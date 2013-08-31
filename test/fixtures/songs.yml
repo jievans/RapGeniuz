@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lyrics: MyText
+  artist_id: 1
+  title: MyString
+  youtube_url: MyString
+  album_id: 1
+
+two:
+  lyrics: MyText
+  artist_id: 1
+  title: MyString
+  youtube_url: MyString
+  album_id: 1
