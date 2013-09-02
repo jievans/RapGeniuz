@@ -9,21 +9,29 @@ class SongsController < ApplicationController
   def create
 
     @song = Song.new(params[:song])
-    @artist = Artist.find_or_initialize_by_id(params[:artist])
+    @artist = Artist.find_or_initialize_by_name(params[:artist][:name])
+    @album = Album.find_or_initialize_by_name(params[:album][:name])
 
     begin
       ActiveRecord::Base.transaction do
         @artist.save! unless @artist.persisted?
+        @album.save! unless @album.persisted?
         @song.artist_id = @artist.id
+        @song.album_id = @album.id
 
-
-
+        @song.save!
       end
 
       redirect_to song_url(@song)
     rescue  => e
       flash[:errors] ||= []
-      flash[:errors] << e.message
+
+      [@song, @artist, @album].each do |ar_object|
+        ar_object.errors.full_messages.each do |message|
+          flash[:errors] << message
+        end
+      end
+
       render :new
     end
 
