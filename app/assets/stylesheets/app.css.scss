@@ -1,5 +1,6 @@
 $header-blue: rgba(35, 193, 250, 1);
-
+$error-purple: #B762CC;
+$deeper-purple: #7B418A;
 @font-face
 {
   font-family: DinBoldCondensed;
@@ -13,10 +14,28 @@ body {
                Helvetica,
                Geneva,
                sans-serif;
+
+               width: 1000px;
+               margin: auto;
+               margin-top: 10px;
+}
+
+.notice {
+  background-color: $error-purple;
+  background-image: -webkit-linear-gradient(top, $error-purple, $deeper-purple);;
+  border-radius: 5px;
+  padding: 1px 1px;
+  color: white;
+  width: 500px;
 }
 
 .header {
-
   color: $header-blue;
+  font-size: 40px;
+  font-family: DinBoldCondensed;
+
+  .song-title {
+    color: white;
+  }
 
 }

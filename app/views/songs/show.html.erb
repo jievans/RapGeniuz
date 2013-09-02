@@ -1,2 +1,9 @@
+<div class="song-info">
+  <span class="header"><%= @song.artist.name %>
+    <span class="song-title"> - <%= @song.title %> Lyrics</span>
+  </span>
+</div>
+
 <div class="lyrics-wrapper">
+  <%= markdown(@song.lyrics) %>
 </div>

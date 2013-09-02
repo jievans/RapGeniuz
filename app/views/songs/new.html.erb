@@ -9,13 +9,15 @@
     <div class="new-song-field">
       <label for="artist_name">Primary Artist</label>
       <br>
-      <input type="text" name="artist[name]" id="artist_name" size="30">
+      <input type="text" name="artist[name]" id="artist_name" size="30"
+      value="<%= @artist.name %>">
     </div>
 
     <div class="new-song-field">
       <label for="song_title">Song Title</label>
       <br>
-      <input type="text" name="song[title]" id="song_title" size="30">
+      <input type="text" name="song[title]" id="song_title" size="30"
+      value="<%= @song.title %>">
     </div>
 
     <div class="left-column">
@@ -35,19 +37,19 @@
         <label for="song_youtube_url">YouTube URL</label>
         <br>
         <input type="text" name="song[youtube_url]" size="30"
-        id="song_youtube_url">
+        id="song_youtube_url" value="<%= @song.youtube_url %>">
       </div>
 
       <div>
         <label for="album[]">Album</label>
         <br>
         <input type="text" name="album[]" size="30"
-        id="album">
+        id="album" value="<%= @album.name %>">
       </div>
     </div>
 
     <label for="song_lyrics">Lyrics</label>
-    <textarea name="song[lyrics]" id="song_lyrics"></textarea>
+    <textarea name="song[lyrics]" id="song_lyrics"><%= @song.lyrics %></textarea>
 
     <input type="submit" class="submit-button" value="Submit">
 

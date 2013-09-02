@@ -3,6 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $input-grey: rgb(85, 85, 85);
+$lyric-back-grey: rgb(22, 22, 22);
+$lyric-border: rgb(204, 204, 204);
 
 .new-song-page{
 
@@ -48,7 +50,7 @@ $input-grey: rgb(85, 85, 85);
 
     &.submit-button{
       width: auto;
-      background-image: -webkit-linear-gradient(top, rgb(140, 140, 140), rgb(49,           45, 50));
+      background-image: -webkit-linear-gradient(top, rgb(140, 140, 140), rgb(49, 45, 50));
       height: 30px;
       color: white;
       border-radius: 3px;
@@ -66,6 +68,21 @@ $input-grey: rgb(85, 85, 85);
 
 
 }
+
+.lyrics-wrapper {
+  color: white;
+  font-family: sans-serif;
+  font-size: 17px;
+  line-height: 26px;
+  background-color: $lyric-back-grey;
+  border-style: solid;
+  border-color: $lyric-border;
+  // Ask why changing padding top has such an unexpected effect
+  padding: 5px 30px;
+  margin-bottom: 20px;
+}
+
+
 
 
 
