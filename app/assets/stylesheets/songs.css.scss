@@ -1,0 +1,71 @@
+// Place all the styles related to the songs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$input-grey: rgb(85, 85, 85);
+
+.new-song-page{
+
+  width: 997px;
+  margin: auto;
+
+  h1{
+    font-size: 40px;
+    font-family: DinBoldCondensed;
+    color: pink;
+  }
+
+  color: white;
+
+  .new-song-field{
+    width: 410px;
+    float: left;
+  }
+
+  .left-column {
+    clear: both;
+  }
+
+  label {
+    font-weight: bold;
+    font-size: 15px;
+    display: inline-block;
+
+    &[for="song_lyrics"]{
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+  }
+
+  font-size: 17px;
+
+  input{
+    height: 20px;
+    font-size: 17px;
+    width: 375px;
+    color: $input-grey;
+    margin: 5px 0px;
+
+    &.submit-button{
+      width: auto;
+      background-image: -webkit-linear-gradient(top, rgb(140, 140, 140), rgb(49,           45, 50));
+      height: 30px;
+      color: white;
+      border-radius: 3px;
+      border-color: rgb(115, 105, 117);
+
+    }
+  }
+
+  textarea{
+    width: 100%;
+    height: 1000px;
+    font-size: inherit;
+  }
+
+
+
+}
+
+
+
