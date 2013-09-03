@@ -36,13 +36,6 @@ class SongsController < ApplicationController
 
       render :new
     end
-
-    # if song.save
-#       redirect_to song_url(song)
-#     else
-#       flash[:errors] ||= song.errors
-#       redirect_to new_song_url
-#     end
   end
 
   def show

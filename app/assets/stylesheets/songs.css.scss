@@ -50,7 +50,7 @@ $lyric-border: rgb(204, 204, 204);
 
     &.submit-button{
       width: auto;
-      background-image: -webkit-linear-gradient(top, rgb(140, 140, 140), rgb(49, 45, 50));
+      background-image: -webkit-linear-gradient(top, rgb(140, 140, 140),      rgb(49, 45, 50));
       height: 30px;
       color: white;
       border-radius: 3px;
@@ -77,9 +77,26 @@ $lyric-border: rgb(204, 204, 204);
   background-color: $lyric-back-grey;
   border-style: solid;
   border-color: $lyric-border;
+  border-width: 1px;
   // Ask why changing padding top has such an unexpected effect
   padding: 5px 30px;
   margin-bottom: 20px;
+}
+
+#explain-button {
+  background-color: orange;
+  display: inline-block;
+  border-radius: 5px;
+  position: absolute;
+  margin-top: -40px;
+  margin-left: -28px;
+  margin-right: 10px;
+  padding: 0px 18px;
+
+  &::before {
+
+  }
+//  margin-right: 10px;
 }
 
 
