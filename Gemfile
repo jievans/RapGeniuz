@@ -12,6 +12,7 @@ group :development do
 end
 
 gem 'pg'
+gem 'ejs'
 
 
 # Gems used only for assets and not required

@@ -98,7 +98,8 @@ $lyric-border: rgb(204, 204, 204);
   height: 30px;
   width: 70px;
 
-  &:before {
+  &:not(.loading):before {
+    // why isn't this emptied by empty???
     content: "";
     position: absolute;
     right: 63px;
@@ -108,11 +109,29 @@ $lyric-border: rgb(204, 204, 204);
     border-left: 5px solid transparent;
     -webkit-transform: rotate(35deg);
   }
+
+	&.loading {
+	  background-image: image-url("throbber.gif");
+		background-repeat: no-repeat;
+		background-position: center;
+
+	  // nice to know about this option --- just push the starting line's material out of the block
+	  //text-indent: -119988px;
+	//  overflow: hidden;
+	//  text-align: left;
+
+	}
 //  margin-right: 10px;
 }
 
-.loading {
-  background: image-url("throbber.gif") center no-repeat;
+
+
+// Question: how margins work in absolutely positioned elements?
+#annotation_form {
+	position: absolute;
+	margin-top: -120px;
+	margin-left: 450px;
+	background-color: gray;
 }
 
 
