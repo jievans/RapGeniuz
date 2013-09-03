@@ -85,6 +85,7 @@ $lyric-border: rgb(204, 204, 204);
 
 #explain-button {
   background-color: orange;
+  text-align: center;
   display: inline-block;
   border-radius: 5px;
   position: absolute;
@@ -92,11 +93,26 @@ $lyric-border: rgb(204, 204, 204);
   margin-left: -28px;
   margin-right: 10px;
   padding: 0px 18px;
+  z-index: 100;
+  line-height: 30px;
+  height: 30px;
+  width: 70px;
 
-  &::before {
-
+  &:before {
+    content: "";
+    position: absolute;
+    right: 63px;
+    top: 20px;
+    border-top: 22px solid orange;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    -webkit-transform: rotate(35deg);
   }
 //  margin-right: 10px;
+}
+
+.loading {
+  background: image-url("throbber.gif") center no-repeat;
 }
 
 
