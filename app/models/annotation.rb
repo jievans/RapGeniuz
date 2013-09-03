@@ -1,3 +1,3 @@
 class Annotation < ActiveRecord::Base
-  attr_accessible :referent
+  attr_accessible :referent, :body
 end

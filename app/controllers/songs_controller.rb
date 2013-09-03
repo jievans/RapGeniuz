@@ -1,6 +1,9 @@
 ### Handle in show when song cannot be found
 
 class SongsController < ApplicationController
+
+  include SongsHelper
+
   def new
     @song = Song.new
     @artist = Artist.new
@@ -9,6 +12,8 @@ class SongsController < ApplicationController
   end
 
   def create
+
+    params[:song][:lyrics] = markdown(params[:song][:lyrics])
 
     @song = Song.new(params[:song])
     @artist = Artist.find_or_initialize_by_name(params[:artist][:name])
@@ -36,6 +41,12 @@ class SongsController < ApplicationController
 
       render :new
     end
+  end
+
+  def update
+    song = Song.find(params[:id])
+    song.update_attributes!(params[:song])
+    render :json => song
   end
 
   def show

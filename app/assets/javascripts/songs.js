@@ -44,7 +44,7 @@ $(
 			formContent = JST["annotation_form"]();
 			$form = $(formContent);
 
-			clonedRange.insertNode($form[0]);
+
 
      // annotation_form = $("<span>",
  //                          {id: "explain-button", text: "Annotate"} )[0];
@@ -54,11 +54,33 @@ $(
 				$.ajax({
 				url: "/annotations",
 				type: "POST",
-				success: function(data){
+				success: function(first_data){
 					$button.remove();
-					var id = data.id;
-					$anchor = $('<a>', { href: "/annotations/" + id });
-					range.surroundContents($anchor[0]);
+					var id = first_data.id;
+					clonedRange.insertNode($form[0]);
+					$form.on("click", "#submit-button", function(event){
+						$anchor = $('<a>', { href: "/annotations/" + id });
+						var formData = $form.serializeJSON();
+						formData.annotation.referent = range.toString();
+						$.ajax({
+							url: "/annotations/" + id,
+							data: formData,
+							type: "PUT",
+							success: function(second_data){
+								range.surroundContents($anchor[0]);
+								$form.remove();
+								var lyrics = $('.lyrics-wrapper').html();
+								var songData = {song: {lyrics: lyrics}};
+								$.ajax({
+									url: "/songs/" + $('.song-info').attr('data-song-id'),
+									type: "PUT",
+									data: songData,
+									success: function(){alert("maybe this worked")},
+								});
+							},
+						});
+
+					});
 				},
 			});
 

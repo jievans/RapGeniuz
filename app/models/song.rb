@@ -1,4 +1,7 @@
 class Song < ActiveRecord::Base
+
+  include SongsHelper
+
   attr_accessible :album_id, :artist_id, :lyrics, :title, :youtube_url
 
   belongs_to :artist,
@@ -7,6 +10,5 @@ class Song < ActiveRecord::Base
              :primary_key => :id
 
   validates :artist_id, :presence => true
-
 
 end

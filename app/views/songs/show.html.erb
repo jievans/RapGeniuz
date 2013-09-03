@@ -1,13 +1,10 @@
-<div class="song-info">
+<div class="song-info" data-song-id="<%= @song.id %>">
   <span class="header"><%= @song.artist.name %>
     <span class="song-title"> - <%= @song.title %> Lyrics</span>
   </span>
 </div>
 
 <div class="lyrics-wrapper">
-  <%= markdown(@song.lyrics) %>
-  <div class="test">
-    hello hello hello
-  </div>
+  <%= @song.lyrics.html_safe %>
 </div>
 
