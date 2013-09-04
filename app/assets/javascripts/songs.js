@@ -11,16 +11,13 @@ $(
 				type: "GET",
 				success: function(data){
 					renderedContent = JST["annotation_show"]({annotation: data});
-					$anchor.append(renderedContent);
+					$renderedContent = $(renderedContent);
+					$anchor.after($renderedContent);
+					$renderedContent.position({my: "left center",
+																		 at: "right+10 center",
+																		 of: $anchor});
 				},
 			});
-		});
-
-		$('.lyrics-wrapper').on('click', '#annotation-show', function(event){
-			event.stopPropagation();
-			event.preventDefault();
-			console.log("you just clicked on this show of an annotation.");
-			$(this).remove();
 		});
 
 		// keep annotation form from being able to be annotated

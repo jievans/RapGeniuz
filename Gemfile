@@ -7,6 +7,8 @@ gem 'rails', '3.2.13'
 
 gem 'redcarpet'
 
+gem 'jquery-ui-rails'
+
 group :development do
   gem 'sqlite3'
 end
