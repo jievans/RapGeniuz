@@ -29,6 +29,11 @@ $(
 			event.stopPropagation();
 		});
 
+		$('.lyrics-wrapper').on('mouseup', '#annotation-show', function(event){
+			console.log("regsitered event in annotation form");
+			event.stopPropagation();
+		});
+
 
 
     // ask about the difference between click and mouseup, and how they interact
@@ -39,6 +44,7 @@ $(
 
 			if($(event.target).attr('id') === 'explain-button') return true;
 			$('#annotation-form').remove();
+			$('#annotation-show').remove();
 
 			console.log('got to second part');
       var previous_button = $('#explain-button');
