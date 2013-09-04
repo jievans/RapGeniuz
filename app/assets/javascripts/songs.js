@@ -1,3 +1,5 @@
+// Is there a way to get propagation history????
+
 $(
   function(){
 
@@ -14,19 +16,36 @@ $(
 			});
 		});
 
+		$('.lyrics-wrapper').on('click', '#annotation-show', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			console.log("you just clicked on this show of an annotation.");
+			$(this).remove();
+		});
+
+		// keep annotation form from being able to be annotated
+		$('.lyrics-wrapper').on('mouseup', '#annotation-form', function(event){
+			console.log("regsitered event in annotation form");
+			event.stopPropagation();
+		});
+
+
+
     // ask about the difference between click and mouseup, and how they interact
     // important thing seems to be that they're the same
     $('.lyrics-wrapper').on('mouseup', function(event){
 
 			// this line should be unnecessary
 
-
 			if($(event.target).attr('id') === 'explain-button') return true;
+			$('#annotation-form').remove();
+
 			console.log('got to second part');
       var previous_button = $('#explain-button');
       if (previous_button.length > 0 ) previous_button.remove();
 
       var selection = window.getSelection();
+			if (selection.rangeCount === 0) return true;
       var range = selection.getRangeAt(0);
 
       var text = range.toString();

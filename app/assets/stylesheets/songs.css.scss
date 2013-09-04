@@ -5,7 +5,10 @@
 $input-grey: rgb(85, 85, 85);
 $lyric-back-grey: rgb(22, 22, 22);
 $lyric-border: rgb(204, 204, 204);
-$anchor-orange: #ffc31c;;
+$anchor-orange: #ffc31c;
+
+// LESSON: Div up against an achor will create a little space even when the Div is absolutely positioned.  You have to put the div inside the anchor for the space not to be created.
+//  Also, span acts truly inline, whereas Div clears possibly and then is relative to where it would have been otherwise????
 
 .new-song-page{
 
