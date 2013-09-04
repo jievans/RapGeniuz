@@ -9,6 +9,8 @@ gem 'redcarpet'
 
 gem 'jquery-ui-rails'
 
+gem 'nokogiri'
+
 group :development do
   gem 'sqlite3'
 end
