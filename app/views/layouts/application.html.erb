@@ -11,12 +11,20 @@
 		<div id="banner">
 			rap genius
 		</div>
+
+		<% if logged_in? %>
+		<div id="logout">
+			Sign Out...
+		</div>
+		<% else %>
 		<div id="sign-in">
 			Sign In!!!
 		</div>
 		<div id="sign-up">
 			Create an account
 		</div>
+		<% end %>
+
 	</div>
 
 

@@ -38,12 +38,26 @@ $(function(){
 
 		if($(event.target).hasClass('signin-button')){
 
+			console.log("You clicked on the signin-button");
+			$form = $('#sign-in-form');
+			var data = $form.serializeJSON();
+
 			$.ajax({
-				url: "/"
+				url: "/session",
+				type: "Post",
+				data: data,
+				success: function(response){
+					location.reload(true);
+				},
+				error: function(response){
+					var errors = response.responseJSON.errors;
+					$('#sign-in-form').prepend(errors);
+				},
 			});
 
 
-		};
+		}
+
 	});
 
 

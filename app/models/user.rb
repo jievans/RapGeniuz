@@ -3,6 +3,8 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :username, :password
 
+  before_validation :generate_token
+
   include BCrypt
 
   def password=(secret)
@@ -14,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_token
-
+    self.token = SecureRandom.urlsafe_base64
   end
 
 end

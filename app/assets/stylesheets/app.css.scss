@@ -4,6 +4,7 @@ $deeper-purple: #7B418A;
 $seafoam-green: rgba(51, 211, 171, 1);
 $hot-pink: rgba(244, 60, 143, 1);
 $light-green: rgba(167, 255, 99, 1);
+$lipstick-red: rgba(177, 0, 10, 1);
 
 @font-face
 {
@@ -26,7 +27,7 @@ $light-green: rgba(167, 255, 99, 1);
 
 
 
-#sign-in, #sign-up {
+#sign-in, #sign-up, #logout {
 	float: right;
 	font-size: 20px;
 	font-style: italic;
@@ -35,6 +36,15 @@ $light-green: rgba(167, 255, 99, 1);
 	border: solid 3px $hot-pink;
 	&:active {
 		background-color: $header-blue;
+	}
+}
+
+#logout {
+	color: $lipstick-red;
+	border-color: $lipstick-red;
+
+	&:active {
+		background: white;
 	}
 }
 
