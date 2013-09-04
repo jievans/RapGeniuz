@@ -44,6 +44,7 @@ class SongsController < ApplicationController
   end
 
   def update
+
     song = Song.find(params[:id])
     song.update_attributes!(params[:song])
     render :json => song
@@ -51,5 +52,21 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+  end
+
+  private
+
+  def noko_check(old_lyrics, new_lyrics)
+    illegal = false
+    old_doc = Nokogiri::HTML(old_lyrics)
+    new_doc = Nokogiri::HTML(new_lyrics)
+    old_anchors = old_doc.css("a")
+    new_anchors = new_doc.css("a")
+
+
+
+    anchor_set.each do |anchor|
+
+    end
   end
 end
