@@ -1,10 +1,79 @@
 $header-blue: rgba(35, 193, 250, 1);
 $error-purple: #B762CC;
 $deeper-purple: #7B418A;
+$seafoam-green: rgba(51, 211, 171, 1);
+$hot-pink: rgba(244, 60, 143, 1);
+
 @font-face
 {
   font-family: DinBoldCondensed;
   src: url('dinfont.woff');
+}
+
+#banner {
+	font-family: DinBoldCondensed;
+	font-size: 40px;
+	display: inline-block;
+//	padding: 5px;
+	border-radius: 5px;
+	color: pink;
+}
+
+#toolbar {
+	margin: 10px 0px;
+}
+
+#sign-in {
+	float: right;
+	font-size: 20px;
+	font-style: italic;
+	color: $hot-pink;
+	padding: 5px;
+	border: solid 3px $hot-pink;
+	&:active {
+		background-color: $header-blue;
+	}
+}
+
+#sign-in-form {
+	text-align: center;
+	background-color: gray;
+	display: inline-block;
+	width: 400px;
+	padding: 50px;
+
+	label {
+		font-style: italic;
+		font-weight: bold;
+	}
+
+	color: pink;
+
+	input[type="submit"] {
+		// and this is why we don't use submit input buttons
+		background-color: transparent;
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		border: solid pink 3px;
+		margin-top: 20px;
+	}
+
+}
+
+.exit {
+	display: inline-block;
+	padding: 5px;
+	border: solid pink 2px;
+	background-color: gray;
+	color: pink;
+	font-size: 15px;
+
+	&:active{
+		background-color: $header-blue;
+	}
+	//width: 10px;
+	//		height: 10px;
 }
 
 body {
@@ -22,7 +91,7 @@ body {
 
 .notice {
   background-color: $error-purple;
-  background-image: -webkit-linear-gradient(top, $error-purple, $deeper-purple);;
+  background-image: -webkit-linear-gradient(top, $error-purple, $deeper-purple);
   border-radius: 5px;
   padding: 1px 1px;
   color: white;
