@@ -11,4 +11,7 @@ class Song < ActiveRecord::Base
 
   validates :artist_id, :presence => true
 
+  has_many :annotations, :class_name => "Annotation", :foreign_key => :song_id,
+  :primary_key => :id
+
 end
