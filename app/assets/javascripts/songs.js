@@ -1,6 +1,19 @@
 $(
   function(){
 
+		$('.lyrics-wrapper').on('click', 'a.annotation', function(event){
+			event.preventDefault();
+			$anchor = $(this);
+			$.ajax({
+				url: $anchor.attr('href'),
+				type: "GET",
+				success: function(data){
+					renderedContent = JST["annotation_show"]({annotation: data});
+					$anchor.append(renderedContent);
+				},
+			});
+		});
+
     // ask about the difference between click and mouseup, and how they interact
     // important thing seems to be that they're the same
     $('.lyrics-wrapper').on('mouseup', function(event){
@@ -28,6 +41,8 @@ $(
     });
 
 		// TODO: Is there no way to prevent clearing the selection?
+
+		$('')
 
     $('.lyrics-wrapper').on('mousedown', '#explain-button', function(event){
       event.stopPropagation();
@@ -59,7 +74,7 @@ $(
 					var id = first_data.id;
 					clonedRange.insertNode($form[0]);
 					$form.on("click", "#submit-button", function(event){
-						$anchor = $('<a>', { href: "/annotations/" + id });
+						$anchor = $('<a>', { "class": "annotation", href: "/annotations/" + id });
 						var formData = $form.serializeJSON();
 						formData.annotation.referent = range.toString();
 						$.ajax({
@@ -75,7 +90,6 @@ $(
 									url: "/songs/" + $('.song-info').attr('data-song-id'),
 									type: "PUT",
 									data: songData,
-									success: function(){alert("maybe this worked")},
 								});
 							},
 						});
