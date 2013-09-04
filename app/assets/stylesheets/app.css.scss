@@ -3,6 +3,7 @@ $error-purple: #B762CC;
 $deeper-purple: #7B418A;
 $seafoam-green: rgba(51, 211, 171, 1);
 $hot-pink: rgba(244, 60, 143, 1);
+$light-green: rgba(167, 255, 99, 1);
 
 @font-face
 {
@@ -23,7 +24,9 @@ $hot-pink: rgba(244, 60, 143, 1);
 	margin: 10px 0px;
 }
 
-#sign-in {
+
+
+#sign-in, #sign-up {
 	float: right;
 	font-size: 20px;
 	font-style: italic;
@@ -35,7 +38,13 @@ $hot-pink: rgba(244, 60, 143, 1);
 	}
 }
 
-#sign-in-form {
+#sign-up {
+	border-color: $light-green;
+	color: $light-green;
+	margin-right: 10px;
+}
+
+#sign-in-form, #sign-up-form {
 	text-align: center;
 	background-color: gray;
 	display: inline-block;
@@ -49,16 +58,32 @@ $hot-pink: rgba(244, 60, 143, 1);
 
 	color: pink;
 
-	input[type="submit"] {
+	.signup-button {
 		// and this is why we don't use submit input buttons
+		display: inline-block;
 		background-color: transparent;
 		font-family: inherit;
 		font-size: inherit;
 		color: inherit;
 		border: solid pink 3px;
+		padding: 5px;
 		margin-top: 20px;
 	}
 
+}
+
+#sign-in-form {
+	.signin-button {
+		// and this is why we don't use submit input buttons
+		display: inline-block;
+		background-color: transparent;
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		border: solid pink 3px;
+		padding: 5px;
+		margin-top: 20px;
+	}
 }
 
 .exit {
@@ -87,6 +112,8 @@ body {
                width: 1000px;
                margin: auto;
                margin-top: 10px;
+
+  color: white;
 }
 
 .notice {

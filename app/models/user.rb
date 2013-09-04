@@ -1,7 +1,7 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  attr_accessible :password_digest, :username
+  attr_accessible :username, :password
 
   include BCrypt
 
@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   def password_equals?(secret)
     Password.new(self.password_digest).is_password?(secret)
+  end
+
+  def generate_token
+
   end
 
 end

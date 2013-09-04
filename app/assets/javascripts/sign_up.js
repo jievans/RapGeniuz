@@ -1,18 +1,10 @@
-//  LESSON: Cannot do this
-// $div = $('<div></div>').find('div');
-// console.log($div);
-
-
-
 $(function(){
 
-	form_authenticity_token = $('meta[name="csrf-token"]').attr("content");
+	$('#sign-up').on('click', function(){
 
-	$('#sign-in').on('click', function(){
+		$('body').append(JST["users/new"]());
 
-		$('body').append(JST["session/new"]());
-
-		$form = $('#sign-in-form');
+		$form = $('#sign-up-form');
 
 		$exit = $('.exit');
 
@@ -30,22 +22,29 @@ $(function(){
 
 	});
 
-	$('body').on('click', '#sign-in-form', function(event){
+	$('body').on('click', '#sign-up-form', function(event){
 		event.preventDefault();
 		console.log("We're inside the event.");
 		console.log($(event.target));
 		if ($(event.target).hasClass('exit')) $(this).remove();
 
-		if($(event.target).hasClass('signin-button')){
+		if($(event.target).hasClass('signup-button')){
+
+			$form = $('#sign-up-form');
+			var data = $form.serializeJSON();
 
 			$.ajax({
-				url: "/"
+				url: "/users",
+				type: "Post",
+				data: data,
+				success: function(response){
+					window.location.replace(response.url)
+				},
 			});
 
 
 		};
 	});
-
 
 
 
