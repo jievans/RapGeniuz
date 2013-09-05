@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RapGenius</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<title>RapGenius</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="toolbar">
-		<div id="banner">
-			rap genius
+	<div id="body">
+		<div id="toolbar">
+			<div id="banner">
+				rap genius
+			</div>
+
+			<% if logged_in? %>
+			<div id="logout">
+				Sign Out...
+			</div>
+			<% else %>
+			<div id="sign-in">
+				Sign In!!!
+			</div>
+			<div id="sign-up">
+				Create an account
+			</div>
+			<% end %>
+
 		</div>
 
-		<% if logged_in? %>
-		<div id="logout">
-			Sign Out...
+
+		<% if flash[:notices] %>
+		<div class="notice">
+			<ul>
+				<% flash[:notices].each do |notice| %>
+				<li> <%= notice %>
+					<% end %>
+				</ul>
+			</div>
+			<% end %>
+
+			<%= yield %>
+
 		</div>
-		<% else %>
-		<div id="sign-in">
-			Sign In!!!
-		</div>
-		<div id="sign-up">
-			Create an account
-		</div>
-		<% end %>
-
-	</div>
-
-
-  <% if flash[:notices] %>
-  <div class="notice">
-    <ul>
-    <% flash[:notices].each do |notice| %>
-        <li> <%= notice %>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
-
-<%= yield %>
-
-</body>
-</html>
+	</body>
+	</html>

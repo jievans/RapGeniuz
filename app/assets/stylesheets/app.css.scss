@@ -83,6 +83,11 @@ $lipstick-red: rgba(177, 0, 10, 1);
 }
 
 #sign-in-form {
+
+	position: absolute;
+	top: 0;
+	right: 0;
+
 	.signin-button {
 		// and this is why we don't use submit input buttons
 		display: inline-block;
