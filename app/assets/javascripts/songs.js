@@ -1,5 +1,7 @@
 // Is there a way to get propagation history????
 
+// TODO: setting referent twice, need to fix
+
 $(
   function(){
 
@@ -88,6 +90,8 @@ $(
      // annotation_form = $("<span>",
  //                          {id: "explain-button", text: "Annotate"} )[0];
 
+ // if updating song data fails, just delete the annotation
+
 			setTimeout(function(){
 
 				$.ajax({
@@ -99,7 +103,7 @@ $(
 					var id = first_data.id;
 					clonedRange.insertNode($form[0]);
 					$form.on("click", "#submit-button", function(event){
-						$anchor = $('<a>', { "class": "annotation", href: "/annotations/" + id });
+						$anchor = $('<a>', { "class": "annotation", href: "/annotations/" + id, "data-annotation-id": id });
 						var formData = $form.serializeJSON();
 						formData.annotation.referent = range.toString();
 						$.ajax({
