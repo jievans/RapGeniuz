@@ -5,7 +5,8 @@ class AnnotationsController < ApplicationController
   end
 
   def create
-    annotation = Annotation.create!
+    annotation = Annotation.create!(:user_id => current_user.id,
+                                    :referent => params[:referent])
     render :json => annotation
   end
 

@@ -61,6 +61,12 @@ $lipstick-red: rgba(177, 0, 10, 1);
 	width: 400px;
 	padding: 50px;
 
+
+	// necessary for javascript positioning
+	position: absolute;
+	top: 0;
+	right: 0;
+
 	label {
 		font-style: italic;
 		font-weight: bold;
@@ -83,10 +89,6 @@ $lipstick-red: rgba(177, 0, 10, 1);
 }
 
 #sign-in-form {
-
-	position: absolute;
-	top: 0;
-	right: 0;
 
 	.signin-button {
 		// and this is why we don't use submit input buttons

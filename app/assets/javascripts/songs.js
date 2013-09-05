@@ -81,6 +81,8 @@ $(
 			formContent = JST["annotation_form"]();
 			$form = $(formContent);
 
+			console.log(range.toString());
+
 
 
      // annotation_form = $("<span>",
@@ -91,6 +93,7 @@ $(
 				$.ajax({
 				url: "/annotations",
 				type: "POST",
+				data: {referent: range.toString()},
 				success: function(first_data){
 					$button.remove();
 					var id = first_data.id;

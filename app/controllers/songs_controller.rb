@@ -63,7 +63,8 @@ class SongsController < ApplicationController
     old_anchors = old_doc.css("a")
     new_anchors = new_doc.css("a")
 
-
+    # loop through old anchors
+    # check that old anchors match up in every way with new anchors, except in cases where the new anchors have user-ids
 
     anchor_set.each do |anchor|
 
