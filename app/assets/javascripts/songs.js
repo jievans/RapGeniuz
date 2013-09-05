@@ -86,8 +86,25 @@ $(
 			console.log(range.toString());
 
 
-			var post_error = function(){
+			var postError = function(errorObject){
+				$error = $(JST["errors/message"]({messages: errorObject}))
+				$('body').append($error);
+				$error.position({
+					my: "center center",
+					at: "center center",
+					of: $(window),
+				});
 
+				$exit = $error.find(".exit");
+				$exit.position({
+					my: "right top",
+					at: "right-10 top+10",
+					of: $error,
+				});
+
+				$exit.on("click", function(){
+					$error.remove();
+				});
 			}
 
 
@@ -125,10 +142,10 @@ $(
 									data: songData,
 									error: function(response){
 										// where we left off
-										var error_object = response.responseJSON;
-										for (var property in error_object){
-
-										}
+										var selector = 'a[data-annotation-id="' + id + '"]';
+										$(selector).contents().unwrap();
+										var errorObject = response.responseJSON;
+										postError(errorObject);
 									},
 								});
 							},

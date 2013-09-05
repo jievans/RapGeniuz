@@ -12,6 +12,34 @@ $lipstick-red: rgba(177, 0, 10, 1);
   src: url('dinfont.woff');
 }
 
+.error-message {
+	position: absolute;
+	color: white;
+	background: red;
+	padding: 20px;
+	padding-top: 0px;
+
+	h2 {
+		text-align: center;
+		margin: 10px 0px;
+	}
+
+	.exit {
+		background-color: red;
+		border-color: white;
+		color: white;
+		font-size: 15px;
+		position: absolute;
+
+		&:active{
+			background-color: $header-blue;
+		}
+		//width: 10px;
+		//		height: 10px;
+	}
+
+}
+
 #banner {
 	font-family: DinBoldCondensed;
 	font-size: 40px;
