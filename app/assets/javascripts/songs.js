@@ -86,6 +86,10 @@ $(
 			console.log(range.toString());
 
 
+			var post_error = function(){
+
+			}
+
 
      // annotation_form = $("<span>",
  //                          {id: "explain-button", text: "Annotate"} )[0];
@@ -119,6 +123,13 @@ $(
 									url: "/songs/" + $('.song-info').attr('data-song-id'),
 									type: "PUT",
 									data: songData,
+									error: function(response){
+										// where we left off
+										var error_object = response.responseJSON;
+										for (var property in error_object){
+
+										}
+									},
 								});
 							},
 						});

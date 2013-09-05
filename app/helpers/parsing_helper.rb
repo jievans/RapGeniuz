@@ -1,36 +1,35 @@
 module ParsingHelper
 
-  def noko_invalid?(old_lyrics, new_lyrics)
+
+  def lyrics_invalid?(old_lyrics, new_lyrics)
 
     failure = {}
 
-    illegal = false
     old_doc = Nokogiri::HTML(old_lyrics)
     new_doc = Nokogiri::HTML(new_lyrics)
     old_anchors = old_doc.css("a")
     new_anchors = new_doc.css("a")
 
+    # ## purely for testing purposes
+#     user_id = 1
 
-
-    # loop through old anchors
-    # check that old anchors match up in every way with new anchors, except in cases where the new anchors have user-ids
 
     old_anchors.each do |old_node|
       ## see if old anchors deleted
       anchor_id = old_node["data-annotation-id"]
-      new_node = new_anchors.at_css("data-annotation-id='#{anchor_id}'")
+      new_node = new_anchors.at_css("a[data-annotation-id='#{anchor_id}']")
 
       if new_node
         old_node.attributes.each do |key, attr_obj|
           unless new_node[key] == attr_obj.value
-            failure[:fiddled] = "You messed with the attributes"
+            failure[:fiddled] = "You messed with the attributes on an old annotation."
           end
         end
-        new_anchors.remove(new_node)
+        new_anchors.delete(new_node)
       else
         annotation = Annotation.find_by_id(anchor_id)
         unless annotation.user_id == current_user.id
-          failure[:deletion] = "You aren't allowed to delete other's annotations."
+          failure[:deletion] = "You aren't allowed to delete others' annotations."
         end
       end
 
@@ -43,12 +42,17 @@ module ParsingHelper
       unless current_attributes == proper_attributes
         failure[:fiddled] = "You messed with the attributes on a new annotation."
       else
-        record = Annotation.find(anchor["data-annotation-id"])
-        unless record.user_id == current_user.id
-          failure[:other_annotation] = "You can't pull in other's annoations."
+        record = Annotation.find_by_id(anchor["data-annotation-id"])
+
+        if record
+          unless record.user_id == current_user.id
+            failure[:other_annotation] = "You can't pull in others' annotations."
+          end
+        else
+          failure[:nonexist_annotation] = "You're trying to link to an annotation that doesn't exist."
         end
 
-        unless attributes_valid?(node)
+        unless attributes_valid?(anchor)
           failure[:fiddled] = "You messed with the attributes"
         end
       end

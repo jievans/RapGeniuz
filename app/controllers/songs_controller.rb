@@ -3,6 +3,7 @@
 class SongsController < ApplicationController
 
   include SongsHelper
+  include ParsingHelper
 
   def new
     @song = Song.new
@@ -44,10 +45,13 @@ class SongsController < ApplicationController
   end
 
   def update
-
     song = Song.find(params[:id])
-    song.update_attributes!(params[:song])
-    render :json => song
+    unless errors = lyrics_invalid?(song.lyrics, params[:song][:lyrics])
+      song.update_attributes!(params[:song])
+      render :json => song
+    else
+      render :json => errors, :status => 409
+    end
   end
 
   def show
