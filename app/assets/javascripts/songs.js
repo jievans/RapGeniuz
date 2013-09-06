@@ -72,7 +72,7 @@ $(
       var previous_button = $('#explain-button');
       if (previous_button.length > 0 ) previous_button.remove();
 
-      var selection = window.getSelection();
+      var selection = rangy.getSelection();
 			if (selection.rangeCount === 0) return true;
       var range = selection.getRangeAt(0);
 			if (containsAnchor(range)) return true;
@@ -103,12 +103,14 @@ $(
 		};
 
 		var hasAnchor = function(range){
-			var $anchorParents = $(range.startContainer).parents();
-			var $offsetParents = $(range.endContainer).parents();
-			var $childNodes = $(range.cloneContents().childNodes);
-			console.log($childNodes);
-			return $childNodes.is('a') ||
-				 		 $anchorParents.is('a') || $offsetParents.is('a');
+
+			return $(range.getNodes([1])).is('a');
+			// var $anchorParents = $(range.startContainer).parents();
+// 			var $offsetParents = $(range.endContainer).parents();
+// 			var $childNodes = $(range.cloneContents().childNodes);
+// 			console.log($childNodes);
+// 			return $childNodes.is('a') ||
+// 				 		 $anchorParents.is('a') || $offsetParents.is('a');
 		};
 
 
