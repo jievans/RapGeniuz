@@ -12,6 +12,17 @@ $lipstick-red: rgba(177, 0, 10, 1);
   src: url('dinfont.woff');
 }
 
+.button {
+	display: inline-block;
+	font-size: 20px;
+	font-style: italic;
+	border: solid 3px;
+	padding: 5px;
+	&:active {
+		background-color: $header-blue;
+	}
+}
+
 .error-message {
 	position: absolute;
 	color: white;

@@ -4,7 +4,10 @@
   </span>
 </div>
 
-<div class="lyrics-wrapper">
-  <%= @song.lyrics.html_safe %>
+<div id="song-wrapper">
+	<div class="lyrics-wrapper">
+		<%= @song.lyrics.html_safe %>
+	</div>
+	<span class="button edit-lyrics">Edit Lyrics</span>
 </div>
 

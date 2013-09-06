@@ -87,6 +87,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     redcarpet (3.0.0)
+    reverse_markdown (0.4.6)
+      nokogiri
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -121,6 +123,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.13)
   redcarpet
+  reverse_markdown
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

@@ -13,6 +13,8 @@ gem 'nokogiri'
 
 gem 'bcrypt-ruby'
 
+gem 'reverse_markdown'
+
 group :development do
   gem 'sqlite3'
 end
