@@ -74,11 +74,13 @@ $(
 
       var selection = rangy.getSelection();
 			if (selection.rangeCount === 0) return true;
+
       var range = selection.getRangeAt(0);
+			if ($.trim(range.toString()) === "") return true;
+			console.log(selection.rangeCount);
 			if (containsAnchor(range)) return true;
 
-      var text = range.toString();
-      if ($.trim(text) === "") return true;
+
 
       clonedRange = range.cloneRange();
       clonedRange.collapse(false);
@@ -89,7 +91,6 @@ $(
     });
 
 		var containsAnchor = function(range){
-			console.log(hasAnchor(range));
 			if (hasAnchor(range)){
 				message = {};
 				message["Invalid Selection"] = "One cannot annotate that which has already been annotated...dude.";
@@ -103,14 +104,16 @@ $(
 		};
 
 		var hasAnchor = function(range){
-
-			return $(range.getNodes([1])).is('a');
-			// var $anchorParents = $(range.startContainer).parents();
-// 			var $offsetParents = $(range.endContainer).parents();
+			// console.log(range);
+// 			console.log($(range.getNodes([1])));
+			// return $(range.getNodes([1])).is('a');
+			var $anchorParents = $(range.startContainer).parents();
+			var $offsetParents = $(range.endContainer).parents();
+			var containsAnchors = $(range.getNodes([1])).is('a');
 // 			var $childNodes = $(range.cloneContents().childNodes);
 // 			console.log($childNodes);
-// 			return $childNodes.is('a') ||
-// 				 		 $anchorParents.is('a') || $offsetParents.is('a');
+			return containsAnchors ||
+				 		 $anchorParents.is('a') || $offsetParents.is('a');
 		};
 
 
