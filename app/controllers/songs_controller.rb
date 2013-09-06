@@ -14,7 +14,7 @@ class SongsController < ApplicationController
 
   def create
 
-    params[:song][:lyrics] = markdown(params[:song][:lyrics])
+    params[:song][:lyrics] = params[:song][:lyrics]
 
     @song = Song.new(params[:song])
     @artist = Artist.find_or_initialize_by_name(params[:artist][:name])

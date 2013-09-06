@@ -6,7 +6,8 @@
 
 <div id="song-wrapper">
 	<div class="lyrics-wrapper">
-		<%= @song.lyrics.html_safe %>
+		<span> hello how are you what is up </span>
+		<%= markdown(@song.lyrics) %>
 	</div>
 	<span class="button edit-lyrics">Edit Lyrics</span>
 </div>
