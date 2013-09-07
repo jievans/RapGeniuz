@@ -8,3 +8,4 @@
 
 
 Artist.create!(:name => "Eric Clapton")
+User.create!(:username => "jack", :password => "password")

@@ -6,7 +6,7 @@
 // TODO: Refactor errors with custom events
 
 $(
-  function(){
+	function(){
 
 		$('body').on('error_added', function(event){
 			$target = $(event.target);
@@ -57,9 +57,9 @@ $(
 
 
 
-    // ask about the difference between click and mouseup, and how they interact
-    // important thing seems to be that they're the same
-    $('.lyrics-wrapper').on('mouseup', function(event){
+		// ask about the difference between click and mouseup, and how they interact
+		// important thing seems to be that they're the same
+		$('.lyrics-wrapper').on('mouseup', function(event){
 
 			// this line should be unnecessary
 
@@ -69,31 +69,32 @@ $(
 
 
 			console.log('got to second part');
-      var previous_button = $('#explain-button');
-      if (previous_button.length > 0 ) previous_button.remove();
+			var previous_button = $('#explain-button');
+			if (previous_button.length > 0 ) previous_button.remove();
 
-      var selection = rangy.getSelection();
+			var selection = rangy.getSelection();
 			if (selection.rangeCount === 0) return true;
 
-      var range = selection.getRangeAt(0);
+			var range = selection.getRangeAt(0);
 			if ($.trim(range.toString()) === "") return true;
 			console.log(selection.rangeCount);
 			if (containsAnchor(range)) return true;
 
 
 
-      clonedRange = range.cloneRange();
-      clonedRange.collapse(false);
+			clonedRange = range.cloneRange();
+			clonedRange.collapse(false);
 
-      annotate_button = $("<span>",
-                          {id: "explain-button", text: "Annotate"} )[0];
-      clonedRange.insertNode(annotate_button);
-    });
+			annotate_button = $("<span>",
+			{id: "explain-button", text: "Annotate"} )[0];
+			clonedRange.insertNode(annotate_button);
+		});
 
 		var containsAnchor = function(range){
 			if (hasAnchor(range)){
 				message = {};
 				message["Invalid Selection"] = "One cannot annotate that which has already been annotated...dude.";
+				console.log("Adding an error");
 				var $errorMessage = $(JST["errors/message"]({messages: message}));
 				$('body').append($errorMessage);
 				$errorMessage.trigger('error_added');
@@ -105,27 +106,27 @@ $(
 
 		var hasAnchor = function(range){
 			// console.log(range);
-// 			console.log($(range.getNodes([1])));
+			// 			console.log($(range.getNodes([1])));
 			// return $(range.getNodes([1])).is('a');
 			var $anchorParents = $(range.startContainer).parents();
 			var $offsetParents = $(range.endContainer).parents();
 			var containsAnchors = $(range.getNodes([1])).is('a');
-// 			var $childNodes = $(range.cloneContents().childNodes);
-// 			console.log($childNodes);
+			// 			var $childNodes = $(range.cloneContents().childNodes);
+			// 			console.log($childNodes);
 			return containsAnchors ||
-				 		 $anchorParents.is('a') || $offsetParents.is('a');
+			$anchorParents.is('a') || $offsetParents.is('a');
 		};
 
 
-    $('.lyrics-wrapper').on('mousedown', '#explain-button', function(event){
-      event.stopPropagation();
-		//	event.preventDefault();
-      var selection = window.getSelection();
+		$('.lyrics-wrapper').on('mousedown', '#explain-button', function(event){
+			event.stopPropagation();
+			//	event.preventDefault();
+			var selection = window.getSelection();
 			var range = selection.getRangeAt(0);
-      $button = $(this);
-      // is it possible to insert information through pseudo-selector
-      $button.empty();
-      $button.addClass('loading');
+			$button = $(this);
+			// is it possible to insert information through pseudo-selector
+			$button.empty();
+			$button.addClass('loading');
 
 			clonedRange = range.cloneRange();
 			clonedRange.collapse(false);
@@ -157,60 +158,53 @@ $(
 			}
 
 
-     // annotation_form = $("<span>",
- //                          {id: "explain-button", text: "Annotate"} )[0];
+			// annotation_form = $("<span>",
+			//                          {id: "explain-button", text: "Annotate"} )[0];
 
- // if updating song data fails, just delete the annotation
+			// if updating song data fails, just delete the annotation
 
 			setTimeout(function(){
 
-				$.ajax({
-				url: "/annotations",
-				type: "POST",
-				data: {referent: range.toString()},
-				success: function(first_data){
-					$button.remove();
-					var id = first_data.id;
-					clonedRange.insertNode($form[0]);
-					$form.on("click", "#submit-button", function(event){
-						$anchor = $('<a>', { "class": "annotation", href: "/annotations/" + id, "data-annotation-id": id });
-						var formData = $form.serializeJSON();
-						formData.annotation.referent = range.toString();
-						$.ajax({
-							url: "/annotations/" + id,
-							data: formData,
-							type: "PUT",
-							success: function(second_data){
-								range.surroundContents($anchor[0]);
-								$form.remove();
-								var lyrics = $('.lyrics-wrapper').html();
-								var songData = {song: {lyrics: lyrics}};
-								$.ajax({
-									url: "/songs/" + $('.song-info').attr('data-song-id'),
-									type: "PUT",
-									data: songData,
-									error: function(response){
-										// where we left off
-										var selector = 'a[data-annotation-id="' + id + '"]';
-										$(selector).contents().unwrap();
-										var errorObject = response.responseJSON;
-										postError(errorObject);
-									},
-								});
-							},
-						});
-
+				$button.remove();
+				clonedRange.insertNode($form[0]);
+				$form.on("click", "#submit-button", function(event){
+					var formData = $form.serializeJSON();
+					formData.annotation.referent = range.toString();
+					formData.annotation.song_id = $('.song-info').attr('data-song-id');
+					$.ajax({
+						url: "/annotations",
+						data: formData,
+						type: "POST",
+						success: function(data){
+							var id = data.id;
+							$anchor = $('<a>', { "class": "annotation", href: "/annotations/" + id, "data-annotation-id": id });
+							range.surroundContents($anchor[0]);
+							$form.remove();
+							var lyrics = $('.lyrics-wrapper').html();
+							var songData = {song: {lyrics: lyrics}};
+							$.ajax({
+								url: "/songs/" + $('.song-info').attr('data-song-id'),
+								type: "PUT",
+								data: songData,
+								error: function(response){
+									// where we left off
+									var selector = 'a[data-annotation-id="' + id + '"]';
+									$(selector).contents().unwrap();
+									var errorObject = response.responseJSON;
+									postError(errorObject);
+								},
+							});
+						},
 					});
-				},
-			});
+
+				});
 
 			}, 200);
 
-    });
+	});
 
 
-  }
-);
+});
 
 
 
