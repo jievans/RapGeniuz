@@ -5,31 +5,39 @@
 // TODO: Is there no way to prevent clearing the selection?
 // TODO: Refactor errors with custom events
 
+// 'use strict'
+
 $(
 	function(){
 
-		$('body').on('error_added', function(event){
-			$target = $(event.target);
+		$('body').on('error_added', function(error_event){
+			var $target = $(error_event.target);
 			$target.position({
 				my: "center center",
 				at: "center center",
 				of: $(window),
 			});
-			$exit = $target.find(".exit");
+			var $exit = $target.find(".exit");
 			$exit.position({
 				my: "right top",
 				at: "right-10 top+10",
 				of: $target,
 			});
 
-			$exit.on('click', function(){
+			$exit.on('click', function(exit_event){
+				console.log("clicking on x");
+				// debugger changes the console.log output;
 				$target.remove();
+			//	console.log(form_event.target);
+
+			//	$(error_event.target).remove();
+
 			});
 		});
 
 		$('.lyrics-wrapper').on('click', 'a.annotation', function(event){
 			event.preventDefault();
-			$anchor = $(this);
+			var $anchor = $(this);
 			$.ajax({
 				url: $anchor.attr('href'),
 				type: "GET",
@@ -66,6 +74,7 @@ $(
 			if($(event.target).attr('id') === 'explain-button') return true;
 			$('#annotation-form').remove();
 			$('#annotation-show').remove();
+			$('.error-message').remove();
 
 
 			console.log('got to second part');
@@ -92,11 +101,13 @@ $(
 
 		var containsAnchor = function(range){
 			if (hasAnchor(range)){
-				message = {};
+				var message = {};
 				message["Invalid Selection"] = "One cannot annotate that which has already been annotated...dude.";
 				console.log("Adding an error");
 				var $errorMessage = $(JST["errors/message"]({messages: message}));
 				$('body').append($errorMessage);
+
+		//		$('body').find('.error-message').trigger('error_added');
 				$errorMessage.trigger('error_added');
 				return true;
 			}
@@ -137,7 +148,7 @@ $(
 
 
 			var postError = function(errorObject){
-				$error = $(JST["errors/message"]({messages: errorObject}))
+				var $error = $(JST["errors/message"]({messages: errorObject}))
 				$('body').append($error);
 				$error.position({
 					my: "center center",
@@ -145,7 +156,7 @@ $(
 					of: $(window),
 				});
 
-				$exit = $error.find(".exit");
+				var $exit = $error.find(".exit");
 				$exit.position({
 					my: "right top",
 					at: "right-10 top+10",
