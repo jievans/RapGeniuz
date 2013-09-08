@@ -9,8 +9,7 @@ module ParsingHelper
 
     current_nodeset.each do |node|
       id = node["data-annotation-id"]
-      corresponding = edited_nodeset.at_css("a[href='/annotations/#{id}']")
-      debugger
+      corresponding = edited_nodeset.at_css("a[href='/#{id}']")
       node.attributes.each do |key, attribute|
         corresponding[key] = attribute.value
       end
@@ -82,7 +81,7 @@ module ParsingHelper
   end
 
   def attributes_valid?(node)
-     node["class"] == "annotation" && node["href"] == "/annotations/#{node['data-annotation-id']}"
+     node["class"] == "annotation" && node["href"] == "/#{node['data-annotation-id']}"
   end
 
 end

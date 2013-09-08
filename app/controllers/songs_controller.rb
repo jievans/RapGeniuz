@@ -14,8 +14,10 @@ class SongsController < ApplicationController
 
   def create
 
-    html_lyrics = markdown(params[:song][:lyrics], :hard_wrap => true)
-                  .gsub("\n", "").strip
+   # debugger
+    html_lyrics = non_block_markdown(params[:song][:lyrics])
+
+    # html_lyrics = params[:song][:lyrics].gsub("\r\n", "<br>").gsub("\n", "<br>")
 
     params[:song][:lyrics] = html_lyrics
 
@@ -48,10 +50,24 @@ class SongsController < ApplicationController
   end
 
   def plain_update
-    edited_lyrics = markdown(params[:lyrics]).gsub("\n", "").strip
-   # debugger
+   # edited_lyrics = markdown(params[:lyrics]).gsub("\n", "").strip
+   edited_lyrics = non_block_markdown(params[:lyrics])
+
+    pattern = /(\[)(.+?)(\])(\()(\/\d+)(\))/
+
+  # pattern = /(?<firstbracket>\[)(?<body>.+?)(?<secondbracket>\])(?<openparen>\()(?<id>\/\d+)(?<closeparen>\))/
+
+   edited_lyrics.gsub!(pattern) do |match|
+     debugger
+     "<a href=\"/#{$2}\">#{$5}</a>"
+   end
+
+   p edited_lyrics
+
     song = Song.find(params[:id])
     full_edited = html_update(song.lyrics, edited_lyrics)
+
+
   #  debugger
     unless errors = lyrics_invalid?(song.lyrics, full_edited)
       song.update_attributes!(:lyrics => full_edited)

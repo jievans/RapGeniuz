@@ -218,7 +218,7 @@ $(
 						type: "POST",
 						success: function(data){
 							var id = data.id;
-							$anchor = $('<a>', { "class": "annotation", href: "/annotations/" + id, "data-annotation-id": id });
+							$anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
 							range.surroundContents($anchor[0]);
 							$form.remove();
 							var lyrics = $('.lyrics-wrapper').html();
