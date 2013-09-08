@@ -1,5 +1,6 @@
 ### Handle in show when song cannot be found
 #### Implement RedCarpet Postprocessor
+
 class SongsController < ApplicationController
 
   include SongsHelper
@@ -58,19 +59,22 @@ class SongsController < ApplicationController
   def plain_update
    # edited_lyrics = markdown(params[:lyrics]).gsub("\n", "").strip
    edited_lyrics = non_block_markdown(params[:lyrics])
-
+  # edited_lyrics = edited_lyrics.html_safe
      pattern = /(\[)(.+?)(\])(\()(\d+)(\))/m
-
+    edited_lyrics = edited_lyrics.to_param()
   # pattern = /(?<firstbracket>\[)(?<body>.+?)(?<secondbracket>\])(?<openparen>\()(?<id>\d+)(?<closeparen>\))/
 
    # do_match(pattern, edited_lyrics)
 
    # without this line, the global variables don't get set
-   edited_lyrics =~ pattern
+   # edited_lyrics =~ pattern
+
    edited_lyrics.gsub!(pattern) do |match|
      debugger
      "<a href=\"/#{$5}\">#{$2}</a>"
    end
+
+   debugger
    # edited_lyrics = make_anchors(edited_lyrics)
 
 
