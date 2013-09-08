@@ -19,13 +19,21 @@ module SongsHelper
   def reverse_markdown(lyrics)
     plain_lyrics = ReverseMarkdown.parse_element(lyrics)
 
-    pattern = /(?<lyric>\[.+?\]\()(?<link>\/\d+)(?<endparen>\))/
+    pattern = /(?<lyric>\[.+?\]\()(?<link>\/\d+)(?<endparen>\))/m
 
     plain_lyrics.gsub!(pattern) do |match|
       $~[:lyric] + $~[:link][1..-1] + $~[:endparen]
     end
 
-    debugger
     plain_lyrics
+  end
+
+  def make_anchors(edited_lyrics)
+    pattern = /(\[)(.+?)(\])(\()(\d+)(\))/m
+
+    edited_lyrics.gsub(pattern) do |match|
+      debugger
+      "<a href=\"/#{$2}\">#{$5}</a>"
+    end
   end
 end
