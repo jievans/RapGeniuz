@@ -35,6 +35,36 @@ $(
 			});
 		});
 
+    $('.edit-lyrics').on('click', function(event){
+
+      var id = $('.song-info').attr('data-song-id');
+      $.ajax({
+        url: "/songs/" + id,
+        type: "GET",
+        dataType: "json",
+        success: function(data){
+          console.log(data);
+          $('.lyrics-wrapper').empty();
+          var content = JST["songs/edit"]({song: data});
+          $('.lyrics-wrapper').html(content);
+        },
+      });
+    });
+
+    $('body').on('submit', '#edit-song-form', function(event){
+      event.preventDefault();
+      var id = $('.song-info').attr('data-song-id');
+      var lyricsData = {lyrics: $(this).find("textarea").val(), }
+      $.ajax({
+        url: "/songs/" + id + "/markdown",
+        type: "Post",
+        data: lyricsData,
+        success: function(data){
+          $(".lyrics-wrapper").html(data.lyrics);
+        },
+      });
+    });
+
 		$('.lyrics-wrapper').on('click', 'a.annotation', function(event){
 			event.preventDefault();
 			var $anchor = $(this);

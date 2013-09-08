@@ -38,6 +38,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    columnize (0.3.6)
+    debugger (1.5.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.0)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.0)
     ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.0.1)
@@ -61,6 +68,8 @@ GEM
       mini_portile (~> 0.5.0)
     pg (0.16.0)
     polyglot (0.3.3)
+    rabl (0.8.6)
+      activesupport (>= 2.3.14)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -116,11 +125,13 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 3.2.1)
+  debugger
   ejs
   jquery-rails
   jquery-ui-rails
   nokogiri
   pg
+  rabl
   rails (= 3.2.13)
   redcarpet
   reverse_markdown

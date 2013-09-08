@@ -15,6 +15,10 @@ gem 'bcrypt-ruby'
 
 gem 'reverse_markdown'
 
+gem 'rabl'
+
+gem 'debugger'
+
 group :development do
   gem 'sqlite3'
 end

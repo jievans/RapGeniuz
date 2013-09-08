@@ -1,5 +1,5 @@
 ### Handle in show when song cannot be found
-
+#### Implement RedCarpet Postprocessor
 class SongsController < ApplicationController
 
   include SongsHelper
@@ -14,7 +14,10 @@ class SongsController < ApplicationController
 
   def create
 
-    params[:song][:lyrics] = markdown(params[:song][:lyrics])
+    html_lyrics = markdown(params[:song][:lyrics], :hard_wrap => true)
+                  .gsub("\n", "").strip
+
+    params[:song][:lyrics] = html_lyrics
 
     @song = Song.new(params[:song])
     @artist = Artist.find_or_initialize_by_name(params[:artist][:name])
@@ -44,6 +47,20 @@ class SongsController < ApplicationController
     end
   end
 
+  def plain_update
+    edited_lyrics = markdown(params[:lyrics]).gsub("\n", "").strip
+   # debugger
+    song = Song.find(params[:id])
+    full_edited = html_update(song.lyrics, edited_lyrics)
+  #  debugger
+    unless errors = lyrics_invalid?(song.lyrics, full_edited)
+      song.update_attributes!(:lyrics => full_edited)
+      render :json => song
+    else
+      render :json => errors, :status => 409
+    end
+  end
+
   def update
     song = Song.find(params[:id])
     unless errors = lyrics_invalid?(song.lyrics, params[:song][:lyrics])
@@ -56,6 +73,10 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render "show.rabl" }
+    end
   end
 
 

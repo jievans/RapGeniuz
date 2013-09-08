@@ -1,5 +1,24 @@
 module ParsingHelper
 
+  def html_update(current_lyrics, edited_lyrics)
+    current_doc = Nokogiri::HTML::DocumentFragment.parse(current_lyrics)
+    edited_doc = Nokogiri::HTML::DocumentFragment.parse(edited_lyrics)
+
+    edited_nodeset = edited_doc.css("a")
+    current_nodeset = current_doc.css("a")
+
+    current_nodeset.each do |node|
+      id = node["data-annotation-id"]
+      corresponding = edited_nodeset.at_css("a[href='/annotations/#{id}']")
+      debugger
+      node.attributes.each do |key, attribute|
+        corresponding[key] = attribute.value
+      end
+    end
+
+    edited_doc.to_s()
+  end
+
 
   def lyrics_invalid?(old_lyrics, new_lyrics)
 

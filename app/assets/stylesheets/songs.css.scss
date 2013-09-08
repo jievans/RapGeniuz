@@ -92,6 +92,17 @@ $edit-color: $edit-purple;
 	padding-bottom: 15px;
 	margin-bottom: 20px;
 
+  #edit-song-form{
+    margin: 10px 0px;
+    textarea {
+      width: 100%;
+      height: 500px;
+      font-size: inherit;
+    }
+  }
+
+
+
 	.edit-lyrics {
 		border-color: $edit-color;
 		color: $edit-color;
