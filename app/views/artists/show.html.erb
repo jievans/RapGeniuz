@@ -1,0 +1,5 @@
+<h2 class="header"><%= @artist.name %></h2>
+<h3> All Songs </h3>
+<% @artist.songs.each do |song| %>
+	<%= song.title %>
+<% end %>

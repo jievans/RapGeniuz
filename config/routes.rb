@@ -7,6 +7,8 @@ RapGenius::Application.routes.draw do
       post "markdown", :to => "songs#plain_update"
     end
   end
+
+  resources :artists
   resources :annotations
   resources :users
   resource :session

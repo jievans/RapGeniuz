@@ -6,8 +6,8 @@ window.RapGenius = {
   Repositories: {
     Songs: {},
   },
+	SignedIn: false,
   initialize: function() {
-    alert('Hello from Backbone!');
   }
 };
 
