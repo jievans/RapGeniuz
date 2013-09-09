@@ -1,7 +1,7 @@
 require 'redcarpet'
 require 'reverse_markdown'
 require 'redcarpet_renderers'
-require 'debugger'
+
 
 module SongsHelper
   def markdown(lyrics, options = {})
