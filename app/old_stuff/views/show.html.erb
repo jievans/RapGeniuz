@@ -1,0 +1,22 @@
+<div class="song-info" data-song-id="<%= @song.id %>">
+  <span class="header"><%= @song.artist.name %>
+    <span class="song-title"> - <%= @song.title %> Lyrics</span>
+  </span>
+</div>
+
+<script type="text/javascript" id="bootstrapped-song">
+  var json = <%= @song.to_json.html_safe %>
+  RapGenius.Repositories.Songs.show = json
+</script>
+
+<div id="song-show">
+</div>
+
+
+<div id="song-wrapper">
+	<div class="lyrics-wrapper">
+		<%= @song.lyrics.html_safe %>
+	</div>
+	<span class="button edit-lyrics">Edit Lyrics</span>
+</div>
+

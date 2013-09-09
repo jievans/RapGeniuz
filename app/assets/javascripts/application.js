@@ -12,9 +12,33 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
+//= require backbone
+//= require rap_genius
+//= require_tree ../templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers
 //= require_tree ../../../vendor/assets/javascripts/
 //= require jquery.ui.position
+//= require underscore
+//= require backbone
+//= require rap_genius
 //= require_tree ../templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers
+//= require_tree ../templates
+//= require underscore
+//= require backbone
+//= require rap_genius
+//= require_tree ../templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers
 //= require_tree .
 
 // TODO: am I doing things wrong with my vendor requirement???

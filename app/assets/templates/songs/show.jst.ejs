@@ -1,0 +1,12 @@
+<div class="song-info" data-song-id="<%= song.get("id") %>">
+  <span class="header"><%= song.get("artist").name %>
+    <span class="song-title"> - <%= song.get("title") %> Lyrics</span>
+  </span>
+</div>
+
+<div id="song-wrapper">
+  <div class="lyrics-wrapper">
+	<%= song.get("lyrics") %>
+  </div>
+	<span class="button edit-lyrics">Edit Lyrics</span>
+</div>

@@ -19,6 +19,8 @@ gem 'rabl'
 
 gem 'debugger'
 
+gem 'backbone-on-rails'
+
 group :development do
   gem 'sqlite3'
 end

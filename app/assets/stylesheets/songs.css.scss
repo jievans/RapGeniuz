@@ -161,10 +161,18 @@ $edit-color: $edit-purple;
 		margin: 20px 0px;
 	}
 
+	// should be absolutely positioned relative to page, but might change later.
+
+
+
+
+}
+
+#song-show{
 	#annotation-form {
 		position: absolute;
-		margin-top: -120px;
-		margin-left: 450px;
+	//	margin-top: -120px;
+	//	margin-left: 450px;
 		background-color: gray;
 		padding: 0px 20px;
 		border-radius: 5px;
@@ -191,8 +199,6 @@ $edit-color: $edit-purple;
 		}
 	}
 
-	// should be absolutely positioned relative to page, but might change later.
-
 	#annotation-show {
 		position: absolute;
 		color: black;
@@ -205,8 +211,6 @@ $edit-color: $edit-purple;
 		//margin-top: -50px;
 //		margin-left: 450px;
 	}
-
-
 }
 
 // Question: how margins work in absolutely positioned elements?
