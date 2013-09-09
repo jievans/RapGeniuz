@@ -70,11 +70,9 @@ class SongsController < ApplicationController
    # edited_lyrics =~ pattern
 
    edited_lyrics.gsub!(pattern) do |match|
-     debugger
      "<a href=\"/#{$5}\">#{$2}</a>"
    end
 
-   debugger
    # edited_lyrics = make_anchors(edited_lyrics)
 
 

@@ -1,10 +1,17 @@
+
+// TODO: When you have a space in your selection, it doesn't put in the span for the annotation form.
+
 RapGenius.Views.SongShowView = Backbone.View.extend({
 
 //  lyricsView: new RapGenius.Views.Lyrics({model: this.model}),
+
+// TODO: change .annotation event to mouseup instead of click
   events: {
     "click .annotation": "displayAnnotation",
     "mouseup .lyrics-wrapper": "showAnnotateButton",
     "mousedown #explain-button": "makeAnnotation",
+    "click .edit-lyrics": "showEditSong",
+    "click #edit-song-button": "submitEditSong",
   //  "submit #annotation-form": "submitAnnotation",
   },
 
@@ -18,6 +25,26 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     var renderedContent = JST["songs/show"]({song: this.model});
     $el.html(renderedContent);
     return this;
+  },
+
+  // TODO: save through the model
+  submitEditSong: function(event){
+    var that = this;
+    event.preventDefault();
+    var id = this.model.get("id");
+    var lyricsData = {lyrics: $(event.target).parent().find("textarea").val(), }
+    $.ajax({
+      url: "/songs/" + id + "/markdown",
+      type: "Post",
+      data: lyricsData,
+      success: function(data){
+        that.model.fetch({
+          success: function(){
+            that.render()
+          },
+        });
+      },
+    });
   },
 
   displayAnnotation: function(event){
@@ -39,6 +66,21 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			},
 		});
 	},
+
+  showEditSong: function(event){
+    var id = $('.song-info').attr('data-song-id');
+    $.ajax({
+      url: "/songs/" + id,
+      type: "GET",
+      dataType: "json",
+      success: function(data){
+        console.log(data);
+        $('.lyrics-wrapper').empty();
+        var content = JST["songs/edit"]({song: data});
+        $('.lyrics-wrapper').html(content);
+      },
+    });
+  },
 
   positionMessage: function(message){
 			var $message = message;
@@ -101,9 +143,13 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
   showAnnotateButton: function(event){
 
 			// this line should be unnecessary
+
+      if($(event.target).is('textarea')) return true;
 			if($(event.target).attr('id') === 'explain-button') return true;
+      if($(event.target).attr('id') === 'edit-song-button') return true;
 
       $('#annotation-show').remove();
+      $('#annotation-form').remove();
       // why is this line necessary???
       if($(event.target).hasClass('annotation')) return true;
 
@@ -197,8 +243,8 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         clonedRange.insertNode($dummy[0]);
         that.$el.append($form);
         $form.position({
-          my: "left center",
-          at: "right+300 center",
+          my: "left center+100",
+          at: "right+200 center",
           of: $dummy,
         });
         $dummy.remove();
@@ -211,7 +257,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
           event.preventDefault();
 					var formData = $form.serializeJSON();
 					formData.annotation.referent = range.toString();
-          debugger;
 					formData.annotation.song_id = that.model.get("id");
 					$.ajax({
 						url: "/annotations",

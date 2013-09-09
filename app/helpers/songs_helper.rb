@@ -32,7 +32,6 @@ module SongsHelper
     pattern = /(\[)(.+?)(\])(\()(\d+)(\))/m
 
     edited_lyrics.gsub(pattern) do |match|
-      debugger
       "<a href=\"/#{$2}\">#{$5}</a>"
     end
   end
