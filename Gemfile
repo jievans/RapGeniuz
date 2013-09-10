@@ -23,6 +23,8 @@ gem 'figaro'
 
 gem 'httparty'
 
+gem 'filepicker-rails'
+
 group :development do
   gem 'sqlite3'
   gem 'debugger'

@@ -62,6 +62,9 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    filepicker-rails (0.1)
+      multi_json (~> 1.6)
+      railties (>= 3.1.0, < 5.0)
     hike (1.2.3)
     httparty (0.11.0)
       multi_json (~> 1.0)
@@ -148,6 +151,7 @@ DEPENDENCIES
   debugger
   ejs
   figaro
+  filepicker-rails
   httparty
   jquery-rails
   jquery-ui-rails

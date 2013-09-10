@@ -21,7 +21,6 @@
 		</div>
 
 		<div id="right-sidebar">
-			<% debugger %>
 			<% if @artist.image %>
 			<div id="artist-image"><%= image_tag(@artist.image)%></div>
 			<% end %>
@@ -51,3 +50,12 @@
 
 	</div>
 </div>
+
+<%= form_for @image do |f| %>
+  <div>
+    <%= f.label :url, "Upload Your Avatar:" %>
+    <%= f.filepicker_field :url %> <!-- User#filepicker_url is a regular string column -->
+  </div>
+
+  <%= f.submit %>
+<% end %>

@@ -8,6 +8,7 @@ RapGenius::Application.routes.draw do
     end
   end
 
+  resources :images
   resources :artists
   resources :albums
   resources :annotations

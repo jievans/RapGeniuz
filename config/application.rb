@@ -61,5 +61,7 @@ module RapGenius
 
     ## trying to autoload library files
    # config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/"]
+
+    config.filepicker_rails.api_key = ENV["INK_API"]
   end
 end
