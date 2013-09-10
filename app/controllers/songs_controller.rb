@@ -106,6 +106,8 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+    @bop_artist_name = @song.artist.name.downcase.gsub(" ", "-")
+    @bop_song_name = @song.title.downcase.gsub(" ", "-")
     respond_to do |format|
       format.html
       format.json { render "show.rabl" }

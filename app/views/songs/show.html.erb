@@ -6,4 +6,15 @@
 <div id="song-show">
 </div>
 
+<div id="song-relations">
+	<a data-width="358" data-bop-link
+	href="http://www.bop.fm/s/<%=u @bop_artist_name %>/<%=u @bop_song_name %>">
+		<%= @song.artist.name %> - <%= @song.title %>
+	</a>
+	<script async src="http://assets.bop.fm/embed.js"></script>
+	<div id="album-image">
+		<%= image_tag(@song.album.image)%>
+	</div>
+</div>
+
 

@@ -169,6 +169,11 @@ $edit-color: $edit-purple;
 }
 
 #song-show{
+	width: 585px;
+	display: inline-block;
+	.lyrics-wrapper{
+		margin: 10px 0px;
+	}
 	#annotation-form {
 		position: absolute;
 	//	margin-top: -120px;
@@ -211,6 +216,10 @@ $edit-color: $edit-purple;
 		//margin-top: -50px;
 //		margin-left: 450px;
 	}
+}
+
+#song-relations{
+	float: right;
 }
 
 // Question: how margins work in absolutely positioned elements?
