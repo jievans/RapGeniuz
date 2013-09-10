@@ -8,6 +8,7 @@ $lyric-border: rgb(204, 204, 204);
 $anchor-orange: #ffc31c;
 $edit-purple: rgba(201, 149, 255, 1);
 $edit-color: $edit-purple;
+$dark-border: rgb(102, 102, 102);
 
 // LESSON: Div up against an achor will create a little space even when the Div is absolutely positioned.  You have to put the div inside the anchor for the space not to be created.
 //  Also, span acts truly inline, whereas Div clears possibly and then is relative to where it would have been otherwise????
@@ -78,6 +79,15 @@ $edit-color: $edit-purple;
 
 }
 
+.song-info {
+	background-color: $lyric-back-grey;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border: solid 1px $dark-border;
+}
+
 #song-wrapper {
 	color: white;
 	font-family: sans-serif;
@@ -85,7 +95,7 @@ $edit-color: $edit-purple;
 	line-height: 26px;
 	background-color: $lyric-back-grey;
 	border-style: solid;
-	border-color: $lyric-border;
+	border-color: $dark-border; //$lyric-border;
 	border-width: 1px;
 	// Ask why changing padding top has such an unexpected effect
 	padding: 5px 30px;
@@ -220,6 +230,38 @@ $edit-color: $edit-purple;
 
 #song-relations{
 	float: right;
+	width: 380px;
+
+
+	#song-description {
+		background-color: rgb(17, 17, 17);
+		border: solid rgb(102, 102, 102) 1px;
+		.label {
+			background-color: #1c1c1c;
+			color: #666;
+			font-family: sans-serif;
+			font-size: 14px;
+			padding: 3px;
+			padding-left: 5px;
+
+		}
+
+		#description-text{
+			text-align: center;
+			padding-bottom: 10px;
+
+			#album-image{
+				img {
+					display: inline-block;
+				}
+				margin: 20px;
+			}
+		}
+
+		margin: 30px 0px;
+
+	}
+
 }
 
 // Question: how margins work in absolutely positioned elements?

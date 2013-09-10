@@ -1,6 +1,6 @@
-class Artist < ActiveRecord::Base
+require 'addressable/uri'
 
-  include ArtistsHelper
+class Artist < ActiveRecord::Base
 
   attr_accessible :name, :bio
   before_save :ensure_info
@@ -23,11 +23,35 @@ class Artist < ActiveRecord::Base
   end
 
   def ensure_info
-    info = fetch_info(self.name) unless self.image && self.bio
-    unless info["error"]
-      self.image = info[:image] unless self.image
-      self.bio = info[:bio] unless self.bio
+    return if self.image && self.bio
+    json = self.fetch_json()
+    return if json["error"]
+
+    bio = json["artist"]["bio"]["summary"]
+    image_link = json["artist"]["image"][4]["#text"]
+
+    unless self.image || image_link.empty?
+      self.image = image_link unless self.image
     end
+
+    unless self.bio || bio.empty?
+      self.bio = bio unless self.image
+    end
+  end
+
+  def fetch_json()
+   address = Addressable::URI.new(
+       :scheme => "http",
+       :host => "ws.audioscrobbler.com",
+       :path => "2.0",
+       :query_values => {:method => "artist.getInfo",
+                         :artist => name,
+                         :api_key => LastFm.api_key,
+                         :format => "json"}
+     ).to_s
+
+   response = HTTParty.get(address)
+   JSON.parse(response.body)
   end
 
 end

@@ -16,15 +16,22 @@
 				<% end %>
 
 			<% end %>
-			<a data-width="358" data-bop-link href="http://www.bop.fm/s/my-bloody-valentine/sometimes">Coldplay - Hurts Like Heaven</a><script async src="http://assets.bop.fm/embed.js"></script>
+			<!-- good stuff -->
+			<!-- <a data-width="358" data-bop-link href="http://www.bop.fm/s/my-bloody-valentine/sometimes">Coldplay - Hurts Like Heaven</a><script async src="http://assets.bop.fm/embed.js"></script> -->
 		</div>
 
 		<div id="right-sidebar">
+			<% debugger %>
+			<% if @artist.image %>
 			<div id="artist-image"><%= image_tag(@artist.image)%></div>
+			<% end %>
+
 			<div id="bio">
 				<h3>About <%= @artist.name %></h3>
 				<div class="content">
-				<%= @bio.html_safe %>
+				<% if @artist.bio %>
+					<%= @bio.html_safe %>
+				<% end %>
 				</div>
 			</div>
 
@@ -40,8 +47,6 @@
 					<% end %>
 				</div>
 			</div>
-
-
 		</div>
 
 	</div>

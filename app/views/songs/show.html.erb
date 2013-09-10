@@ -12,8 +12,19 @@
 		<%= @song.artist.name %> - <%= @song.title %>
 	</a>
 	<script async src="http://assets.bop.fm/embed.js"></script>
-	<div id="album-image">
-		<%= image_tag(@song.album.image)%>
+
+	<div id="song-description">
+		<div class="label">From album <i><%= @song.album.name %></i></div>
+		<div id="description-text">
+			<div id="description-content">
+			<!-- TODO: provide track description -->
+			</div>
+			<div id="album-image">
+				<%= link_to album_url(@song.album) do %>
+					<%= image_tag(@song.album.image)%>
+				<% end %>
+			</div>
+		</div>
 	</div>
 </div>
 
