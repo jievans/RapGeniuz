@@ -51,11 +51,10 @@
 	</div>
 </div>
 
-<%= form_for @image do |f| %>
-  <div>
-    <%= f.label :url, "Upload Your Avatar:" %>
-    <%= f.filepicker_field :url %> <!-- User#filepicker_url is a regular string column -->
-  </div>
+<script type="text/javascript">
+function hello(event){
+	console.log(event);
+}
+</script>
 
-  <%= f.submit %>
-<% end %>
+<button class="filepick">Submit a Photo</button>

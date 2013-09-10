@@ -1,5 +1,6 @@
 // Dummy Span appeared to be automatically removed from DOM when span was empty.
 // TODO: When you have a space in your selection, it doesn't put in the span for the annotation form.
+// TODO: annotation.body.replace(/\n/)function(match){return "<br>";})
 
 RapGenius.Views.SongShowView = Backbone.View.extend({
 
@@ -12,6 +13,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     "mousedown #explain-button": "makeAnnotation",
     "click .edit-lyrics": "showEditSong",
     "click #edit-song-button": "submitEditSong",
+		"click #edit-annotation-button": "showEditAnnotation",
   //  "submit #annotation-form": "submitAnnotation",
   },
 
@@ -26,6 +28,10 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     $el.html(renderedContent);
     return this;
   },
+
+	showEditAnnotation: function(event){
+		$('#annotation-show')
+	},
 
   // TODO: save through the model
   submitEditSong: function(event){
@@ -53,15 +59,27 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     event.stopPropagation();
     var that = this;
 		var $anchor = $(event.target);
+		var that = this;
 		$.ajax({
 			url: $anchor.attr('href'),
 			type: "GET",
 			success: function(data){
-				renderedContent = JST["annotation_show"]({annotation: data});
+				that.model.annotation = data.body;
+				var html = data.body.replace(/\n/g, function(match){return "<br>";});
+				html = html.replace(/https?:\/\/.+\S/g, function(match){
+					return '<img src="' + match + '"></img>'
+				});
+
+				// make model for annotation, don't save
+				// provide model to annotationShow view with data...
+				// take rendered content from view and position
+				// when user clicks off of annotation, clear
+				renderedContent = JST["annotation_show"]({annotation: html});
 				$renderedContent = $(renderedContent);
 				that.$el.append($renderedContent);
-				$renderedContent.position({my: "left center",
-																	 at: "right+10 center",
+				// could we not append to the lyrics wrapper and then the lyrics wrapper will redraw itself?
+				$renderedContent.position({my: "left top-10",
+																	 at: "right+10 top",
 																	 of: $anchor});
 			},
 		});
