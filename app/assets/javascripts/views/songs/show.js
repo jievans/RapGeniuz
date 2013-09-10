@@ -1,4 +1,4 @@
-
+// Dummy Span appeared to be automatically removed from DOM when span was empty.
 // TODO: When you have a space in your selection, it doesn't put in the span for the annotation form.
 
 RapGenius.Views.SongShowView = Backbone.View.extend({
@@ -238,7 +238,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			setTimeout(function(){
 
 				$button.remove();
-        var $dummy = $('<span>');
+        var $dummy = $('<span>dummy text<span>');
 				// clonedRange.insertNode($form[0]);
         clonedRange.insertNode($dummy[0]);
         that.$el.append($form);
@@ -247,6 +247,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
           at: "right+200 center",
           of: $dummy,
         });
+				console.log($dummy.parent());
         $dummy.remove();
 
         // this whole thing can be reformatted of course...

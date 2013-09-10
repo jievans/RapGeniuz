@@ -12,6 +12,11 @@ $lipstick-red: rgba(177, 0, 10, 1);
   src: url('dinfont.woff');
 }
 
+.main-wrapper {
+	width: 997px;
+	margin: auto;
+}
+
 .button {
 	display: inline-block;
 	font-size: 20px;
@@ -185,6 +190,11 @@ body {
   color: $header-blue;
   font-size: 40px;
   font-family: DinBoldCondensed;
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
 
   .song-title {
     color: white;

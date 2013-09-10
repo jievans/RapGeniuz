@@ -1,5 +1,48 @@
-<h2 class="header"><%= @artist.name %></h2>
-<h3> All Songs </h3>
-<% @artist.songs.each do |song| %>
-	<%= song.title %>
-<% end %>
+
+<div class="main-wrapper">
+	<div id="artist-show">
+
+		<h2 class="header"><%= @artist.name %></h2>
+
+		<div id="left-sidebar">
+			<h3> All Songs </h3>
+
+			<% @artist.songs.each do |song| %>
+
+				<%= link_to song_url(song) do %>
+					<span class="marker">
+						<%= song.title %>
+					</span>
+				<% end %>
+
+			<% end %>
+			<a data-width="358" data-bop-link href="http://www.bop.fm/s/my-bloody-valentine/sometimes">Coldplay - Hurts Like Heaven</a><script async src="http://assets.bop.fm/embed.js"></script>
+		</div>
+
+		<div id="right-sidebar">
+			<div id="artist-image"><%= image_tag(@artist.image)%></div>
+			<div id="bio">
+				<h3>About <%= @artist.name %></h3>
+				<div class="content">
+				<%= @bio.html_safe %>
+				</div>
+			</div>
+
+			<div id="albums">
+				<h3><%= @artist.name %>'s Albums</h3>
+				<div class="content">
+					<% @artist.albums.each do |album| %>
+						<%= link_to album_url(album) do %>
+							<span class="marker">
+								<%= album.name %>
+							</span>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+</div>

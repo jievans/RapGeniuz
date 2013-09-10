@@ -1,5 +1,8 @@
+<% var artist_link =  "/artists/" + song.get("artist_id") %>
+
 <div class="song-info" data-song-id="<%= song.get("id") %>">
-  <span class="header"><%= song.get("artist").name %>
+  <span class="header">
+		<a href="<%= artist_link %>"><%= song.get("artist").name %></a>
     <span class="song-title"> - <%= song.get("title") %> Lyrics</span>
   </span>
 </div>

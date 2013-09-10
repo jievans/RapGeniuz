@@ -21,6 +21,8 @@ gem 'backbone-on-rails'
 
 gem 'figaro'
 
+gem 'httparty'
+
 group :development do
   gem 'sqlite3'
   gem 'debugger'

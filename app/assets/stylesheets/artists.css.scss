@@ -1,3 +1,89 @@
 // Place all the styles related to the artists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$header-blue: rgba(35, 193, 250, 1);
+$anchor-orange: #ffc31c;
+
+
+#artist-show {
+
+	h2 {
+		border-bottom: solid 2px white;
+	}
+
+	.marker {
+		-webkit-transition: all 75ms ease;
+		-moz-transition: all 75ms ease;
+		-ms-transition: all 75ms ease;
+		-o-transition: all 75ms ease;
+		transition: all 75ms ease;
+		display: block;
+		padding-left: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		height: 100%;
+		&:hover{
+			border-left-width: 4px;
+			border-left-color: $anchor-orange;
+			border-left-style: solid;
+		};
+	}
+
+	#left-sidebar {
+		width: 400px;
+		display: inline-block;
+	}
+
+	.header {
+		color: white;
+	}
+
+	a {
+		color: rgb(5, 170, 229);
+		text-decoration: none;
+		display: block;
+		border-style: solid;
+		border-color: rgb(30, 30, 30);
+		border-width: 1px 0px;
+		&:hover {
+			color: white;
+		}
+	}
+
+	ul{
+		list-style-type: none;
+		padding: 0;
+	}
+
+	li {
+		&:hover{
+			a {
+				color: white;
+			}
+		}
+
+		border-style: solid;
+		border-color: rgb(30, 30, 30);
+		border-width: 1px 0px;
+		padding: 10px;
+	}
+
+	#right-sidebar {
+		float: right;
+		width: 500px;
+	}
+
+
+	#bio {
+		margin-top: 20px;
+
+		.content {
+					color: rgb(204, 204, 204);
+			}
+	}
+
+
+
+
+}

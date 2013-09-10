@@ -29,6 +29,7 @@ class SongsController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
         @artist.save! unless @artist.persisted?
+        @album.artist_id ||= @artist.id
         @album.save! unless @album.persisted?
         @song.artist_id = @artist.id
         @song.album_id = @album.id
@@ -38,6 +39,7 @@ class SongsController < ApplicationController
 
       redirect_to song_url(@song)
     rescue  => e
+      debugger
       flash.now[:notices] ||= []
 
       [@song, @artist, @album].each do |ar_object|

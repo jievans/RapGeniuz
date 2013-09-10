@@ -9,6 +9,7 @@ RapGenius::Application.routes.draw do
   end
 
   resources :artists
+  resources :albums
   resources :annotations
   resources :users
   resource :session
