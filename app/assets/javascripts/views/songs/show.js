@@ -1,22 +1,28 @@
 // Dummy Span appeared to be automatically removed from DOM when span was empty.
 // TODO: When you have a space in your selection, it doesn't put in the span for the annotation form.
 // TODO: annotation.body.replace(/\n/)function(match){return "<br>";})
+// TODO: clear finished annotation views on click for show annotation button
 
 RapGenius.Views.SongShowView = Backbone.View.extend({
 
 //  lyricsView: new RapGenius.Views.Lyrics({model: this.model}),
 
 // TODO: change .annotation event to mouseup instead of click
+
+	subViews: [],
+
+	assign: function(view){
+		this.subViews.push(view);
+	},
+
   events: {
     "click .annotation": "displayAnnotation",
     "mouseup .lyrics-wrapper": "showAnnotateButton",
     "mousedown #explain-button": "makeAnnotation",
     "click .edit-lyrics": "showEditSong",
     "click #edit-song-button": "submitEditSong",
-		"click #edit-annotation-button": "showEditAnnotation",
   //  "submit #annotation-form": "submitAnnotation",
   },
-
 
   render: function(){
     console.log("render being called");
@@ -60,29 +66,50 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     var that = this;
 		var $anchor = $(event.target);
 		var that = this;
-		$.ajax({
-			url: $anchor.attr('href'),
-			type: "GET",
-			success: function(data){
-				that.model.annotation = data.body;
-				var html = data.body.replace(/\n/g, function(match){return "<br>";});
-				html = html.replace(/https?:\/\/.+\S/g, function(match){
-					return '<img src="' + match + '"></img>'
-				});
 
-				// make model for annotation, don't save
-				// provide model to annotationShow view with data...
-				// take rendered content from view and position
-				// when user clicks off of annotation, clear
-				renderedContent = JST["annotation_show"]({annotation: html});
-				$renderedContent = $(renderedContent);
-				that.$el.append($renderedContent);
-				// could we not append to the lyrics wrapper and then the lyrics wrapper will redraw itself?
-				$renderedContent.position({my: "left top-10",
+		var annotation = new RapGenius.Models.Annotation(
+			{id: $anchor.attr("data-annotation-id")}
+		);
+
+		annotation.fetch({
+			success: function(model){
+				var annotationView = new RapGenius.Views.ShowAnnotationView(
+					{model: model}
+				);
+				that.assign(annotationView);
+				that.$el.append(annotationView.render().$el);
+				annotationView.$el.position({my: "left top-10",
 																	 at: "right+10 top",
 																	 of: $anchor});
 			},
 		});
+
+		// $.ajax({
+	// 		url: $anchor.attr('href'),
+	// 		type: "GET",
+	// 		success: function(data){
+	// 			// that.model.annotation = data.body;
+	// 			var html = data.body.replace(/\n/g, function(match){return "<br>";});
+	// 			html = html.replace(/https?:\/\/.+\S/g, function(match){
+	// 				return '<img src="' + match + '"></img>'
+	// 			});
+	//
+	// 			// we could have the models pre-fetched
+	//
+	// 			debugger;
+	// 			// make model for annotation, don't save
+	// 			// provide model to annotationShow view with data...
+	// 			// take rendered content from view and position
+	// 			// when user clicks off of annotation, clear
+	// 			renderedContent = JST["annotation_show"]({annotation: html});
+	// 			$renderedContent = $(renderedContent);
+	// 			that.$el.append($renderedContent);
+	// 			// could we not append to the lyrics wrapper and then the lyrics wrapper will redraw itself?
+	// 			$renderedContent.position({my: "left top-10",
+	// 																 at: "right+10 top",
+	// 																 of: $anchor});
+	// 		},
+	// 	});
 	},
 
   showEditSong: function(event){
@@ -166,6 +193,10 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			if($(event.target).attr('id') === 'explain-button') return true;
       if($(event.target).attr('id') === 'edit-song-button') return true;
 
+			_.each(this.subViews, function(subView){
+				subView.remove();
+			});
+
       $('#annotation-show').remove();
       $('#annotation-form').remove();
       // why is this line necessary???
@@ -220,7 +251,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 			var clonedRange = range.cloneRange();
 			clonedRange.collapse(false);
-			var formContent = JST["annotation_form"]();
+			var formContent = JST["annotations/new"]();
 			$form = $(formContent);
 
 			console.log(range.toString());
