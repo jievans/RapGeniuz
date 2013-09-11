@@ -1,5 +1,7 @@
 <form id="edit-annotation-form">
 	<h2>¡Edit Yo Annotation Yo!</h2>
-	<textarea name="body"><%= annotation.get("body") %></textarea><br>
-	<button type="submit">Submit Annotation</button>
+	<textarea name="body"
+	id="annotation_body"><%= annotation.get("body") %></textarea><br>
+	<span class="button filepick">Add image</span>
+	<button class="button" type="submit">Submit Annotation</button>
 </form>

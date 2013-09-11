@@ -35,10 +35,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     return this;
   },
 
-	showEditAnnotation: function(event){
-		$('#annotation-show')
-	},
-
   // TODO: save through the model
   submitEditSong: function(event){
     var that = this;
