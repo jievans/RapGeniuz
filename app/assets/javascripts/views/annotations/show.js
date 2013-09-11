@@ -4,6 +4,7 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 
 	events: {
 		"click .edit-annotation-button": "showEditAnnotation",
+		"submit #edit-annotation-form": "submitEditAnnotation",
 	},
 
 	render: function(){
@@ -24,6 +25,17 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 	showEditAnnotation: function(event){
 		var content = JST["annotations/edit"]({annotation: this.model});
 		this.$el.html(content);
+	},
+
+	submitEditAnnotation: function(event){
+		event.preventDefault();
+		var that = this;
+		var updates = $('#edit-annotation-form').serializeJSON();
+		this.model.save(updates, {
+			success: function(model){
+				that.render();
+			},
+		});
 	},
 
 });

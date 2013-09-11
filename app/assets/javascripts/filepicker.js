@@ -1,7 +1,8 @@
 $(function(){
 	$("body").on("click", ".filepick", function(){
 		filepicker.pick(function(inkBlob){
-			console.log(inkBlob.url);
+			$('#annotation_body').val($('#annotation_body').val() + '\n\n'
+																	+ inkBlob.url);
 		});
 	});
 });
