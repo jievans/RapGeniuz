@@ -2,7 +2,7 @@ class Song < ActiveRecord::Base
 
   include SongsHelper
 
-  attr_accessible :album_id, :artist_id, :lyrics, :title, :youtube_url
+  attr_accessible :album_id, :artist_id, :lyrics, :title, :youtube_url, :user_id
 
   before_save :remove_whitespace
 
@@ -10,6 +10,8 @@ class Song < ActiveRecord::Base
              :class_name => "Artist",
              :foreign_key => :artist_id,
              :primary_key => :id
+
+  belongs_to :user
 
   belongs_to :album,
   :class_name => "Album",

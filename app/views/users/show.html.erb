@@ -3,3 +3,17 @@ pulling things down -->
 
 
 What is up <%= @user.username %> ?
+
+<script type="text/javascript">
+
+RapGenius.Repositories.UserAnnotationStreams =
+<%= @user.annotations.to_json.html_safe %>;
+
+RapGenius.Repositories.UserSongStreams =
+<%= @user.songs.to_json.html_safe %>;
+
+var activityView = new RapGenius.Views.UserActivityView;
+
+$("body").append(activityView.render().$el);
+
+</script>

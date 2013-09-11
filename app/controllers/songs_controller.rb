@@ -21,6 +21,7 @@ class SongsController < ApplicationController
     # html_lyrics = params[:song][:lyrics].gsub("\r\n", "<br>").gsub("\n", "<br>")
 
     params[:song][:lyrics] = html_lyrics
+    params[:song][:user_id] = current_user.id
 
     @song = Song.new(params[:song])
     @artist = Artist.find_or_initialize_by_name(params[:artist][:name])

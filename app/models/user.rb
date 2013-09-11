@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
 
   before_validation :generate_token
 
+  has_many :songs
+
+  has_many :annotations
+
   include BCrypt
 
   def password=(secret)

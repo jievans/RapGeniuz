@@ -5,6 +5,8 @@ window.RapGenius = {
   Routers: {},
   Repositories: {
     Songs: {},
+		UserAnnotationStreams: {},
+		UserSongStreams: {},
   },
 	SignedIn: false,
   initialize: function() {

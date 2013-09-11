@@ -13,7 +13,7 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 		});
 
 		html = html.replace(/https?:\/\/.+\S/g, function(match){
-			return '<img src="' + match + '"></img>'
+			return '<img id="annotation-image" src="' + match + '"></img>'
 		});
 
 		var renderedContent = JST["annotations/show"]({annotation: html});
