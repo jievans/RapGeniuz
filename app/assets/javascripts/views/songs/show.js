@@ -109,6 +109,17 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 	},
 
   showEditSong: function(event){
+		var anchor_regex = /(<a.*?data-annotation-id=")(\d+)(">)((.|\n)*?)(<\/a>)/g;
+		var plain_lyrics = this.model.get("body").replace(/<br>/g, function(match){
+															return '\n';
+													 }).replace(anchor_regex, function(match,
+														 p1, p2, p3, p4){
+														return "[" + _.str.trim(p4) + "]" + "("
+														+ _.str.trim(p2) + ")";
+													 });
+
+
+
     var id = $('.song-info').attr('data-song-id');
     $.ajax({
       url: "/songs/" + id,
