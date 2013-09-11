@@ -6,14 +6,20 @@ What is up <%= @user.username %> ?
 
 <script type="text/javascript">
 
+<% content = render(:partial => "rabl_partials/annotation",
+:locals => {:type => :collection,
+						:annotation => @user.annotations} ).html_safe %>
+
 RapGenius.Repositories.UserAnnotationStreams =
-<%= @user.annotations.to_json.html_safe %>;
+JSON.parse("<%="#{j content}".html_safe %>");
+
+console.log(RapGenius.Repositories.UserAnnotationStreams.constructor);
 
 RapGenius.Repositories.UserSongStreams =
 <%= @user.songs.to_json.html_safe %>;
 
 var activityView = new RapGenius.Views.UserActivityView;
 
-$("body").append(activityView.render().$el);
+$("#body").append(activityView.render().$el);
 
 </script>

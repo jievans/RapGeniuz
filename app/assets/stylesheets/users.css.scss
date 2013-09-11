@@ -3,13 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #user-activity {
-	#toolbar {
+	#tabs {
 		.activity-tab {
+			display: inline-block;
 			text-align: center;
 		}
 	}
 
+
 	width: 653px;
+	float: right;
 
 }
 

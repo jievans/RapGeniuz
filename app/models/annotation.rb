@@ -3,6 +3,8 @@ class Annotation < ActiveRecord::Base
 
   has_many :images, as: :imageable
 
+  belongs_to :song
+
   before_save :cleanse_body
 
   def cleanse_body()
