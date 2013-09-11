@@ -9,7 +9,7 @@ RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 
 	render: function(){
 		var header = JST["annotations/referent"]({annotation: this.model,
-																							referent: this.model.referent});
+																		  referent: this.model.get("referent")});
 
 		var html = this.model.get("body").replace(/\n/g, function(match){
 			return "<br>";
@@ -20,8 +20,8 @@ RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 		});
 
 		var renderedContent = JST["annotations/show"]({annotation: html});
-		var $renderedContent = $(renderedContent);
-		this.$el.html($renderedContent);
+		this.$el.empty();
+		this.$el.append(header, renderedContent);
 		return this;
 	},
 

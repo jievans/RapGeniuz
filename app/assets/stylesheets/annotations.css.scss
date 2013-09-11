@@ -31,3 +31,26 @@
 	display: block;
 	margin: auto;
 }
+
+#annotation-stream-unit{
+	background-color: rgb(49,45,50);
+}
+
+#referent-wrapper {
+	background: image-url("tactile_noise.png");
+	border-top: solid 1px rgb(212, 179, 254);
+
+	a {
+		text-decoration: none;
+		color: #ffc31c;
+		font-size: 18px;
+		display: inline-block;
+		position: relative;
+		left: 40px;
+		margin: 20px 0px;
+
+		.big-quote {
+			font-size: 30px;
+		}
+	}
+}
