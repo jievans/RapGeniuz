@@ -3,6 +3,7 @@ collection locals[:annotation] if locals[:type] == :collection
 
 
 object locals[:annotation]
+attributes *Annotation.column_names
 
 child :song do
 
@@ -11,4 +12,9 @@ child :song do
 	child :album do
 		attributes *Album.column_names
 	end
+
+	child :artist do
+		attributes *Artist.column_names
+	end
 end
+

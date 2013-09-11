@@ -8,17 +8,23 @@ What is up <%= @user.username %> ?
 
 <% content = render(:partial => "rabl_partials/annotation",
 :locals => {:type => :collection,
-						:annotation => @user.annotations} ).html_safe %>
+						:annotation => @user.annotations.order("created_at DESC")} )
+						.html_safe %>
 
-RapGenius.Repositories.UserAnnotationStreams =
+RapGenius.Repositories.AnnotationStreams.user =
 JSON.parse("<%="#{j content}".html_safe %>");
 
-console.log(RapGenius.Repositories.UserAnnotationStreams.constructor);
-
-RapGenius.Repositories.UserSongStreams =
+RapGenius.Repositories.SongStreams.user =
 <%= @user.songs.to_json.html_safe %>;
 
-var activityView = new RapGenius.Views.UserActivityView;
+
+var annotationCollection = new RapGenius.Collections.Annotations(
+												RapGenius.Repositories.AnnotationStreams.user,
+												{parse: true});
+
+var activityView = new RapGenius.Views.UserActivityView({
+																			collection: annotationCollection
+																		});
 
 $("#body").append(activityView.render().$el);
 
