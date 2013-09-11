@@ -4,6 +4,8 @@ class Song < ActiveRecord::Base
 
   attr_accessible :album_id, :artist_id, :lyrics, :title, :youtube_url
 
+  before_save :remove_whitespace
+
   belongs_to :artist,
              :class_name => "Artist",
              :foreign_key => :artist_id,
@@ -18,5 +20,9 @@ class Song < ActiveRecord::Base
 
   has_many :annotations, :class_name => "Annotation", :foreign_key => :song_id,
   :primary_key => :id
+
+  def remove_whitespace
+    self.lyrics = self.lyrics.strip
+  end
 
 end

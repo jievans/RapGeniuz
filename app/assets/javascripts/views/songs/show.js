@@ -110,7 +110,8 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
   showEditSong: function(event){
 		var anchor_regex = /(<a.*?data-annotation-id=")(\d+)(">)((.|\n)*?)(<\/a>)/g;
-		var plain_lyrics = this.model.get("body").replace(/<br>/g, function(match){
+		debugger;
+		var plain_lyrics = this.model.get("lyrics").replace(/<br>/g, function(match){
 															return '\n';
 													 }).replace(anchor_regex, function(match,
 														 p1, p2, p3, p4){
@@ -120,18 +121,21 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 
 
-    var id = $('.song-info').attr('data-song-id');
-    $.ajax({
-      url: "/songs/" + id,
-      type: "GET",
-      dataType: "json",
-      success: function(data){
-        console.log(data);
-        $('.lyrics-wrapper').empty();
-        var content = JST["songs/edit"]({song: data});
-        $('.lyrics-wrapper').html(content);
-      },
-    });
+     var content = JST["songs/edit"]({plain_lyrics: plain_lyrics});
+		 debugger;
+     $('.lyrics-wrapper').html(content);
+
+    // $.ajax({
+//       url: "/songs/" + id,
+//       type: "GET",
+//       dataType: "json",
+//       success: function(data){
+//         console.log(data);
+//         $('.lyrics-wrapper').empty();
+//         var content = JST["songs/edit"]({song: data});
+//         $('.lyrics-wrapper').html(content);
+//       },
+//     });
   },
 
   positionMessage: function(message){
