@@ -10,4 +10,10 @@ class UsersController < ApplicationController
     render :json => {:url => user_url(user)}
   end
 
+  def update
+    user = User.find(params[:id])
+    user.update_attributes(:image => params[:image])
+    render :json => user
+  end
+
 end

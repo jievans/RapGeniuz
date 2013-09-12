@@ -6,12 +6,12 @@
   src: url('dinfont.woff');
 }
 
-button {
-	background: transparent;
-	border-style: none;
-	font-family: inherit;
-	font-size: inherit;
-}
+//button {
+//	background: transparent;
+//	border-style: none;
+//	font-family: inherit;
+//	font-size: inherit;
+//}
 
 .main-wrapper {
 	width: 997px;
@@ -207,7 +207,7 @@ body {
 .info-box {
 	background-color: rgb(17, 17, 17);
 	border: solid rgb(102, 102, 102) 1px;
-	.label {
+	.box-header {
 		background-color: #1c1c1c;
 		color: #666;
 		font-family: sans-serif;
@@ -217,3 +217,41 @@ body {
 
 	}
 }
+
+.btn-dark {
+	background-color: hsl(2, 0%, 12%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3d3d3d", endColorstr="#1e1e1e");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#3d3d3d), to(#1e1e1e));
+  background-image: -moz-linear-gradient(top, #3d3d3d, #1e1e1e);
+  background-image: -ms-linear-gradient(top, #3d3d3d, #1e1e1e);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3d3d3d), color-stop(100%, #1e1e1e));
+  background-image: -webkit-linear-gradient(top, #3d3d3d, #1e1e1e);
+  background-image: -o-linear-gradient(top, #3d3d3d, #1e1e1e);
+  background-image: linear-gradient(#3d3d3d, #1e1e1e);
+  border-color: #1e1e1e #1e1e1e hsl(2, 0%, 9%);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.19);
+  -webkit-font-smoothing: antialiased;
+
+	&:hover {
+	  background-repeat: repeat-x;
+		color: white;
+	   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#595a4e", endColorstr="#23231e");
+	   background-image: -khtml-gradient(linear, left top, left bottom, from(#595a4e), to(#23231e));
+	   background-image: -moz-linear-gradient(top, #595a4e, #23231e);
+	   background-image: -ms-linear-gradient(top, #595a4e, #23231e);
+	   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #595a4e), color-stop(100%, #23231e));
+	   background-image: -webkit-linear-gradient(top, #595a4e, #23231e);
+	   background-image: -o-linear-gradient(top, #595a4e, #23231e);
+	   background-image: linear-gradient(#595a4e, #23231e);
+	   border-color: #23231e #23231e hsl(64, 7%, 8%);
+
+	}
+
+	&:active{
+		background-image: none;
+	};
+}
+
+

@@ -17,16 +17,18 @@
 
 }
 
-.user-avatar {
-	display: inline-block;
-	background: rgb(20, 0, 45);
-	border: solid white 2px;
 
-}
 
 #user-info {
 
 	width: 300px;
+
+	.user-avatar {
+		display: inline-block;
+		background: rgb(20, 0, 45);
+		border: solid white 4px;
+		width: 300px;
+	}
 
 	#user-profile-header {
 		color: $header-orange;
@@ -34,7 +36,26 @@
 		font-size: 43px;
 		padding-bottom: 20px;
 		border-bottom: solid 2px $header-orange;
+		margin-bottom: 20px;
 	}
+
+	.info-box {
+		margin-top: 20px;
+		width: 300px;
+
+		.options{
+			text-align: center;
+			margin: 20px;
+			//.cool-button {
+//				background-color: rgb(88, 81, 90);
+//				background-repeat: repeat-x;
+//				background-image: webkit-linear-gradient(top, rgb(140, 131, 143), rgb(88, 81, 90));
+//			}
+		}
+	}
+
+
 }
+
 
 

@@ -1,6 +1,13 @@
 <h2 id="user-profile-header"><%= user.escape("username") %></h2>
 <img class="user-avatar" src="<%=user.escape("image")%>"></img>
 <div id="user-options" class="info-box">
-	<div class="label">User Options</div>
+	<div class="box-header">User Options</div>
+	<div class="options">
+		<button id="user-avatar-filepick"
+		class="btn-block btn-dark btn-sm user-avatar-filepick">
+		Change Profile Pic</button>
+		<button class="btn-block btn-dark btn-sm">Change name,
+			email address, or password</button>
+	</div>
 </div>
 
