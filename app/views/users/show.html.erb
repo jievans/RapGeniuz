@@ -2,7 +2,7 @@
 pulling things down -->
 
 
-What is up <%= @user.username %> ?
+
 
 <script type="text/javascript">
 
@@ -17,6 +17,9 @@ JSON.parse("<%="#{j content}".html_safe %>");
 RapGenius.Repositories.SongStreams.user =
 <%= @user.songs.to_json.html_safe %>;
 
+RapGenius.Repositories.User =
+JSON.parse("<%="#{j @user.to_json}".html_safe %>");
+
 
 var annotationCollection = new RapGenius.Collections.Annotations(
 												RapGenius.Repositories.AnnotationStreams.user,
@@ -26,6 +29,15 @@ var activityView = new RapGenius.Views.UserActivityView({
 																			collection: annotationCollection
 																		});
 
+var userModel = new RapGenius.Models.User(RapGenius.Repositories.User);
+
+var infoView = new RapGenius.Views.UserInfoView({
+																			model: userModel
+																		});
+
+
 $("#body").append(activityView.render().$el);
+$("#body").append(infoView.render().$el);
+
 
 </script>

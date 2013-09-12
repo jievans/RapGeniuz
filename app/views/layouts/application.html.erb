@@ -9,6 +9,10 @@
 	<script>
 		filepicker.setKey("<%= ENV["INK_API"] %>")
 	</script>
+	<script>
+		RapGenius.currentUser = new RapGenius.Models.User(JSON.parse(
+			"<%= "#{j current_user.to_json }".html_safe %>"));
+	</script>
 	<%= csrf_meta_tags %>
 </head>
 <body>

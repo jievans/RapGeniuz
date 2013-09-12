@@ -253,7 +253,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
       var that = this;
 			event.stopPropagation();
 			//	event.preventDefault();
-			var selection = window.getSelection();
+			var selection = rangy.getSelection();
 			var range = selection.getRangeAt(0);
 			var $button = $(event.target);
 			// is it possible to insert information through pseudo-selector
@@ -297,8 +297,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 			setTimeout(function(){
 
-				console.log(range.toHtml());
-
 				$button.remove();
         var $dummy = $('<span>dummy text<span>');
 				// clonedRange.insertNode($form[0]);
@@ -319,7 +317,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 				$form.on("submit", function(event){
           event.preventDefault();
 					var formData = $form.serializeJSON();
-					formData.annotation.referent = range.toString();
+					formData.annotation.referent = range.toHtml();
 					formData.annotation.song_id = that.model.get("id");
 					$.ajax({
 						url: "/annotations",

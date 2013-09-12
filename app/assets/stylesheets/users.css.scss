@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "colors";
+
 #user-activity {
 	#tabs {
 		.activity-tab {
@@ -10,10 +12,22 @@
 		}
 	}
 
-
 	width: 653px;
 	float: right;
 
+}
+
+#user-info {
+
+	width: 300px;
+
+	#user-profile-header {
+		color: $header-orange;
+		outline-color: rgb(255, 195, 28);
+		font-size: 43px;
+		padding-bottom: 20px;
+		border-bottom: solid 2px $header-orange;
+	}
 }
 
 
