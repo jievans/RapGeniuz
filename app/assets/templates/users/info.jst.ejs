@@ -1,1 +1,6 @@
-<h2 id="user-profile-header"><%= user.get("username") %></h2>
+<h2 id="user-profile-header"><%= user.escape("username") %></h2>
+<img class="user-avatar" src="<%=user.escape("image")%>"></img>
+<div id="user-options" class="info-box">
+	<div class="label">User Options</div>
+</div>
+

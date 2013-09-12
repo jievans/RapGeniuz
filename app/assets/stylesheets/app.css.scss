@@ -203,3 +203,17 @@ body {
   }
 
 }
+
+.info-box {
+	background-color: rgb(17, 17, 17);
+	border: solid rgb(102, 102, 102) 1px;
+	.label {
+		background-color: #1c1c1c;
+		color: #666;
+		font-family: sans-serif;
+		font-size: 14px;
+		padding: 3px;
+		padding-left: 5px;
+
+	}
+}
