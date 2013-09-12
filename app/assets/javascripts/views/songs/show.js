@@ -297,6 +297,8 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 			setTimeout(function(){
 
+				console.log(range.toHtml());
+
 				$button.remove();
         var $dummy = $('<span>dummy text<span>');
 				// clonedRange.insertNode($form[0]);

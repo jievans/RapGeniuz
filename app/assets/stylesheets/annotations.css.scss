@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// sprites http://assets.rapgenius.com/images/redesign/sprite.png?1378943071
+
 @import "colors";
 
 
@@ -41,6 +43,11 @@
 
 	.annotation-content {
 		margin: 30px;
+	//	margin-bottom: 30px;
+		border-left: solid rgb(107, 107, 107) 1px;
+		padding-left: 20px;
+		padding-bottom: 10px;
+		padding-top: 10px;
 	}
 
 	.edit-annotation-button-wrapper {
@@ -48,12 +55,19 @@
 		text-align: left;
 	//	margin: 20px;
 		// can't get margin-bottom to work
-		padding-bottom: 10px;
+	//	margin: 30px;
+		margin-bottom: 0px;
+		padding: 10px;
+		border-top: solid rgb(68, 68, 68) 1px;
 
 		.edit-annotation-button.button {
-			color: green;
+			display: inline-block;
+			margin-left: 30px;
+			color: #5BB647;;
 			font-size: 12px;
+			margin-top: 0px;
 			border: none;
+			cursor: pointer;
 		}
 
 	}
@@ -61,13 +75,18 @@
 	#referent-wrapper {
 		background: image-url("tactile_noise.png");
 		border-top: solid 1px rgb(212, 179, 254);
+		padding: 20px 10px;
 
 		.block-wrapper {
 
-			display: inline-block;
-			position: relative;
-			left: 40px;
-			margin: 20px 0px;
+		//	display: inline-block;
+		//	left: 40px;
+		//	padding: 40px;
+			margin-left: 40px;
+			margin-right: 40px;
+		//	padding-right: 40px;
+		//	width: 300px;
+			//padding-bottom: 100px;
 
 			a {
 				text-decoration: none;
