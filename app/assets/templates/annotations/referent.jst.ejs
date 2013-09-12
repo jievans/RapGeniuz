@@ -2,7 +2,9 @@
 	<div class="block-wrapper">
 		<a class="referent" href="/songs/<%= annotation.get('song_id') %>">
 			<span class="big-quote">"</span><%= referent %>
+		</a> <br>
+		<a class="referent-info" href="/songs/<%= annotation.get('song_id') %>">
+			<%= annotation.artist.name %> - <%= annotation.song.title %>
 		</a>
-	ERRORS	<%= annotation.artist.name %><%= annotation.song.title %>
-	<div>
+	</div>
 </div>

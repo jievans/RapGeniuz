@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "colors";
+
+
 
 #edit-annotation-form {
 	text-align: center;
@@ -32,25 +35,56 @@
 	margin: auto;
 }
 
-#annotation-stream-unit{
+.annotation-stream-unit{
 	background-color: rgb(49,45,50);
-}
+	color: rgb(239, 239, 239);;
 
-#referent-wrapper {
-	background: image-url("tactile_noise.png");
-	border-top: solid 1px rgb(212, 179, 254);
+	.annotation-content {
+		margin: 30px;
+	}
 
-	a {
-		text-decoration: none;
-		color: #ffc31c;
-		font-size: 18px;
-		display: inline-block;
-		position: relative;
-		left: 40px;
-		margin: 20px 0px;
+	.edit-annotation-button-wrapper {
+		display: block;
+		text-align: left;
+	//	margin: 20px;
+		// can't get margin-bottom to work
+		padding-bottom: 10px;
 
-		.big-quote {
-			font-size: 30px;
+		.edit-annotation-button.button {
+			color: green;
+			font-size: 12px;
+			border: none;
+		}
+
+	}
+
+	#referent-wrapper {
+		background: image-url("tactile_noise.png");
+		border-top: solid 1px rgb(212, 179, 254);
+
+		.block-wrapper {
+
+			display: inline-block;
+			position: relative;
+			left: 40px;
+			margin: 20px 0px;
+
+			a {
+				text-decoration: none;
+				color: #ffc31c;
+				font-size: 18px;
+			}
+
+			.referent-info {
+				color: $header-blue;
+				font-size: 12px;
+			}
+
+			.big-quote {
+				font-size: 30px;
+			}
 		}
 	}
 }
+
+

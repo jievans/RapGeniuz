@@ -1,6 +1,8 @@
 RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 
-	id: "annotation-stream-unit",
+	attributes: {
+		class: "annotation-stream-unit",
+	},
 
 	events: {
 		"click .edit-annotation-button": "showEditAnnotation",
@@ -8,6 +10,7 @@ RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 	},
 
 	render: function(){
+
 		var header = JST["annotations/referent"]({annotation: this.model,
 																		  referent: this.model.get("referent")});
 
