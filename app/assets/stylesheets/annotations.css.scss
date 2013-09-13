@@ -6,7 +6,9 @@
 
 @import "colors";
 
-
+.annotation-content {
+	font-size: 16px;
+}
 
 #edit-annotation-form {
 	text-align: center;
@@ -26,7 +28,9 @@
 }
 
 .edit-annotation-button {
-	display: block;
+	display: inline-block;
+	color: rgb(94, 4, 14);
+	cursor: pointer;
 	margin-top: 10px;
 }
 
@@ -60,10 +64,10 @@
 		padding: 10px;
 		border-top: solid rgb(68, 68, 68) 1px;
 
-		.edit-annotation-button.button {
+		.edit-annotation-button {
 			display: inline-block;
 			margin-left: 30px;
-			color: #5BB647;;
+			color: #5BB647;
 			font-size: 12px;
 			margin-top: 0px;
 			border: none;

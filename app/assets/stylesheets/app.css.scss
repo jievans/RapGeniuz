@@ -13,6 +13,11 @@
 //	font-size: inherit;
 //}
 
+// overriding bootstrap's weirdness
+*, *:before, *:after {
+	box-sizing: content-box !important;
+}
+
 .main-wrapper {
 	width: 997px;
 	margin: auto;
@@ -164,7 +169,11 @@
 }
 
 body {
-  background: black;
+	background: black;
+}
+
+#body{
+
   font-family: 'Helvetica Neue',
                Arial,
                Helvetica,
@@ -251,7 +260,7 @@ body {
 
 	&:active{
 		background-image: none;
-	};
+	}
 }
 
 

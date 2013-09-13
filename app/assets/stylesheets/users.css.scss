@@ -8,7 +8,34 @@
 	#tabs {
 		.activity-tab {
 			display: inline-block;
+			padding: 20px;
+			padding-top: 10px;
+			padding-bottom: 10px;
 			text-align: center;
+			cursor: pointer;
+			background-color: $annotation-unit-grey;
+			margin: 0px;
+
+			&:hover{
+				background-color: rgb(5, 170, 229);
+			}
+		}
+
+		#suggestions-button, #songs-button {
+			//position: relative;
+			//left: -10px;
+			box-shadow: -5px 0px 3px rgba(0,0,0, .2);
+		}
+
+	}
+
+	#activity-content {
+		background-color: $annotation-unit-grey;
+
+		a {
+			display: block;
+			margin-left: 20px;
+			padding-top: 15px;
 		}
 	}
 
@@ -22,6 +49,10 @@
 #user-info {
 
 	width: 300px;
+
+	#editUserModal {
+		color: black;
+	}
 
 	.user-avatar {
 		display: inline-block;

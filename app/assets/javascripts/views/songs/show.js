@@ -304,7 +304,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         that.$el.append($form);
         $form.position({
           my: "left center+100",
-          at: "right+200 center",
+          at: "right+75 center",
           of: $dummy,
         });
 				console.log($dummy.parent());

@@ -15,7 +15,7 @@ RapGenius.Repositories.AnnotationStreams.user =
 JSON.parse("<%="#{j content}".html_safe %>");
 
 RapGenius.Repositories.SongStreams.user =
-<%= @user.songs.to_json.html_safe %>;
+JSON.parse("<%="#{j @user.songs.to_json }".html_safe %>")
 
 RapGenius.Repositories.User =
 JSON.parse("<%="#{j @user.to_json}".html_safe %>");

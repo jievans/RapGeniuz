@@ -61,10 +61,10 @@ class SongsController < ApplicationController
 
   def plain_update
    # edited_lyrics = markdown(params[:lyrics]).gsub("\n", "").strip
-   edited_lyrics = non_block_markdown(params[:lyrics])
+  # edited_lyrics = non_block_markdown(params[:lyrics])
   # edited_lyrics = edited_lyrics.html_safe
-     pattern = /(\[)(.+?)(\])(\()(\d+)(\))/m
-    edited_lyrics = edited_lyrics.to_param()
+    anchor_pattern = /(\[)(.+?)(\])(\()(\d+)(\))/m
+    edited_lyrics = params[:lyrics].to_param().strip()
   # pattern = /(?<firstbracket>\[)(?<body>.+?)(?<secondbracket>\])(?<openparen>\()(?<id>\d+)(?<closeparen>\))/
 
    # do_match(pattern, edited_lyrics)
@@ -72,9 +72,11 @@ class SongsController < ApplicationController
    # without this line, the global variables don't get set
    # edited_lyrics =~ pattern
 
-   edited_lyrics.gsub!(pattern) do |match|
+   edited_lyrics.gsub!(anchor_pattern) do |match|
      "<a href=\"/#{$5}\">#{$2}</a>"
    end
+
+   edited_lyrics.gsub!(/\n/) {|match| "<br>"}
 
    # edited_lyrics = make_anchors(edited_lyrics)
 

@@ -2,6 +2,8 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 
 	events: {
 		"click .user-avatar-filepick": "submitUserPic",
+		"submit #edit-user-form": "updateUser",
+	//	"hidden.bs.modal #editUserModal": "updateUser",
 	},
 
   id: "user-info",
@@ -22,4 +24,36 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 			});
 		});
 	},
+
+	updateUser: function(event){
+		event.preventDefault();
+		var that = this;
+
+		var saved = false;
+		var hidden = false;
+
+		$("#editUserModal").one("hidden.bs.modal", function () {
+			hidden = true;
+
+			maybeRerender();
+		}).modal('hide');
+
+		var userData = $("#edit-user-form").serializeJSON();
+
+		this.model.save(userData,{
+			success: function(model){
+				saved = true;
+
+				maybeRerender();
+			},
+		});
+
+		function maybeRerender () {
+			if (saved && hidden) {
+				that.render();
+			}
+		}
+	},
+
+
 });

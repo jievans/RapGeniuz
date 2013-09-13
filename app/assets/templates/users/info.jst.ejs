@@ -6,8 +6,44 @@
 		<button id="user-avatar-filepick"
 		class="btn-block btn-dark btn-sm user-avatar-filepick">
 		Change Profile Pic</button>
-		<button class="btn-block btn-dark btn-sm">Change name,
+		<button data-toggle="modal" data-target="#editUserModal"
+		class="btn-block btn-dark btn-sm">Change name,
 			email address, or password</button>
 	</div>
+
+	<div class="modal fade" id="editUserModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Edit User</h4>
+				</div>
+				<div class="modal-body">
+					<form id="edit-user-form">
+						<label for="username">Username</label>
+						<input type="text" class="form-control" name="username"
+						id="username" value="<%= user.escape("username")%>"><br>
+						<label for="password">Password</label><br>
+						<input type="password" class="form-control" name="password"
+						id="password">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+							<button type="submit"
+							class="btn btn-primary edit-user-submit">
+								Save changes
+							</button>
+						</div>
+					</form>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 </div>
+
+
+
+
 
