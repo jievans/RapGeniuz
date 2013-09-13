@@ -15,6 +15,10 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 		this.subViews.push(view);
 	},
 
+	initialize: function(options){
+		this.router = new RapGenius.Routers.SongShowRouter({view: this});
+	},
+
   events: {
     "click .annotation": "displayAnnotation",
     "mouseup .lyrics-wrapper": "showAnnotateButton",
@@ -54,6 +58,10 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
       },
     });
   },
+
+	triggerAnnotationView: function(id){
+
+	},
 
   displayAnnotation: function(event){
     console.log("We are in displayAnnotation");
@@ -115,7 +123,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 															return '\n';
 													 }).replace(anchor_regex, function(match,
 														 p1, p2, p3, p4){
-														return "[" + _.str.trim(p4) + "]" + "("
+														return "[" + p4 + "]" + "("
 														+ _.str.trim(p2) + ")";
 													 });
 

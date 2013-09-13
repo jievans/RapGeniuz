@@ -53,7 +53,7 @@
 		padding-top: 10px;
 	}
 
-	.edit-annotation-button-wrapper {
+	#edit-annotation-button-wrapper {
 		display: block;
 		text-align: left;
 	//	margin: 20px;
@@ -62,10 +62,14 @@
 		margin-bottom: 0px;
 		padding: 10px;
 		border-top: solid rgb(68, 68, 68) 1px;
+		color: #5BB647;
+
+		.buttons {
+			margin-left: 30px;
+		}
 
 		.edit-annotation-button {
 			display: inline-block;
-			margin-left: 30px;
 			color: #5BB647;
 			font-size: 12px;
 			margin-top: 0px;
