@@ -11,12 +11,10 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 	subViews: [],
 
+	id: "song-show",
+
 	assign: function(view){
 		this.subViews.push(view);
-	},
-
-	initialize: function(options){
-		this.router = new RapGenius.Routers.SongShowRouter({view: this});
 	},
 
   events: {

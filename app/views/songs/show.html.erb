@@ -1,11 +1,3 @@
-<script type="text/javascript" id="bootstrapped-song">
-  var json = <%= (render :partial => "show").html_safe %>
-  RapGenius.Repositories.Songs.show = json;
-</script>
-
-<div id="song-show">
-</div>
-
 <div id="song-relations">
 	<a data-width="358" data-bop-link
 	href="http://www.bop.fm/s/<%=u @bop_artist_name %>/<%=u @bop_song_name %>">
@@ -27,5 +19,18 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript" id="bootstrapped-song">
+  RapGenius.Repositories.Songs.show = <%= (render :partial => "show").html_safe %>
+
+  var songModel = new RapGenius.Models.Song(RapGenius.Repositories.Songs.show);
+
+  var songShowView = new RapGenius.Views.SongShowView({model: songModel});
+
+	var songShowRouter = new RapGenius.Routers.SongShowRouter({view: songShowView});
+
+</script>
+
+
 
 
