@@ -1,5 +1,7 @@
 RapGenius::Application.routes.draw do
 
+  root :to => "root#primary"
+
   get '/:id', to: 'annotations#show', constraints: {id: /\d+/}
 
   resources :songs do

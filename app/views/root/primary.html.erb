@@ -1,0 +1,22 @@
+<div id="newsfeed">
+
+	<div id="welcome">
+		<em><i>Welcome to the RapGenius Newsfeed!!</i></em>
+	</div>
+
+
+	<div id="songs">
+		<% @songs.each do |song| %>
+		<a href="<%= song_url(song) %>">
+			<div class="song">
+				<%= song.artist.name %> - <%= song.title %>
+				<div class="song-footer">
+					<%= song.annotations.length %> annotations
+				</div>
+			</div>
+		</a>
+		<% end %>
+	</div>
+
+
+</div>

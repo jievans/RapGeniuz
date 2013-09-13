@@ -6,6 +6,15 @@
   src: url('dinfont.woff');
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+	&:hover {
+		text-decoration: none;
+	}
+
+}
+
 //button {
 //	background: transparent;
 //	border-style: none;
@@ -15,13 +24,41 @@
 
 // overriding bootstrap's weirdness
 *, *:before, *:after {
-	box-sizing: content-box !important;
+	box-sizing: content-box;
 }
 
 .main-wrapper {
 	width: 997px;
 	margin: auto;
 }
+#user-header {
+	float: right;
+	vertical-align: middle;
+	font-size: 22px;
+
+	padding: 0px;
+	line-height: 36px;
+
+	.info {
+		display: inline-block;
+		.name {
+			display: inline-block;
+			text-decoration: none;
+			color: white;
+			margin-right: 5px;
+		}
+	}
+
+	#profile-pic {
+		display: inline-block;
+		margin-right: 5px;
+		max-height: 36px;
+		background-color: purple;
+		border: solid white 1px;
+	//	box-sizing: border-box;
+	}
+}
+
 
 .button {
 	display: inline-block;
@@ -78,7 +115,7 @@
 
 
 #sign-in, #sign-up, #logout {
-	float: right;
+	display: inline-block;
 	font-size: 20px;
 	font-style: italic;
 	color: $hot-pink;
@@ -89,10 +126,10 @@
 	}
 }
 
+
 #logout {
 	color: $lipstick-red;
 	border-color: $lipstick-red;
-
 	&:active {
 		background: white;
 	}

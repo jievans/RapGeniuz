@@ -22,10 +22,22 @@
 				rap genius
 			</div>
 
+			<div id="user-header">
 			<% if logged_in? %>
-			<div id="logout">
-				Sign Out...
-			</div>
+
+			<a href="<%= user_url(current_user) %>">
+				<div class="info">
+					<div class="name">
+					<%= current_user.username %>
+					</div>
+					<image src="<%= current_user.image %>" id="profile-pic">
+					</image>
+				</div>
+			</a>
+				<div id="logout">
+					Sign Out...
+				</div>
+
 			<% else %>
 			<div id="sign-in">
 				Sign In!!!
@@ -34,7 +46,7 @@
 				Create an account
 			</div>
 			<% end %>
-
+			</div>
 		</div>
 
 

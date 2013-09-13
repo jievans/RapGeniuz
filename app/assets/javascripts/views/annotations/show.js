@@ -5,6 +5,7 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 	events: {
 		"click .edit-annotation-button": "showEditAnnotation",
 		"submit #edit-annotation-form": "submitEditAnnotation",
+	//	"click .delete-annotation-button": "deleteAnnotation",
 	},
 
 	render: function(){
@@ -34,6 +35,19 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 		this.model.save(updates, {
 			success: function(model){
 				that.render();
+			},
+		});
+	},
+
+	deleteAnnotation: function(event){
+		var that = this;
+		this.model.destroy({
+			success: function(model){
+				that.options.composite.model.fetch({
+					success: function(model){
+						that.render();
+					},
+				});
 			},
 		});
 	},

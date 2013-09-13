@@ -1,0 +1,41 @@
+// http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html
+
+@import "colors";
+
+$miami-green : rgb(186, 254, 167);
+
+#newsfeed {
+	width: 500px;
+	margin: auto;
+
+
+	font-size: 22px;
+
+
+	#welcome {
+		text-align: center;
+		color: $miami-green;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+
+	#songs{
+		color: $edit-purple;
+
+		.song{
+			border: solid 3px $edit-purple;
+			margin-bottom: 10px;
+			padding: 10px;
+			cursor: pointer;
+
+			.song-footer {
+				color: pink;
+				font-size: 12px;
+			}
+			&:hover {
+				background: rgb(0, 6, 42);
+				color: lighten($edit-purple, 10%);
+			}
+		}
+	}
+}

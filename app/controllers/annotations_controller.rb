@@ -16,4 +16,10 @@ class AnnotationsController < ApplicationController
     render :json => annotation
   end
 
+  def destroy
+    annotation = Annotation.find(params[:id])
+    song = song.find(annotation.song.id)
+    # will write more later
+  end
+
 end
