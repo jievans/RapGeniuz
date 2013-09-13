@@ -11,13 +11,16 @@ RapGenius.Routers.SongShowRouter = Backbone.Router.extend({
 	},
 
 	renderNormal: function(id){
+		console.log("rendering from renderNormal");
 		$("#body").append(this.view.render().$el);
 	},
 
 	renderWithAnnotation: function(id){
+		console.log("rendering from renderWithAnnotation");
 		this.view.$el.remove();
 		$("#body").append(this.view.render().$el);
 		$(function(){
+			debugger;
 			$("[data-annotation-id = " + id + "]").trigger("click");
 		});
 	},

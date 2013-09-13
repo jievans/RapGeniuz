@@ -21,13 +21,21 @@
 </div>
 
 <script type="text/javascript" id="bootstrapped-song">
-  RapGenius.Repositories.Songs.show = <%= (render :partial => "show").html_safe %>
 
-  var songModel = new RapGenius.Models.Song(RapGenius.Repositories.Songs.show);
+$(function(){
 
-  var songShowView = new RapGenius.Views.SongShowView({model: songModel});
+	RapGenius.Repositories.Songs.show =
+	<%= (render :partial => "show").html_safe %>;
 
-	var songShowRouter = new RapGenius.Routers.SongShowRouter({view: songShowView});
+	var songModel = new RapGenius.Models.Song(RapGenius.Repositories.Songs.show);
+
+	var songShowView = new RapGenius.Views.SongShowView({model: songModel});
+
+	var songShowRouter = new RapGenius.Routers
+																		.SongShowRouter({view: songShowView});
+
+});
+
 
 </script>
 
