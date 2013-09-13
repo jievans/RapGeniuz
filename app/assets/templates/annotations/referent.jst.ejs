@@ -1,6 +1,7 @@
 <div id="referent-wrapper">
 	<div class="block-wrapper">
-		<a class="referent" href="/songs/<%= annotation.get('song_id') %>">
+		<a class="referent"
+		href="/songs/<%= annotation.get('song_id') %>#<%=annotation.get("id")%>">
 			<span class="big-quote">"</span><%= referent %>
 		</a> <br>
 		<a class="referent-info" href="/songs/<%= annotation.get('song_id') %>">
