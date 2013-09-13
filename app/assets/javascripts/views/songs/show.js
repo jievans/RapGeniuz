@@ -116,7 +116,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
   showEditSong: function(event){
 		var anchor_regex = /(<a.*?data-annotation-id=")(\d+)(">)((.|\n)*?)(<\/a>)/g;
-		debugger;
 		var plain_lyrics = this.model.get("lyrics").replace(/<br>/g, function(match){
 															return '\n';
 													 }).replace(anchor_regex, function(match,
@@ -128,7 +127,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 
      var content = JST["songs/edit"]({plain_lyrics: plain_lyrics});
-		 debugger;
      $('.lyrics-wrapper').html(content);
 
     // $.ajax({
