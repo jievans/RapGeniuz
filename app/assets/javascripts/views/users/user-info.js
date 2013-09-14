@@ -1,5 +1,14 @@
 RapGenius.Views.UserInfoView = Backbone.View.extend({
 
+	initialize: function(options){
+		if(RapGenius.currentUser &&
+			RapGenius.currentUser.get("id") == this.model.get("id")){
+			this.model = RapGenius.currentUser;
+		}
+
+		this.listenTo(this.model, "change", this.render);
+	},
+
 	events: {
 		"click .user-avatar-filepick": "submitUserPic",
 		"submit #edit-user-form": "updateUser",
@@ -17,11 +26,7 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 	submitUserPic: function(event){
 		var that = this;
 		filepicker.pick(function(inkBlob){
-			that.model.save({image: inkBlob.url}, {
-				success: function(){
-					that.render();
-				},
-			});
+			that.model.save({image: inkBlob.url});
 		});
 	},
 
@@ -32,27 +37,40 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 		var saved = false;
 		var hidden = false;
 
-		$("#editUserModal").one("hidden.bs.modal", function () {
-			hidden = true;
-
-			maybeRerender();
-		}).modal('hide');
-
 		var userData = $("#edit-user-form").serializeJSON();
 
-		this.model.save(userData,{
-			success: function(model){
-				saved = true;
+		$("#editUserModal").one("hidden.bs.modal", function () {
 
-				maybeRerender();
-			},
-		});
+			that.model.save(userData);
 
-		function maybeRerender () {
-			if (saved && hidden) {
-				that.render();
-			}
-		}
+		}).modal('hide');
+
+		// $("#editUserModal").one("hidden.bs.modal", function () {
+	// 		hidden = true;
+	//
+	// 		// that.model.save(userData);
+	//
+	// 		maybeRerender();
+	// 	}).modal('hide');
+
+
+
+
+
+		// this.model.save(userData,{
+// 			silent: true,
+// 			success: function(model){
+// 				saved = true;
+//
+// 				maybeRerender();
+// 			},
+// 		});
+
+		// function maybeRerender () {
+	// 		if (saved && hidden) {
+	// 			that.render();
+	// 		}
+	// 	}
 
 
 	},

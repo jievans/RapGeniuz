@@ -5,12 +5,12 @@
 <div id="user-header">
 <% if (currentUser) { %>
 
-<a href="<%= currentUser.%>">
+<a href="<%= "/users/" + currentUser.get("id") %>">
 	<div class="info">
 		<div class="name">
-		<%= currentUser.username %>
+		<%= currentUser.get("username") %>
 		</div>
-		<image src="<%= currentUser.image %>" id="profile-pic">
+		<image src="<%= currentUser.get("image") %>" id="profile-pic">
 		</image>
 	</div>
 </a>

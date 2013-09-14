@@ -9,53 +9,28 @@
 	<script>
 		filepicker.setKey("<%= ENV["INK_API"] %>")
 	</script>
-	<script>
-
-		RapGenius.currentUser = new RapGenius.Models.User(JSON.parse(
-			"<%= "#{j current_user.to_json }".html_safe %>"));
-
-		var toolbarView = new RapGenius.Views.Toolbar({
-			model: RapGenius.currentUser}
-		);
-
-		$("#body").append(toolbarView.render().$el);
-
-	</script>
 	<%= csrf_meta_tags %>
 </head>
 <body>
 	<div id="body">
-		<div id="toolbar">
-			<div id="banner">
-				rap genius
-			</div>
 
-			<div id="user-header">
-			<% if logged_in? %>
+		<script>
 
-			<a href="<%= user_url(current_user) %>">
-				<div class="info">
-					<div class="name">
-					<%= current_user.username %>
-					</div>
-					<image src="<%= current_user.image %>" id="profile-pic">
-					</image>
-				</div>
-			</a>
-				<div id="logout">
-					Sign Out...
-				</div>
-
+		(function(){
+			<% if current_user.nil? %>
+				RapGenius.currentUser = null;
 			<% else %>
-			<div id="sign-in">
-				Sign In!!!
-			</div>
-			<div id="sign-up">
-				Create an account
-			</div>
+				RapGenius.currentUser = new RapGenius.Models.User(JSON.parse(
+					"<%= "#{j current_user.to_json }".html_safe %>"));
 			<% end %>
-			</div>
-		</div>
+
+			var toolbarView = new RapGenius.Views.Toolbar({
+				model: RapGenius.currentUser}
+			);
+
+			$("#body").prepend(toolbarView.render().$el);
+		})();
+		</script>
 
 
 		<% if flash[:notices] %>
