@@ -1,0 +1,29 @@
+<div id="banner">
+	rap genius
+</div>
+
+<div id="user-header">
+<% if (currentUser) { %>
+
+<a href="<%= currentUser.%>">
+	<div class="info">
+		<div class="name">
+		<%= currentUser.username %>
+		</div>
+		<image src="<%= currentUser.image %>" id="profile-pic">
+		</image>
+	</div>
+</a>
+	<div id="logout">
+		Sign Out...
+	</div>
+
+<% } else { %>
+<div id="sign-in">
+	Sign In!!!
+</div>
+<div id="sign-up">
+	Create an account
+</div>
+<% } %>
+</div>

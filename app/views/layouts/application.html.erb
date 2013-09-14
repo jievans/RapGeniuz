@@ -10,8 +10,16 @@
 		filepicker.setKey("<%= ENV["INK_API"] %>")
 	</script>
 	<script>
+
 		RapGenius.currentUser = new RapGenius.Models.User(JSON.parse(
 			"<%= "#{j current_user.to_json }".html_safe %>"));
+
+		var toolbarView = new RapGenius.Views.Toolbar({
+			model: RapGenius.currentUser}
+		);
+
+		$("#body").append(toolbarView.render().$el);
+
 	</script>
 	<%= csrf_meta_tags %>
 </head>
