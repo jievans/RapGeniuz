@@ -17,7 +17,8 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 			return '<img id="annotation-image" src="' + match + '"></img>'
 		});
 
-		var renderedContent = JST["annotations/show"]({annotation: html});
+		this.model.html = html;
+		var renderedContent = JST["annotations/show"]({annotation: this.model});
 		var $renderedContent = $(renderedContent);
 		this.$el.html($renderedContent);
 		return this;

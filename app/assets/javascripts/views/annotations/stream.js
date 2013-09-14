@@ -22,7 +22,9 @@ RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 			return '<img id="annotation-image" src="' + match + '"></img>'
 		});
 
-		var renderedContent = JST["annotations/show"]({annotation: html});
+		this.model.html = html;
+
+		var renderedContent = JST["annotations/show"]({annotation: this.model});
 		this.$el.empty();
 		this.$el.append(header, renderedContent);
 		return this;

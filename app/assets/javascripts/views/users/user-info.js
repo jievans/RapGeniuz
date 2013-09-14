@@ -53,6 +53,8 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 				that.render();
 			}
 		}
+
+
 	},
 
 

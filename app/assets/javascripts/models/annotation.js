@@ -13,6 +13,11 @@ RapGenius.Models.Annotation = Backbone.Model.extend({
 				delete data.song.artist;
 			}
 
+			if(data.user){
+				this.user = data.user;
+				delete data.user;
+			}
+
 			this.song = data.song;
 			delete data.song;
 		}

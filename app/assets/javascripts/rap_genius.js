@@ -10,7 +10,7 @@ window.RapGenius = {
   },
 	SignedIn: false,
   initialize: function() {
-  }
+  },
 };
 
 

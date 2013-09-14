@@ -1,7 +1,11 @@
-<div class="annotation-content"><%= annotation %></div>
+<div class="annotation-content"><%= annotation.html %></div>
 <div id="edit-annotation-button-wrapper">
+	<%  if (RapGenius.currentUser.get("id") == annotation.get("user_id") ) { %>
 	<div class="buttons">
 		<span class="edit-annotation-button">Edit</span> |
 		<span class="delete-annotation-button">Delete</span>
 	</div>
+	<% } else { %>
+		Posted by: <%= annotation.user.username %>
+	<% } %>
 </div>

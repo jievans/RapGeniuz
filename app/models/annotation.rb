@@ -5,6 +5,8 @@ class Annotation < ActiveRecord::Base
 
   belongs_to :song
 
+  belongs_to :user
+
   before_save :cleanse_body
 
   def cleanse_body()
