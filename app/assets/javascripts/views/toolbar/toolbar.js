@@ -25,8 +25,9 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 			type: "POST",
 			data: data,
 			success: function(data){
-				debugger;
-				RapGenius.currentUser.set(data);
+				$("#login-modal").one('hidden.bs.modal', function(){
+					RapGenius.currentUser.set(data);
+				}).hide();
 			},
 			error: function(response){
 				$errors = $('<div class="alert alert-danger">').html(response
