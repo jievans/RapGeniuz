@@ -18,7 +18,6 @@ module ParsingHelper
     edited_doc.to_s()
   end
 
-
   def lyrics_invalid?(old_lyrics, new_lyrics)
 
     failure = {}

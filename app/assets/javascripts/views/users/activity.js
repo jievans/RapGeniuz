@@ -2,13 +2,14 @@ RapGenius.Views.UserActivityView = Backbone.View.extend({
 
 	initialize: function(){
 		this.listenTo(RapGenius.currentUser, "change", this.render);
+		this.listenTo(this.collection, "destroy", this.render);
 	},
 
 	subViews: [],
 
 	events: {
 		"click #songs-button": "showSongsTab",
-		"click #annotations-button": "render"
+		"click #annotations-button": "render",
 	},
 
 	id: "user-activity",
@@ -21,7 +22,7 @@ RapGenius.Views.UserActivityView = Backbone.View.extend({
 		var that = this;
 		this.collection.each(function(annotation){
 			var annotationStreamView = new RapGenius.Views.StreamAnnotationView({
-																			model: annotation,
+																			model: annotation, composite: this,
 																	});
 		  that.subViews.push(annotationStreamView);
 			$activityContent.append(annotationStreamView.render().$el);

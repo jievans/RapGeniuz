@@ -11,6 +11,10 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 	subViews: [],
 
+	initialize: function(){
+		this.listenTo(this.model, "change", this.render);
+	},
+
 	id: "song-show",
 
 	assign: function(view){
@@ -76,7 +80,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 		annotation.fetch({
 			success: function(model){
 				var annotationView = new RapGenius.Views.ShowAnnotationView(
-					{model: model, composite: this}
+					{model: model, composite: that}
 				);
 				that.assign(annotationView);
 				that.$el.append(annotationView.render().$el);

@@ -1,5 +1,7 @@
 class AnnotationsController < ApplicationController
 
+  include ParsingHelper
+
   def show
     annotation = Annotation.find(params[:id])
     render :partial => "rabl_partials/annotation",
@@ -20,9 +22,25 @@ class AnnotationsController < ApplicationController
   end
 
   def destroy
-    annotation = Annotation.find(params[:id])
-    song = song.find(annotation.song.id)
-    # will write more later
+    id = params[:id]
+    annotation = Annotation.find(id)
+    song = Song.find(annotation.song.id)
+
+    old_lyrics = song.lyrics
+    pattern = /(<a([^<])*?data-annotation-id="#{Regexp.quote(id)}">)((.|\n)*?)(<\/a>)/;
+    new_lyrics = old_lyrics.gsub(pattern){|match| $3 }
+
+
+    puts new_lyrics
+
+    result = lyrics_invalid?(old_lyrics, new_lyrics)
+    unless result
+      song.update_attributes!(:lyrics => new_lyrics)
+      annotation.destroy
+      render :json => song
+    else
+      render :json => result, :status => 401
+    end
   end
 
 end

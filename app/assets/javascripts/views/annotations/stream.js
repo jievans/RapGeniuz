@@ -7,6 +7,7 @@ RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 	events: {
 		"click .edit-annotation-button": "showEditAnnotation",
 		"submit #edit-annotation-form": "submitEditAnnotation",
+		"click .delete-annotation-button": "deleteAnnotation",
 	},
 
 	render: function(){
@@ -44,6 +45,11 @@ RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 				that.render();
 			},
 		});
+	},
+
+	deleteAnnotation: function(event){
+		debugger;
+		this.model.destroy();
 	},
 
 });
