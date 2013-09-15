@@ -9,7 +9,7 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 	id: "toolbar",
 
 	events: {
-		"click #login-button": "submitLogin",
+		"submit #login-form": "submitLogin",
 	},
 
 	render: function(){
@@ -19,6 +19,7 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 	},
 
 	submitLogin: function(event){
+		event.preventDefault();
 		var data = $("#login-form").serializeJSON();
 		$.ajax({
 			url: "/session",
@@ -27,12 +28,12 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 			success: function(data){
 				$("#login-modal").one('hidden.bs.modal', function(){
 					RapGenius.currentUser.set(data);
-				}).hide();
+				}).modal('hide');
 			},
 			error: function(response){
 				$errors = $('<div class="alert alert-danger">').html(response
 																									.responseJSON.errors);
-				$("#login-modal .modal-header").append($errors);
+				$("#login-alerts").append($errors);
 			},
 
 		});

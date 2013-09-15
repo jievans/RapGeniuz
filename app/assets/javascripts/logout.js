@@ -8,7 +8,8 @@ $(function(){
 			success: function(){
 				location.reload(true);
 			},
-			error: function(){
+			error: function(response){
+				console.log(response);
 				alert("There was an error in logging out.  Please try again.");
 			},
 		});

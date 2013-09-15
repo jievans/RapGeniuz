@@ -1,13 +1,15 @@
 RapGenius.Views.UserInfoView = Backbone.View.extend({
 
 	initialize: function(options){
-		if(RapGenius.currentUser &&
-			RapGenius.currentUser.get("id") == this.model.get("id")){
+		if(RapGenius.currentUser.get("id") == this.model.get("id")){
 			this.model = RapGenius.currentUser;
 		}
 
 		this.listenTo(this.model, "change", this.render);
+		this.listenTo(RapGenius.currentUser, "change", this.switchModel);
 	},
+
+	id: "user-info",
 
 	events: {
 		"click .user-avatar-filepick": "submitUserPic",
@@ -15,7 +17,12 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 	//	"hidden.bs.modal #editUserModal": "updateUser",
 	},
 
-  id: "user-info",
+	switchModel: function(){
+		if(RapGenius.currentUser.get("id") == this.model.get("id")){
+			this.model = RapGenius.currentUser;
+			this.render();
+		}
+	},
 
   render: function(){
 		var content = JST["users/info"]({user: this.model});

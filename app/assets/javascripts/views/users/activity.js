@@ -1,5 +1,9 @@
 RapGenius.Views.UserActivityView = Backbone.View.extend({
 
+	initialize: function(){
+		this.listenTo(RapGenius.currentUser, "change", this.render);
+	},
+
 	subViews: [],
 
 	events: {
