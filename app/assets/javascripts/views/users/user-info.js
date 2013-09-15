@@ -1,13 +1,10 @@
 RapGenius.Views.UserInfoView = Backbone.View.extend({
 
 	initialize: function(options){
-		if(RapGenius.currentUser.get("id") == this.model.get("id")){
-			this.oldModel = this.model;
-			this.model = RapGenius.currentUser;
-		}
-
-		this.listenTo(RapGenius.currentUser, "change", this.switchModel);
+		// this.listenTo(RapGenius.currentUser, "change", this.switchModel);
 		this.listenTo(this.model, "change", this.render);
+		this.listenTo(this.model, "change", this.checkCurrentUser);
+		this.listenTo(RapGenius.currentUser, "change", this.render);
 	},
 
 	id: "user-info",
@@ -18,31 +15,37 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 	//	"hidden.bs.modal #editUserModal": "updateUser",
 	},
 
-	switchModel: function(){
-
-		if(RapGenius.currentUser != this.model &&
-		RapGenius.currentUser.get("id") == this.model.get("id")){
-			this.stopListening(this.model);
-			this.oldModel = this.model;
-			this.model = RapGenius.currentUser;
-			this.listenTo(this.model, "change", this.render);
-			this.render();
+	checkCurrentUser: function(){
+		if (RapGenius.currentUser.get("id") == this.model.get("id")){
+			RapGenius.currentUser.set(this.model.attributes);
 		}
+	},
 
-		if(RapGenius.currentUser == this.model &&
-			!RapGenius.currentUser.get("id")){
-			this.stopListening(this.model);
-			this.listenTo(RapGenius.currentUser, "change", this.switchModel);
-			this.model = this.oldModel;
-			this.listenTo(this.model, "change", this.render);
-			this.render();
-		} // else {
-// 			this.model = this.oldModel;
-// 			debugger;
-// 			console.log(this.oldModel);
+	// switchModel: function(){
+//
+// 		if(RapGenius.currentUser != this.model &&
+// 		RapGenius.currentUser.get("id") == this.model.get("id")){
+// 			this.stopListening(this.model);
+// 			this.oldModel = this.model;
+// 			this.model = RapGenius.currentUser;
+// 			this.listenTo(this.model, "change", this.render);
 // 			this.render();
 // 		}
-	},
+//
+// 		if(RapGenius.currentUser == this.model &&
+// 			!RapGenius.currentUser.get("id")){
+// 			this.stopListening(this.model);
+// 			this.listenTo(RapGenius.currentUser, "change", this.switchModel);
+// 			this.model = this.oldModel;
+// 			this.listenTo(this.model, "change", this.render);
+// 			this.render();
+// 		} // else {
+// // 			this.model = this.oldModel;
+// // 			debugger;
+// // 			console.log(this.oldModel);
+// // 			this.render();
+// // 		}
+// 	},
 
   render: function(){
 		var content = JST["users/info"]({user: this.model});

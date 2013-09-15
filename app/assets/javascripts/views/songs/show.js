@@ -27,6 +27,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     "mousedown #explain-button": "makeAnnotation",
     "click .edit-lyrics": "showEditSong",
     "click #edit-song-button": "submitEditSong",
+		"click .cancel": "render",
   //  "submit #annotation-form": "submitAnnotation",
   },
 
@@ -131,7 +132,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 
      var content = JST["songs/edit"]({plain_lyrics: plain_lyrics});
-     $('.lyrics-wrapper').html(content);
+     $('#song-wrapper').html(content);
 
     // $.ajax({
 //       url: "/songs/" + id,

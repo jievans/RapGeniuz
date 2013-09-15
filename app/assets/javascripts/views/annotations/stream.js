@@ -48,7 +48,6 @@ RapGenius.Views.StreamAnnotationView = Backbone.View.extend({
 	},
 
 	deleteAnnotation: function(event){
-		debugger;
 		this.model.destroy();
 	},
 
