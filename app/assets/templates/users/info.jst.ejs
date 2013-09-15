@@ -1,8 +1,7 @@
 <h2 id="user-profile-header"><%= user.escape("username") %></h2>
 <img class="user-avatar" src="<%=user.escape("image")%>"></img>
 
-<% if (RapGenius.currentUser &&
-RapGenius.currentUser.get("id") == user.get("id") ) { %>
+<% if (RapGenius.currentUser.get("id") == user.get("id") ) { %>
 <div id="user-options" class="info-box">
 	<div class="box-header">User Options</div>
 	<div class="options">

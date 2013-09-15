@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   has_many :annotations
 
+  validates :username, :presence => true
+
   include BCrypt
 
   def password=(secret)

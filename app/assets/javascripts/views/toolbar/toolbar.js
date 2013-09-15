@@ -1,19 +1,23 @@
 RapGenius.Views.Toolbar = Backbone.View.extend({
 
 	initialize: function(){
-		if(this.model){
-			this.listenTo(this.model, "change", this.render);
-		}
+
+		this.listenTo(this.model, "change", this.render);
+
 	},
 
 	id: "toolbar",
 
 	events: {
 		"submit #login-form": "submitLogin",
+		"submit #create-account-form": "submitCreateAccount",
+		"click #logout": "logout",
 	},
 
 	render: function(){
+		console.log("Calling toolbar render");
 		var content = JST["page/toolbar"]({currentUser: this.model});
+		console.log(this.model);
 		this.$el.html(content);
 		return this;
 	},
@@ -36,6 +40,49 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 				$("#login-alerts").append($errors);
 			},
 
+		});
+	},
+
+	submitCreateAccount: function(event){
+		event.preventDefault();
+		var data = $("#create-account-form").serializeJSON();
+
+		$.ajax({
+			url: "/users",
+			type: "POST",
+			data: data,
+			success: function(data){
+				$("#create-account-modal").one('hidden.bs.modal', function(){
+					RapGenius.currentUser.set(data);
+				}).modal('hide');
+			},
+
+			error: function(response){
+				_.each(response.responseJSON.errors, function(error){
+					console.log("inside callback");
+					$error = $('<div class="alert alert-danger">').html(error);
+					$("#create-account-alerts").append($error);
+				});
+			},
+
+		});
+	},
+
+	logout: function(event){
+		$.ajax({
+			url: "/session",
+			type: "Delete",
+			success: function(response){
+				var propertyReset = {};
+				for(var property in RapGenius.currentUser.attributes){
+					propertyReset[property] = undefined;
+				}
+				debugger;
+				RapGenius.currentUser.set(propertyReset);
+			},
+			error: function(){
+				alert("There was an error in logging out. Please try again.");
+			},
 		});
 	},
 

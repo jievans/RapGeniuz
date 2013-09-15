@@ -127,6 +127,7 @@ a {
 	color: $hot-pink;
 	padding: 5px;
 	border: solid 3px $hot-pink;
+	cursor: pointer;
 	&:active {
 		background-color: $header-blue;
 	}

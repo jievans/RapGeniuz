@@ -2,6 +2,7 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 
 	initialize: function(options){
 		if(RapGenius.currentUser.get("id") == this.model.get("id")){
+			this.oldModel = this.model;
 			this.model = RapGenius.currentUser;
 		}
 
@@ -18,13 +19,25 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 	},
 
 	switchModel: function(){
-		if(RapGenius.currentUser.get("id") == this.model.get("id")){
+		if(RapGenius.currentUser.get("id") &&
+		RapGenius.currentUser.get("id") == this.model.get("id")){
 			this.model = RapGenius.currentUser;
 			this.render();
 		}
+
+		if(!RapGenius.currentUser.get("id")){
+			this.model = this.oldModel;
+			this.render();
+		} // else {
+// 			this.model = this.oldModel;
+// 			debugger;
+// 			console.log(this.oldModel);
+// 			this.render();
+// 		}
 	},
 
   render: function(){
+		debugger;
 		var content = JST["users/info"]({user: this.model});
 		this.$el.html(content);
 		return this;
