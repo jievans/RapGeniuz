@@ -8,9 +8,34 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 
 	id: "toolbar",
 
+	events: {
+		"click #login-button": "submitLogin",
+	},
+
 	render: function(){
 		var content = JST["page/toolbar"]({currentUser: this.model});
 		this.$el.html(content);
 		return this;
 	},
+
+	submitLogin: function(event){
+		var data = $("#login-form").serializeJSON();
+		$.ajax({
+			url: "/session",
+			type: "POST",
+			data: data,
+			success: function(data){
+				debugger;
+				RapGenius.currentUser.set(data);
+			},
+			error: function(response){
+				$errors = $('<div class="alert alert-danger">').html(response
+																									.responseJSON.errors);
+				$("#login-modal .modal-header").append($errors);
+			},
+
+		});
+	},
+
+
 });

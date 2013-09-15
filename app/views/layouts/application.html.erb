@@ -18,7 +18,7 @@
 
 		(function(){
 			<% if current_user.nil? %>
-				RapGenius.currentUser = null;
+				RapGenius.currentUser = new RapGenius.Models.User;
 			<% else %>
 				RapGenius.currentUser = new RapGenius.Models.User(JSON.parse(
 					"<%= "#{j current_user.to_json }".html_safe %>"));
@@ -45,7 +45,7 @@
 
 			<%= yield %>
 
-		</div>
+	</div>
 
-	</body>
-	</html>
+</body>
+</html>

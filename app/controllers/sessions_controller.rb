@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if user && user.password_equals?(params[:password])
       session[:token] = user.token
-      render :text => "Login successful"
+      render :partial => "rabl_partials/user", :locals => {:object => user}
     else
       render :json => {errors: "Invalid credentials, yo"}, :status => 401
     end
