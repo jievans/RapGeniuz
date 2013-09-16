@@ -12,9 +12,11 @@
 			<!-- TODO: provide track description -->
 			</div>
 			<div id="album-image">
-				<%= link_to album_url(@song.album) do %>
-					<%= image_tag(@song.album.image)%>
-				<% end %>
+				<% if @song.album.image %>
+					<%= link_to album_url(@song.album) do %>
+						<%= image_tag(@song.album.image)%>
+					<% end %>
+				<% end%>
 			</div>
 		</div>
 	</div>
