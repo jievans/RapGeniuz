@@ -77,7 +77,7 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 				for(var property in RapGenius.currentUser.attributes){
 					propertyReset[property] = undefined;
 				}
-				debugger;
+
 				RapGenius.currentUser.set(propertyReset);
 			},
 			error: function(){

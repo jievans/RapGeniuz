@@ -40,7 +40,7 @@ class SongsController < ApplicationController
 
       redirect_to song_url(@song)
     rescue  => e
-      debugger
+
       flash.now[:notices] ||= []
 
       [@song, @artist, @album].each do |ar_object|
