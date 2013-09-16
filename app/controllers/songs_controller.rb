@@ -41,6 +41,8 @@ class SongsController < ApplicationController
       redirect_to song_url(@song)
     rescue  => e
 
+      puts e
+
       flash.now[:notices] ||= []
 
       [@song, @artist, @album].each do |ar_object|
@@ -48,6 +50,8 @@ class SongsController < ApplicationController
           flash.now[:notices] << message
         end
       end
+
+      puts flash.now[:notices]
 
       render :new
     end
