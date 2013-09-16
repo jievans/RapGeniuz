@@ -41,6 +41,7 @@ class SongsController < ApplicationController
       redirect_to song_url(@song)
     rescue  => e
 
+      puts "THIS IS THE ERROR!!!!!!!!!"
       puts e
 
       flash.now[:notices] ||= []
