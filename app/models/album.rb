@@ -18,8 +18,11 @@ class Album < ActiveRecord::Base
    json = self.fetch_json()
    return if json["error"]
 
-   self.summary = json["album"]["wiki"]["summary"] unless self.summary
-   self.image = json["album"]["image"][3]["#text"] unless self.image
+   begin
+     self.summary = json["album"]["wiki"]["summary"] unless self.summary
+     self.image = json["album"]["image"][3]["#text"] unless self.image
+   rescue
+   end
   end
 
   def fetch_json()
