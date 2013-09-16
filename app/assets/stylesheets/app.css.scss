@@ -120,7 +120,7 @@ a {
 
 
 
-#sign-in, #sign-up, #logout {
+#sign-in, #sign-up, #logout, #add-song {
 	display: inline-block;
 	font-size: 20px;
 	font-style: italic;
@@ -131,6 +131,11 @@ a {
 	&:active {
 		background-color: $header-blue;
 	}
+}
+
+#add-song {
+	color: rgb(202, 0, 224);
+	border-color: rgb(202, 0, 224);
 }
 
 
