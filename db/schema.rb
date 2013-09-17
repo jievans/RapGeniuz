@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130915182317) do
+ActiveRecord::Schema.define(:version => 20130917204053) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20130915182317) do
     t.datetime "updated_at",                                                :null => false
     t.string   "token",                                                     :null => false
     t.string   "image",           :default => "/assets/default_avatar.png", :null => false
+    t.string   "provider"
+    t.string   "uid"
   end
 
 end

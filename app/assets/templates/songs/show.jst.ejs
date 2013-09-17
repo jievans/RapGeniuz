@@ -11,7 +11,9 @@
   <div class="lyrics-wrapper">
 	<%= song.get("lyrics") %>
   </div>
-	<span class="button edit-lyrics">Edit Lyrics</span>
+  <% if(RapGenius.currentUser.get("id")) { %>  
+  	<span class="button edit-lyrics">Edit Lyrics</span>
+  <% } %>
 </div>
 
 <div class="modal fade" id="annotation-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

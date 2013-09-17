@@ -9,6 +9,8 @@ RapGenius::Application.routes.draw do
       post "markdown", :to => "songs#plain_update"
     end
   end
+  
+  match "/auth/facebook/callback" => "sessions#facebook_create"
 
   resources :images
   resources :artists
