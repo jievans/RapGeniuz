@@ -7,5 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Artist.create!(:name => "Eric Clapton")
 User.create!(:username => "jack", :password => "password")

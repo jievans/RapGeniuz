@@ -37,11 +37,11 @@
 		<div class="notice">
 			<ul>
 				<% flash[:notices].each do |notice| %>
-				<li> <%= notice %>
-					<% end %>
-				</ul>
-			</div>
-			<% end %>
+				<li> <%= notice %> </li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
 
 			<%= yield %>
 

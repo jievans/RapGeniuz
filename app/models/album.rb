@@ -9,6 +9,7 @@ class Album < ActiveRecord::Base
   :primary_key => :id
 
   validates :artist_id, :presence => true
+  validates :name, :presence => true
 
   before_save :ensure_info
 
@@ -40,4 +41,5 @@ class Album < ActiveRecord::Base
    response = HTTParty.get(address)
    JSON.parse(response.body)
   end
+  
 end

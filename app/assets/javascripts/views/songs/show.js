@@ -91,32 +91,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			},
 		});
 
-		// $.ajax({
-	// 		url: $anchor.attr('href'),
-	// 		type: "GET",
-	// 		success: function(data){
-	// 			// that.model.annotation = data.body;
-	// 			var html = data.body.replace(/\n/g, function(match){return "<br>";});
-	// 			html = html.replace(/https?:\/\/.+\S/g, function(match){
-	// 				return '<img src="' + match + '"></img>'
-	// 			});
-	//
-	// 			// we could have the models pre-fetched
-	//
-	// 			debugger;
-	// 			// make model for annotation, don't save
-	// 			// provide model to annotationShow view with data...
-	// 			// take rendered content from view and position
-	// 			// when user clicks off of annotation, clear
-	// 			renderedContent = JST["annotation_show"]({annotation: html});
-	// 			$renderedContent = $(renderedContent);
-	// 			that.$el.append($renderedContent);
-	// 			// could we not append to the lyrics wrapper and then the lyrics wrapper will redraw itself?
-	// 			$renderedContent.position({my: "left top-10",
-	// 																 at: "right+10 top",
-	// 																 of: $anchor});
-	// 		},
-	// 	});
 	},
 
   showEditSong: function(event){

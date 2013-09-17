@@ -15,14 +15,12 @@ class SongsController < ApplicationController
 
   def create
 
-   # debugger
-    html_lyrics = non_block_markdown(params[:song][:lyrics])
-
-    # html_lyrics = params[:song][:lyrics].gsub("\r\n", "<br>").gsub("\n", "<br>")
+    original_lyrics = params[:song][:lyrics]
+    html_lyrics = non_block_markdown(original_lyrics)
 
     params[:song][:lyrics] = html_lyrics
     params[:song][:user_id] = current_user.id
-
+    
     @song = Song.new(params[:song])
     @artist = Artist.find_or_initialize_by_name(params[:artist][:name])
     @album = Album.find_or_initialize_by_name(params[:album][0])
@@ -40,9 +38,6 @@ class SongsController < ApplicationController
 
       redirect_to song_url(@song)
     rescue  => e
-      puts "THIS IS THE ERROR!!!!!!!!!"
-      puts e
-
       flash.now[:notices] ||= []
 
       [@song, @artist, @album].each do |ar_object|
@@ -51,8 +46,7 @@ class SongsController < ApplicationController
         end
       end
 
-      puts flash.now[:notices]
-
+      @song.lyrics = original_lyrics
       render :new
     end
   end

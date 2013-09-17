@@ -6,4 +6,8 @@ en:
     attributes:
       artist:
         name: "Artist name"
+      album:
+        name: "Album name"
+      song:
+        title: "Song title"
   hello: "Hello world"
