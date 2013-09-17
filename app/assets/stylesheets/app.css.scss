@@ -99,8 +99,7 @@ a {
 		&:active{
 			background-color: $header-blue;
 		}
-		//width: 10px;
-		//		height: 10px;
+		
 	}
 
 }
@@ -112,6 +111,13 @@ a {
 //	padding: 5px;
 	border-radius: 5px;
 	color: pink;
+  
+  &:hover{
+    color: rgb(42, 100, 150);
+    text-shadow: 0 0 10px #aeffec, 0 0 20px #aeffec, 0 0 30px #aeffec, 
+    0 0 40px #aeffec, 0 0 70px #aeffec, 0 0 80px #aeffec, 0 0 100px #aeffec, 
+    0 0 150px #aeffec; 
+  }
 }
 
 #toolbar {

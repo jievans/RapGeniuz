@@ -58,39 +58,34 @@ class SongsController < ApplicationController
 #   end
 
   def plain_update
-   # edited_lyrics = markdown(params[:lyrics]).gsub("\n", "").strip
-  # edited_lyrics = non_block_markdown(params[:lyrics])
-  # edited_lyrics = edited_lyrics.html_safe
+   
     anchor_pattern = /(\[)(.+?)(\])(\()(\d+)(\))/m
+    
+    ## to_param() necessary due to ActiveSupport::SafeBuffer
     edited_lyrics = params[:lyrics].to_param().strip()
-  # pattern = /(?<firstbracket>\[)(?<body>.+?)(?<secondbracket>\])(?<openparen>\()(?<id>\d+)(?<closeparen>\))/
 
-   # do_match(pattern, edited_lyrics)
 
-   # without this line, the global variables don't get set
-   # edited_lyrics =~ pattern
-
-   edited_lyrics.gsub!(anchor_pattern) do |match|
-     "<a href=\"/#{$5}\">#{$2}</a>"
+   tagged_edited = edited_lyrics.gsub(anchor_pattern) do |match|
+     "<a class=\"annotation\" href=\"/#{$5}\" data-annotation-id=\"#{$5}\">#{$2}</a>"
    end
 
-   edited_lyrics.gsub!(/\n/) {|match| "<br>"}
+   html_edited = tagged_edited.gsub(/\n/) {|match| "<br>"}
 
    # edited_lyrics = make_anchors(edited_lyrics)
 
 
-
-   p edited_lyrics
-
     song = Song.find(params[:id])
-    full_edited = html_update(song.lyrics, edited_lyrics)
+  #  full_edited = html_update(song.lyrics, edited_lyrics)
 
 
   #  debugger
-    unless errors = lyrics_invalid?(song.lyrics, full_edited)
-      song.update_attributes!(:lyrics => full_edited)
+
+    
+    unless errors = lyrics_invalid?(song.lyrics, html_edited)
+      song.update_attributes!(:lyrics => html_edited)
       render :json => song
     else
+      p errors
       render :json => errors, :status => 409
     end
   end

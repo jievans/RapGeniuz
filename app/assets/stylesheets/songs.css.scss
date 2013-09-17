@@ -138,6 +138,8 @@ $dark-border: rgb(102, 102, 102);
 		line-height: 30px;
 		height: 30px;
 		width: 70px;
+    color: black;
+    font-weight: bold;
 
 		&:not(.loading):before {
 			// why isn't this emptied by empty???

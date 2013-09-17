@@ -47,7 +47,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     var id = this.model.get("id");
-    var lyricsData = {lyrics: $(event.target).parent().find("textarea").val(), }
+    var lyricsData = {lyrics: $(event.target).parent().find("textarea").val(), };
     $.ajax({
       url: "/songs/" + id + "/markdown",
       type: "Post",
@@ -58,6 +58,13 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
             that.render()
           },
         });
+      },
+      error: function(response){
+        errors = response.responseJSON;     
+        for(var error in errors){
+          $errorDiv = $('<div class="song-edit-alert">').html(errors[error]);
+          $("#song-wrapper").prepend($errorDiv);
+        }
       },
     });
   },
@@ -108,17 +115,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
      var content = JST["songs/edit"]({plain_lyrics: plain_lyrics});
      $('#song-wrapper').html(content);
 
-    // $.ajax({
-//       url: "/songs/" + id,
-//       type: "GET",
-//       dataType: "json",
-//       success: function(data){
-//         console.log(data);
-//         $('.lyrics-wrapper').empty();
-//         var content = JST["songs/edit"]({song: data});
-//         $('.lyrics-wrapper').html(content);
-//       },
-//     });
   },
 
   positionMessage: function(message){
@@ -219,6 +215,12 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         this.render();
         return true;
       }
+      
+      if( !RapGenius.currentUser.get("id") ){
+        $("#annotation-login").modal("show");
+        return true;
+      }
+      
 			console.log(selection.rangeCount);
 			if (this.containsAnchor(range)) return true;
 
