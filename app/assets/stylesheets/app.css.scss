@@ -19,6 +19,31 @@ a {
 	color: black;
 }
 
+.facebook-button-wrapper {
+  text-align: center;
+}
+
+.login-divider {
+  text-align: center;
+  margin: 10px;
+}
+
+
+.facebook-login-button {
+  
+  background-color: $facebook-blue;
+  color: rgb(0, 0, 0);
+  text-shadow: rgb(150, 171, 214) 1px 1px 0px;
+  
+  &:hover{
+    background-image: -webkit-linear-gradient(top, $facebook-blue, darken($facebook-blue, 10%));
+    text-shadow: none;
+    color: white;
+  }
+  
+  
+}
+
 
 
 //button {

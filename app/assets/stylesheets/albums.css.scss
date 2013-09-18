@@ -1,3 +1,68 @@
 // Place all the styles related to the albums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "colors";
+
+#album-show{
+  #album-header {
+    font-family: DinBoldCondensed;
+    font-size: 40px;
+  
+    
+    .album-name {
+      color: rgb(163, 240, 180);
+      font-weight: bold;
+    }
+    
+    a{
+      &:hover{
+       color: $header-blue; 
+      }
+    }
+  
+  }
+
+  #album-image {
+    float: right;
+  }
+
+  h2 {
+  	border-bottom: solid 2px white;
+  }
+
+  .marker {
+  	-webkit-transition: all 75ms ease;
+  	-moz-transition: all 75ms ease;
+  	-ms-transition: all 75ms ease;
+  	-o-transition: all 75ms ease;
+  	transition: all 75ms ease;
+  	display: block;
+  	padding-left: 10px;
+  	padding-top: 5px;
+  	padding-bottom: 5px;
+  	height: 100%;
+  	&:hover{
+  		border-left-width: 4px;
+  		border-left-color: $anchor-orange;
+  		border-left-style: solid;
+  	}
+  }
+  
+  #track-list {
+    
+    display: inline-block;
+    width: 400px;
+  	a {
+  		color: rgb(5, 170, 229);
+  		text-decoration: none;
+  		display: block;
+  		border-style: solid;
+  		border-color: rgb(30, 30, 30);
+  		border-width: 1px 0px;
+  		&:hover {
+  			color: white;
+  		}
+  	}
+  }
+}

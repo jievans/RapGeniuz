@@ -6,6 +6,7 @@
 	<script async src="http://assets.bop.fm/embed.js"></script>
 
 	<div id="song-description">
+    <%= link_to album_url(@song.album) do %>
 		<div class="box-header">From album <i><%= @song.album.name %></i></div>
 		<div id="description-text">
 			<div id="description-content">
@@ -13,13 +14,16 @@
 			</div>
 			<% if @song.album.image %>
 			<div id="album-image">
-					<%= link_to album_url(@song.album) do %>
-						<%= image_tag(@song.album.image)%>
-					<% end %>
+					<%= image_tag(@song.album.image)%>
+			</div>
+      <% else %>
+			<div id="album-image">
+					<%= image_tag("image_not_available.jpg")%>
 			</div>
 			<% end%>
 		</div>
 	</div>
+  <% end %>
 </div>
 
 <script type="text/javascript" id="bootstrapped-song">

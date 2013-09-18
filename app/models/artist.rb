@@ -26,16 +26,16 @@ class Artist < ActiveRecord::Base
     return if self.image && self.bio
     json = self.fetch_json()
     return if json["error"]
-
+    
     bio = json["artist"]["bio"]["summary"]
     image_link = json["artist"]["image"][4]["#text"]
 
     unless self.image || image_link.empty?
-      self.image = image_link unless self.image
+      self.image = image_link 
     end
 
     unless self.bio || bio.empty?
-      self.bio = bio unless self.image
+      self.bio = bio 
     end
   end
 

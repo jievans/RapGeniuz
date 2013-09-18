@@ -1,0 +1,25 @@
+<div id="album-show">
+  
+  <h2 id="album-header">
+  <span class="album-name"><%= @album.name %></span> by <%= link_to @album.artist.name, artist_url(@album.artist) %>
+  </h2>
+  
+  <h3> Tracks </h3>
+	<% if @album.image %>
+	<div id="album-image"><%= image_tag(@album.image)%></div>
+	<% end %>
+  
+
+	<div id="track-list">
+    <% @album.songs.each do |song| %>
+  		<%= link_to song_url(song) do %>
+  			<span class="marker">
+  				<%= song.title %>
+  			</span>
+  		<% end %>
+    <% end %>
+		
+	</div>
+
+</div>
+
