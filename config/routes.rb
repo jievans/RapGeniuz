@@ -11,7 +11,9 @@ RapGenius::Application.routes.draw do
   end
   
   match "/auth/facebook/callback" => "sessions#facebook_create"
-
+  
+  get "/search", :to => "search#search"
+  
   resources :images
   resources :artists
   resources :albums

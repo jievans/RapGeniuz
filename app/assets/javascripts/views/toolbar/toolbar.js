@@ -12,6 +12,7 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 		"submit #login-form": "submitLogin",
 		"submit #create-account-form": "submitCreateAccount",
 		"click #logout": "logout",
+    "keyup #search-field": "provideSearchResults",
 	},
 
 	render: function(){
@@ -21,6 +22,23 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 		this.$el.html(content);
 		return this;
 	},
+  
+  provideSearchResults: function(event){
+    search_value = $("#search-field").val();
+    $.ajax({
+      url: "/search",
+      type: "GET",
+      data: {search: search_value},
+      success: function(response){
+        console.log(response);
+        $("#search-results").html(response);
+      },
+      error: function(response){
+        alert("there was a problem");
+        console.log(response);
+      },
+    });
+  },
 
 	submitLogin: function(event){
 		event.preventDefault();
