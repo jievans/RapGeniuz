@@ -7,6 +7,8 @@
   <h3> Tracks </h3>
 	<% if @album.image %>
 	<div id="album-image"><%= image_tag(@album.image)%></div>
+  <% else %>
+  <div id="album-image"><%= image_tag("image_not_available.jpg")%></div>
 	<% end %>
   
 

@@ -45,6 +45,7 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 		this.model.destroy({
 			success: function(model){
 				that.options.composite.model.fetch();
+        that.remove();
 			},
 
 			error: function(model, response){

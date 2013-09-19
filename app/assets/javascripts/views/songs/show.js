@@ -70,10 +70,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     });
   },
 
-	triggerAnnotationView: function(id){
-
-	},
-
   displayAnnotation: function(event){
     console.log("We are in displayAnnotation");
 		event.preventDefault();
@@ -92,7 +88,11 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 					{model: model, composite: that}
 				);
 				that.assign(annotationView);
-				that.$el.append(annotationView.render().$el);
+				// that.$el.append(annotationView.render().$el);
+        $("body").append(annotationView.render().$el);    
+        $("#main").one("click", function(){
+          annotationView.remove();
+        });
 				annotationView.$el.position({my: "left top-10",
 																	 at: "right+10 top",
 																	 of: $anchor});
@@ -188,8 +188,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 				subView.remove();
 			});
 
-      $('#annotation-show').remove();
-      $('#annotation-form').remove();
       // why is this line necessary???
       if($(event.target).hasClass('annotation')) return true;
 
@@ -287,12 +285,16 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         var $dummy = $('<span>dummy text<span>');
 				// clonedRange.insertNode($form[0]);
         clonedRange.insertNode($dummy[0]);
-        that.$el.append($form);
+        $("body").append($form);
+        $("#main").one("click", function(){
+          $form.remove();
+        });
         $form.position({
           my: "left center+100",
           at: "right+75 center",
           of: $dummy,
         });
+        
 				console.log($dummy.parent());
         $dummy.remove();
 

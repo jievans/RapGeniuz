@@ -187,64 +187,7 @@ $dark-border: rgb(102, 102, 102);
 	.lyrics-wrapper{
 		margin: 10px 0px;
 	}
-	#annotation-form {
-		position: absolute;
-	//	margin-top: -120px;
-	//	margin-left: 450px;
-		background-color: rgb(245, 245, 245);
-		color: black;
-		padding: 0px 20px;
-		border-radius: 5px;
-
-		label {
-			font-style: italic;
-
-		}
-
-		.add-image {
-			color: rgb(94, 4, 14);
-			cursor: pointer;
-		}
-
-		.footer {
-			text-align: center;
-
-			button {
-				background-color: transparent;
-			}
-		}
-
-		textarea {
-			width: 100%;
-			height: 200px;
-		}
-
-		#submit-button {
-			display: inline-block;
-			padding: 4px;
-			margin: 20px 0px;
-			border-style: solid;
-			border-width: 5px;
-
-			&:active{
-				background-color: orange;
-			};
-		}
-	}
-
-	#annotation-display {
-		position: absolute;
-		color: black;
-		background-color: white;
-		border-color: gray;
-		border-style: solid;
-		border-radius: 5px;
-		border-width: 5px;
-		padding: 20px;
-		width: 450px;
-		//margin-top: -50px;
-//		margin-left: 450px;
-	}
+	
 }
 
 #song-relations{
