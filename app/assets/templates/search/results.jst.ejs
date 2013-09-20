@@ -1,0 +1,21 @@
+<% _.each(songs, function(song){ %>
+
+  <h4>Songs</h4>
+    <a href="/songs/<%=song.id%>">
+    <div class="result">
+      <%= song.title %>
+    </div>
+    </a>
+
+<% })%>
+
+<% _.each(artists, function(artist){ %>
+
+  <h4>Artists</h4>
+  <a href="/artists/<%=artist.id%>">
+    <div class="result">
+      <%= artist.name %>
+    </div>
+  </a>
+
+<% })%>

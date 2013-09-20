@@ -15,6 +15,16 @@ a {
 
 }
 
+.selected {
+  background-color: blue;
+}
+
+#search-results {
+  position: absolute;
+  background-color: purple;
+  width: 225px;
+}
+
 #search-bar {
   display: inline-block;
   vertical-align: middle;

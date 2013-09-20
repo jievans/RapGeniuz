@@ -13,7 +13,55 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 		"submit #create-account-form": "submitCreateAccount",
 		"click #logout": "logout",
     "keyup #search-field": "provideSearchResults",
+    "keydown #search-field": function(event){
+      this.checkSelect(event);
+      this.goToResult(event);
+    },
+    "mouseover .result": "mouseSelection",
+
 	},
+  
+  mouseSelection: function(event){
+    $(".result.selected").removeClass("selected");
+    $(event.target).addClass("selected");
+  },
+  
+  goToResult: function(event){
+    if(event.keyCode == 13){
+      event.preventDefault();
+      $(".result.selected").trigger("click");
+    }
+  },
+
+  checkSelect: function(event){
+    if(event.keyCode == 40){
+      $results = $("#search-results").find(".result");
+      if ( ! $results.hasClass("selected") ){
+        $results.first().addClass("selected");
+      } else {
+        $selected = $("#search-results")
+        .find(".selected")
+        .removeClass("selected");
+        var nextIndex = ($(".result").index($selected) + 1 ) % $(".result").length;
+        $(".result").eq(nextIndex).addClass("selected");
+      }
+    }
+    
+    if(event.keyCode == 38){
+      $results = $("#search-results").find(".result");
+      event.preventDefault();
+      if ( $results.hasClass("selected") ){
+        $selected = $("#search-results")
+        .find(".selected")
+        .removeClass("selected");
+        var nextIndex = ($(".result").index($selected) - 1 );
+        if(nextIndex < 0){
+          nextIndex += $(".result").length;
+        }
+        $(".result").eq(nextIndex).addClass("selected");
+      }
+    }
+  },
 
 	render: function(){
 		console.log("Calling toolbar render");
@@ -25,19 +73,33 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
   
   provideSearchResults: function(event){
     search_value = $("#search-field").val();
-    $.ajax({
-      url: "/search",
-      type: "GET",
-      data: {search: search_value},
-      success: function(response){
-        console.log(response);
-        $("#search-results").html(response);
-      },
-      error: function(response){
-        alert("there was a problem");
-        console.log(response);
-      },
-    });
+    if( event.keyCode <= 40 && event.keyCode > 35){
+      return true;
+    }
+    
+    if(search_value == ""){
+      return true;
+    }
+    
+   // if(search_value.length > 0){
+      $.ajax({
+        url: "/search",
+        type: "GET",
+        data: {search: search_value},
+        success: function(response){
+          console.log(response);
+          content = JST["search/results"](response);
+          $("#search-results").html(content);
+        },
+        error: function(response, textStatus, errorThrown){
+          // alert("there was a problem");
+          console.log("HERE IS THE ERROR");
+          // console.log(textStatus);
+          alert("There was an error");
+          console.log(response);
+        },
+      }); 
+ //   }
   },
 
 	submitLogin: function(event){
