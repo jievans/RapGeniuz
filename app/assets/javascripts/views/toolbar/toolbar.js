@@ -73,6 +73,7 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
   
   provideSearchResults: function(event){
     search_value = $("#search-field").val();
+
     if( event.keyCode <= 40 && event.keyCode > 35){
       return true;
     }
@@ -96,8 +97,10 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
           console.log("HERE IS THE ERROR");
           // console.log(textStatus);
           alert("There was an error");
+          debugger;
           console.log(response);
         },
+        cache: false,
       }); 
  //   }
   },
