@@ -9,6 +9,7 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
 	id: "toolbar",
 
 	events: {
+    "mousedown .result": "triggerResultClick",
 		"submit #login-form": "submitLogin",
 		"submit #create-account-form": "submitCreateAccount",
 		"click #logout": "logout",
@@ -18,8 +19,18 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
       this.goToResult(event);
     },
     "mouseover .result": "mouseSelection",
-
+    "blur #search-bar": "clearResults",
 	},
+  
+  
+  triggerResultClick: function(){
+    $(event.target).trigger("click");
+  },
+  
+  clearResults: function(event){
+    console.log(event.target);
+    $("#search-results").empty();
+  },
   
   mouseSelection: function(event){
     $(".result.selected").removeClass("selected");
@@ -78,7 +89,8 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
       return true;
     }
     
-    if(search_value == ""){
+    if(event.keyCode == 27){
+      $("#search-results").empty();
       return true;
     }
     

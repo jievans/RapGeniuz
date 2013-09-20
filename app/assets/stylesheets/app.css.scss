@@ -21,8 +21,12 @@ a {
 
 #search-results {
   position: absolute;
-  background-color: purple;
+  background-color: rgb(35, 35, 35);
   width: 225px;
+  
+  .result {
+    border-bottom: solid 2px white;
+  }
 }
 
 #search-bar {

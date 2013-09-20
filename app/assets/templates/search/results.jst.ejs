@@ -19,3 +19,14 @@
   </a>
 
 <% })%>
+
+<% _.each(albums, function(album){ %>
+
+  <h4>Albums</h4>
+  <a href="/albums/<%=album.id%>">
+    <div class="result">
+      <%= album.name %>
+    </div>
+  </a>
+
+<% })%>

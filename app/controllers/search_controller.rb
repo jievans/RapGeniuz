@@ -5,11 +5,12 @@ class SearchController < ApplicationController
     unless params[:search].empty?
       songs = Song.where("title ILIKE ?", "%#{params[:search]}%")
       artists = Artist.where("name ILIKE ?", "%#{params[:search]}%")
+      albums = Album.where("name ILIKE ?", "%#{params[:search]}%")
       p songs
       p artists
-      render :json => {songs: songs, artists: artists}
+      render :json => {songs: songs, artists: artists, albums: albums}
     else
-      render :json => {songs: [], artists: []}
+      render :json => {songs: [], artists: [],  albums: []}
     end
   end
 end
