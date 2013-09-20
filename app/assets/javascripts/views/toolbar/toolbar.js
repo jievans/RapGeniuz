@@ -96,8 +96,6 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
           // alert("there was a problem");
           console.log("HERE IS THE ERROR");
           // console.log(textStatus);
-          alert("There was an error");
-          debugger;
           console.log(response);
         },
         cache: false,
