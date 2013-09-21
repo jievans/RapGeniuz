@@ -195,6 +195,9 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         this.render();
         return true;
       }
+      
+      // refactor
+      $("#annotation-form").remove();
 
 			console.log('got to second part');
 			var previous_button = $('#explain-button');

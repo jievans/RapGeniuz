@@ -1,6 +1,10 @@
+
+<% if (songs.length > 0) { %>
+  <h4>Songs</h4>
+<% } %>
+
 <% _.each(songs, function(song){ %>
 
-  <h4>Songs</h4>
     <a href="/songs/<%=song.id%>">
     <div class="result">
       <%= song.title %>
@@ -9,9 +13,12 @@
 
 <% })%>
 
+<% if (artists.length > 0) { %>
+  <h4>Artists</h4>
+<% } %>
+
 <% _.each(artists, function(artist){ %>
 
-  <h4>Artists</h4>
   <a href="/artists/<%=artist.id%>">
     <div class="result">
       <%= artist.name %>
@@ -20,9 +27,12 @@
 
 <% })%>
 
+<% if (artists.length > 0) { %>
+  <h4>Albums</h4>
+<% } %>
+
 <% _.each(albums, function(album){ %>
 
-  <h4>Albums</h4>
   <a href="/albums/<%=album.id%>">
     <div class="result">
       <%= album.name %>
