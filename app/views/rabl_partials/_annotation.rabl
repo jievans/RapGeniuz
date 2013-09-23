@@ -6,7 +6,7 @@ object locals[:annotation]
 attributes *Annotation.column_names
 
 child :user do
-	attributes :username
+	attributes :username, :id
 end
 
 child :song do

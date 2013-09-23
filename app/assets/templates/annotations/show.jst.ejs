@@ -6,6 +6,6 @@
 		<span class="delete-annotation-button">Delete</span>
 	</div>
 	<% } else { %>
-		Posted by: <%= annotation.user.username %>
+		Posted by: <a class="user-link" href="/users/<%=annotation.user.id%>"><%= annotation.user.username %></a>
 	<% } %>
 </div>
