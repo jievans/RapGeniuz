@@ -10,6 +10,14 @@
   padding-bottom: 100px;
 }
 
+.clearfix:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;
