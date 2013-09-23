@@ -21,32 +21,6 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 		}
 	},
 
-	// switchModel: function(){
-//
-// 		if(RapGenius.currentUser != this.model &&
-// 		RapGenius.currentUser.get("id") == this.model.get("id")){
-// 			this.stopListening(this.model);
-// 			this.oldModel = this.model;
-// 			this.model = RapGenius.currentUser;
-// 			this.listenTo(this.model, "change", this.render);
-// 			this.render();
-// 		}
-//
-// 		if(RapGenius.currentUser == this.model &&
-// 			!RapGenius.currentUser.get("id")){
-// 			this.stopListening(this.model);
-// 			this.listenTo(RapGenius.currentUser, "change", this.switchModel);
-// 			this.model = this.oldModel;
-// 			this.listenTo(this.model, "change", this.render);
-// 			this.render();
-// 		} // else {
-// // 			this.model = this.oldModel;
-// // 			debugger;
-// // 			console.log(this.oldModel);
-// // 			this.render();
-// // 		}
-// 	},
-
   render: function(){
 		var content = JST["users/info"]({user: this.model});
 		this.$el.html(content);
@@ -74,34 +48,6 @@ RapGenius.Views.UserInfoView = Backbone.View.extend({
 			that.model.save(userData);
 
 		}).modal('hide');
-
-		// $("#editUserModal").one("hidden.bs.modal", function () {
-	// 		hidden = true;
-	//
-	// 		// that.model.save(userData);
-	//
-	// 		maybeRerender();
-	// 	}).modal('hide');
-
-
-
-
-
-		// this.model.save(userData,{
-// 			silent: true,
-// 			success: function(model){
-// 				saved = true;
-//
-// 				maybeRerender();
-// 			},
-// 		});
-
-		// function maybeRerender () {
-	// 		if (saved && hidden) {
-	// 			that.render();
-	// 		}
-	// 	}
-
 
 	},
 
