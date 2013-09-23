@@ -1,9 +1,15 @@
+<% if(response.empty) { %>
+  No matching results...
+<% } %>
 
-<% if (songs.length > 0) { %>
+
+<% test = Object.keys(response) %>
+
+<% if (response.songs.length > 0) { %>
   <h4>Songs</h4>
 <% } %>
 
-<% _.each(songs, function(song){ %>
+<% _.each(response.songs, function(song){ %>
 
     <a href="/songs/<%=song.id%>">
     <div class="result">
@@ -13,11 +19,11 @@
 
 <% })%>
 
-<% if (artists.length > 0) { %>
+<% if (response.artists.length > 0) { %>
   <h4>Artists</h4>
 <% } %>
 
-<% _.each(artists, function(artist){ %>
+<% _.each(response.artists, function(artist){ %>
 
   <a href="/artists/<%=artist.id%>">
     <div class="result">
@@ -27,11 +33,11 @@
 
 <% })%>
 
-<% if (albums.length > 0) { %>
+<% if (response.albums.length > 0) { %>
   <h4>Albums</h4>
 <% } %>
 
-<% _.each(albums, function(album){ %>
+<% _.each(response.albums, function(album){ %>
 
   <a href="/albums/<%=album.id%>">
     <div class="result">

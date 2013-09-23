@@ -94,14 +94,17 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
       return true;
     }
     
-   // if(search_value.length > 0){
+    if(search_value.length > 0){
       $.ajax({
         url: "/search",
         type: "GET",
         data: {search: search_value},
         success: function(response){
           console.log(response);
-          content = JST["search/results"](response);
+          response.empty = _.all(response, function(results){
+            return results.length == 0;
+          });
+          content = JST["search/results"]( {response: response} );
           $("#search-results").html(content);
         },
         error: function(response, textStatus, errorThrown){
@@ -112,7 +115,9 @@ RapGenius.Views.Toolbar = Backbone.View.extend({
         },
         cache: false,
       }); 
- //   }
+    } else {
+      $("#search-results").empty();
+    }
   },
 
 	submitLogin: function(event){
