@@ -122,9 +122,6 @@
 	#edit-annotation-button-wrapper {
 		display: block;
 		text-align: left;
-	//	margin: 20px;
-		// can't get margin-bottom to work
-	//	margin: 30px;
 		margin-bottom: 0px;
 		padding: 10px;
 		border-top: solid rgb(68, 68, 68) 1px;
@@ -135,7 +132,7 @@
 			cursor: pointer;
 		}
 
-		.edit-annotation-button {
+		.edit-annotation-button, .delete-annotation-button {
 			display: inline-block;
 			color: #5BB647;
 			font-size: 12px;

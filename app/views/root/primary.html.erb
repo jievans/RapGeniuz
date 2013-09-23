@@ -1,7 +1,7 @@
 <div id="newsfeed">
 
 	<div id="welcome">
-		<em><i>Welcome to the RapGenius Newsfeed!!</i></em>
+		<em><i>Song Feed</i></em>
 	</div>
 
 
@@ -12,6 +12,8 @@
 				<%= song.artist.name %> - <%= song.title %>
 				<div class="song-footer">
 					<%= song.annotations.length %> annotations
+          <%= link_to "posted by: #{song.user.username}", user_url(song.user),
+          {:class => "user-link" }%> 
 				</div>
 			</div>
 		</a>

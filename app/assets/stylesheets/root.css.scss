@@ -31,7 +31,19 @@ $miami-green : rgb(186, 254, 167);
 			.song-footer {
 				color: pink;
 				font-size: 12px;
-			}
+        color: #78d9fc;
+			
+        .user-link {
+          color: pink;
+          display: inline-block;
+          margin-left: 5px;
+          
+          &:hover {
+           color: purple; 
+          }
+        }
+      
+      }
 			&:hover {
 				background: rgb(0, 6, 42);
 				color: lighten($edit-purple, 10%);
