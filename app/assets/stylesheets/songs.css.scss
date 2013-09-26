@@ -116,6 +116,7 @@ $dark-border: rgb(102, 102, 102);
 	.edit-lyrics {
 		border-color: $edit-color;
 		color: $edit-color;
+    cursor: pointer;
 	}
 
 	a {
