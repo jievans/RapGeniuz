@@ -11,6 +11,11 @@
   src: url('dot-digital.ttf');
 }
 
+@font-face {
+  font-family: Arista;
+  src: url('arista.ttf');
+}
+
 #main {
   padding-bottom: 100px;
 }
@@ -101,9 +106,11 @@ a {
 	float: right;
 	vertical-align: middle;
 	font-size: 22px;
+  display: inline-block;
+  vertical-align: middle;
 
 	padding: 0px;
-	line-height: 36px;
+	line-height: 84px;
 
 	.info {
 		display: inline-block;
@@ -166,13 +173,12 @@ a {
 
 #banner {
 	font-family: DotDigital;
-	font-size: 25px;
+	font-size: 30px;
 	display: inline-block;
 //	padding: 5px;
 	border-radius: 5px;
-	color: rgb(12, 233, 222);
+	color: lighten(rgb(12, 233, 222), 50%);
   vertical-align: middle;
-  
   a:hover {
    color: rgb(255, 255, 255); 
   }
@@ -195,9 +201,10 @@ a {
 #sign-in, #sign-up, #logout, #add-song {
 	display: inline-block;
 	font-size: 20px;
+  line-height: 20px;
+  padding: 15px 5px;
 	font-style: italic;
 	color: $hot-pink;
-	padding: 5px;
 	border: solid 3px $hot-pink;
 	cursor: pointer;
 	&:active {
