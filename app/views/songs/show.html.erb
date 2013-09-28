@@ -34,8 +34,13 @@ $(function(){
 	<%= (render :partial => "show").html_safe %>;
 
 	var songModel = new RapGenius.Models.Song(RapGenius.Repositories.Songs.show);
+  var annotations = JSON.parse(
+    "<%= "#{j @song.annotations.to_json }".html_safe %>" 
+  );
+  
+  songModel.annotations = new RapGenius.Collections.Annotations(annotations);
 
-	var songShowView = new RapGenius.Views.SongShowView({model: songModel});
+  var songShowView = new RapGenius.Views.SongShowView({model: songModel});
 
 	var songShowRouter = new RapGenius.Routers
 																		.SongShowRouter({view: songShowView});

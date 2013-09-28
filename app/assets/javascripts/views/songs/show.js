@@ -34,10 +34,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
   render: function(){
     console.log("render being called");
-     $el = this.$el;
-//     $el.html(lyricsView.render().$el);
-//     $editLyrics = $('<span>').attr('class', 'button edit-lyrics');
-//     $editLyrics.html("Edit Lyrics");
+    $el = this.$el;
     var renderedContent = JST["songs/show"]({song: this.model});
     $el.html(renderedContent);
     return this;
@@ -235,6 +232,8 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			{id: "explain-button", text: "Annotate"} )[0];
 			clonedRange.insertNode(annotate_button);
 	},
+  
+  annotateProcess: 1,
 
   makeAnnotation: function(event){
       var that = this;
@@ -249,11 +248,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 			var clonedRange = range.cloneRange();
 			clonedRange.collapse(false);
-			var formContent = JST["annotations/new"]();
-			$form = $(formContent);
-
-			console.log(range.toString());
-
+			var $form = $(JST["annotations/new"]());
 
 			var postError = function(errorObject){
 				var $error = $(JST["errors/message"]({messages: errorObject}))
@@ -310,38 +305,30 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 					var formData = $form.serializeJSON();
 					formData.annotation.referent = range.toHtml();
 					formData.annotation.song_id = that.model.get("id");
-					$.ajax({
-						url: "/annotations",
-						data: formData,
-						type: "POST",
-						success: function(data){
+          
+          var newAnnotation = new RapGenius.Models.Annotation(
+            formData.annotation
+          );
+          
+          newAnnotation.save({}, {
+            success: function(data){
 							var id = data.id;
 							$anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
 							range.surroundContents($anchor[0]);
 							$form.remove();
 							var lyrics = $('.lyrics-wrapper').html();
-							var songData = {song: {lyrics: lyrics}};
-							$.ajax({
-								url: "/songs/" + that.model.get("id"),
-								type: "PUT",
-								data: songData,
-                success: function(){
-                  that.model.fetch({
-                    success: function(){
-                      that.render();
-                    },
-                  });
-                },
-								error: function(response){
+              
+              that.model.save({lyrics: lyrics}, {
+                error: function(response){
 									// where we left off
 									var selector = 'a[data-annotation-id="' + id + '"]';
 									$(selector).contents().unwrap();
 									var errorObject = response.responseJSON;
 									postError(errorObject);
 								},
-							});
+              });
 						},
-					});
+          });
 
 				});
 

@@ -8,6 +8,8 @@ class Annotation < ActiveRecord::Base
   belongs_to :user
 
   before_save :cleanse_body
+  
+  validates :body, :presence => true
 
   def cleanse_body()
    # debugger
