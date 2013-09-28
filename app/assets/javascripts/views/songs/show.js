@@ -74,28 +74,25 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     var that = this;
 		var $anchor = $(event.target);
 		var that = this;
-
-		var annotation = new RapGenius.Models.Annotation(
-			{id: $anchor.attr("data-annotation-id")}
+    
+    var annotations = that.model.annotations;
+    var annotation = annotations.get($anchor.attr("data-annotation-id"));
+    
+		var annotationView = new RapGenius.Views.ShowAnnotationView(
+			{model: annotation, composite: that}
 		);
-
-		annotation.fetch({
-			success: function(model){
-				var annotationView = new RapGenius.Views.ShowAnnotationView(
-					{model: model, composite: that}
-				);
-				that.assign(annotationView);
-				// that.$el.append(annotationView.render().$el);
-        $("body").append(annotationView.render().$el);    
-        $("#main").one("click", function(){
-          annotationView.remove();
-        });
-				annotationView.$el.position({my: "left top-10",
-																	 at: "right+10 top",
-																	 of: $anchor});
-			},
-		});
-
+    
+    that.assign(annotationView);
+    
+    $("body").append(annotationView.render().$el); 
+    
+    $("#main").one("click", function(){
+      annotationView.remove();
+    });
+    
+		annotationView.$el.position({my: "left top-10",
+															 at: "right+10 top",
+															 of: $anchor});
 	},
 
   showEditSong: function(event){
@@ -233,7 +230,62 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			clonedRange.insertNode(annotate_button);
 	},
   
-  annotateProcess: 1,
+  submitAnnotation: function submitAnnotation(event){
+    var range = submitAnnotation.range;
+    var that = submitAnnotation.that;
+    var $form = submitAnnotation.$form;
+    event.preventDefault();
+    var formData = $(this).serializeJSON();
+    formData.annotation.referent = range.toHtml();
+    formData.annotation.song_id = that.model.get("id");
+          
+    var newAnnotation = new RapGenius.Models.Annotation(formData.annotation);
+          
+    newAnnotation.save({}, {
+      success: function(data){
+        var id = data.id;
+        $anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
+        range.surroundContents($anchor[0]);
+        $form.remove();
+        var lyrics = $('.lyrics-wrapper').html();
+              
+        that.model.save({lyrics: lyrics}, {
+          success: function(model, response){
+            that.model.annotations.add(newAnnotation);
+          },
+          error: function(model, response){
+            // where we left off
+            var selector = 'a[data-annotation-id="' + id + '"]';
+            $(selector).contents().unwrap();
+            var errorObject = response.responseJSON;
+            that.postError(errorObject);
+          },
+        });
+      },
+    });
+
+  },
+  
+  postError: function(errorObject){
+    var $error = $(JST["errors/message"]({messages: errorObject}))
+    $('body').append($error);
+    $error.position({
+      my: "center center",
+      at: "center center",
+      of: $(window),
+    });
+
+    var $exit = $error.find(".exit");
+    $exit.position({
+      my: "right top",
+      at: "right-10 top+10",
+      of: $error,
+    });
+
+    $exit.on("click", function(){
+      $error.remove();
+    });
+  },
 
   makeAnnotation: function(event){
       var that = this;
@@ -250,27 +302,9 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			clonedRange.collapse(false);
 			var $form = $(JST["annotations/new"]());
 
-			var postError = function(errorObject){
-				var $error = $(JST["errors/message"]({messages: errorObject}))
-				$('body').append($error);
-				$error.position({
-					my: "center center",
-					at: "center center",
-					of: $(window),
-				});
-
-				var $exit = $error.find(".exit");
-				$exit.position({
-					my: "right top",
-					at: "right-10 top+10",
-					of: $error,
-				});
-
-				$exit.on("click", function(){
-					$error.remove();
-				});
-			}
-
+      that.submitAnnotation.range = range;
+      that.submitAnnotation.that = that;
+      that.submitAnnotation.$form = $form;
 
 			// annotation_form = $("<span>",
 			//                          {id: "explain-button", text: "Annotate"} )[0];
@@ -300,37 +334,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         // TODO: makes more sense to save the data through the model and then render.  also, the form on submit can be pulled out...all it needs is the referent...which by the way, should have the range.toString called earlier and stored, since the range might have collapsed by then.
 
 
-				$form.on("submit", function(event){
-          event.preventDefault();
-					var formData = $form.serializeJSON();
-					formData.annotation.referent = range.toHtml();
-					formData.annotation.song_id = that.model.get("id");
-          
-          var newAnnotation = new RapGenius.Models.Annotation(
-            formData.annotation
-          );
-          
-          newAnnotation.save({}, {
-            success: function(data){
-							var id = data.id;
-							$anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
-							range.surroundContents($anchor[0]);
-							$form.remove();
-							var lyrics = $('.lyrics-wrapper').html();
-              
-              that.model.save({lyrics: lyrics}, {
-                error: function(response){
-									// where we left off
-									var selector = 'a[data-annotation-id="' + id + '"]';
-									$(selector).contents().unwrap();
-									var errorObject = response.responseJSON;
-									postError(errorObject);
-								},
-              });
-						},
-          });
-
-				});
+				$form.on("submit", that.submitAnnotation);
 
 			}, 200);
 
