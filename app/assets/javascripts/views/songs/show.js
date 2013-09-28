@@ -40,31 +40,42 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     return this;
   },
 
-  // TODO: save through the model
+
   submitEditSong: function(event){
     var that = this;
     event.preventDefault();
     var id = this.model.get("id");
-    var lyricsData = {lyrics: $(event.target).parent().find("textarea").val(), };
-    $.ajax({
-      url: "/songs/" + id + "/markdown",
-      type: "Post",
-      data: lyricsData,
-      success: function(data){
-        that.model.fetch({
-          success: function(){
-            that.render()
-          },
-        });
-      },
-      error: function(response){
-        errors = response.responseJSON;     
+    var lyricsData = $(event.target).parent().find("textarea").val();
+    
+    var htmlLyrics = that.lyricsToHtml(lyricsData.trim());
+    
+    that.model.save({lyrics: htmlLyrics}, {
+      wait: true,
+      
+      error: function(model, response){
+        errors = response.responseJSON;    
         for(var error in errors){
           $errorDiv = $('<div class="song-edit-alert">').html(errors[error]);
           $("#song-wrapper").prepend($errorDiv);
         }
       },
+    })
+  },
+  
+  lyricsToHtml: function(lyrics){
+    var markdownAnchor = /(\[)((.|\n)+?)(\])(\()(\d+)(\))/g;
+    
+    function replacer(match, p1, p2, p3, p4, p5, p6, p7){
+      return '<a class="annotation" ' + 'href="/' + p6 + '" ' +  'data-annotation-id="' + p6 + '">' + p2 + '</a>';
+    }
+    
+    var withAnchors = lyrics.replace(markdownAnchor, replacer);
+    
+    var htmlLyrics = withAnchors.replace(/\n/g, function(match){
+      return "<br>";
     });
+    
+    return htmlLyrics;
   },
 
   displayAnnotation: function(event){
