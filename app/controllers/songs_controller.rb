@@ -1,5 +1,4 @@
 ### Handle in show when song cannot be found
-#### Implement RedCarpet Postprocessor
 
 class SongsController < ApplicationController
 
@@ -51,44 +50,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # def do_match string, regexp
-#     string =~ regexp
-#     debugger
-#     $1
-#   end
-
-  def plain_update
-   
-    anchor_pattern = /(\[)(.+?)(\])(\()(\d+)(\))/m
-    
-    ## to_param() necessary due to ActiveSupport::SafeBuffer
-    edited_lyrics = params[:lyrics].to_param().strip()
-
-
-   tagged_edited = edited_lyrics.gsub(anchor_pattern) do |match|
-     "<a class=\"annotation\" href=\"/#{$5}\" data-annotation-id=\"#{$5}\">#{$2}</a>"
-   end
-
-   html_edited = tagged_edited.gsub(/\n/) {|match| "<br>"}
-
-   # edited_lyrics = make_anchors(edited_lyrics)
-
-
-    song = Song.find(params[:id])
-  #  full_edited = html_update(song.lyrics, edited_lyrics)
-
-
-  #  debugger
-
-    
-    unless errors = lyrics_invalid?(song.lyrics, html_edited)
-      song.update_attributes!(:lyrics => html_edited)
-      render :json => song
-    else
-      p errors
-      render :json => errors, :status => 409
-    end
-  end
 
   def update
     # render :json => {"wrong" => "You did something wrong"}, :status => 409
