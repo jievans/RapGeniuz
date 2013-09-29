@@ -35,10 +35,13 @@ $(function(){
 
 	var songModel = new RapGenius.Models.Song(RapGenius.Repositories.Songs.show);
   var annotations = JSON.parse(
-    "<%= "#{j @song.annotations.to_json }".html_safe %>" 
+    "<%= "#{j render 'rabl_partials/annotation', :locals => {
+    :type => :collection, :annotation => @song.annotations } }".html_safe %>" 
   );
   
-  songModel.annotations = new RapGenius.Collections.Annotations(annotations);
+  songModel.annotations = new RapGenius.Collections.Annotations(annotations, {
+    parse: true,
+  });
 
   var songShowView = new RapGenius.Views.SongShowView({model: songModel});
 

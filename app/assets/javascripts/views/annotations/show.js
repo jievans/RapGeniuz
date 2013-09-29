@@ -18,6 +18,7 @@ RapGenius.Views.ShowAnnotationView = Backbone.View.extend({
 		});
 
 		this.model.html = html;
+
 		var renderedContent = JST["annotations/show"]({annotation: this.model});
 		var $renderedContent = $(renderedContent);
 		this.$el.html($renderedContent);

@@ -2,26 +2,27 @@ RapGenius.Models.Annotation = Backbone.Model.extend({
 	urlRoot: "/annotations",
 
 	parse: function(data){
-		if (data.song){
-			if(data.song.album){
-				this.album = data.song.album;
-				delete data.song.album;
-			}
+    if (data.song){
+      if(data.song.album){
+        this.album = data.song.album;
+        delete data.song.album;
+      }
 
-			if(data.song.artist){
-				this.artist = data.song.artist;
-				delete data.song.artist;
-			}
+      if(data.song.artist){
+        this.artist = data.song.artist;
+        delete data.song.artist;
+      }
 
-			if(data.user){
-				this.user = data.user;
-				delete data.user;
-			}
-
-			this.song = data.song;
-			delete data.song;
-		}
-		return data;
-	},
+      this.song = data.song;
+      delete data.song;
+    }
+    
+    if(data.user){
+      this.user = data.user;
+      delete data.user;
+    }
+    
+    return data;
+  },
 
 });

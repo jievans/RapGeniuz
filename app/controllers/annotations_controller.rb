@@ -4,6 +4,7 @@ class AnnotationsController < ApplicationController
 
   def show
     annotation = Annotation.find(params[:id])
+    # render :json => annotation
     render :partial => "rabl_partials/annotation",
     :locals => {:type => "object", :annotation => annotation}
   #  render :json => Annotation.find(params[:id])
@@ -12,7 +13,9 @@ class AnnotationsController < ApplicationController
   def create
     params[:annotation][:user_id] = current_user.id
     annotation = Annotation.create!(params[:annotation])
-    render :json => annotation
+    # render :json => annotation
+    render :partial => "rabl_partials/annotation",
+    :locals => {:type => "object", :annotation => annotation}
   end
 
   def update

@@ -82,7 +82,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     console.log("We are in displayAnnotation");
 		event.preventDefault();
     event.stopPropagation();
-    var that = this;
+    $("#main").trigger("click");
 		var $anchor = $(event.target);
 		var that = this;
     
@@ -187,11 +187,11 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
       if($(event.target).is('textarea')) return true;
 			if($(event.target).attr('id') === 'explain-button') return true;
-      if($(event.target).attr('id') === 'edit-song-button') return true;
+    //  if($(event.target).attr('id') === 'edit-song-button') return true;
 
-			_.each(this.subViews, function(subView){
-				subView.remove();
-			});
+			// _.each(this.subViews, function(subView){
+//         subView.remove();
+//       });
 
       // why is this line necessary???
       if($(event.target).hasClass('annotation')) return true;
@@ -202,7 +202,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
       }
       
       // refactor
-      $("#annotation-form").remove();
+ //     $("#annotation-form").remove();
 
 			console.log('got to second part');
 			var previous_button = $('#explain-button');
@@ -212,14 +212,14 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 
       if (selection.rangeCount === 0){
-        this.render();
+       // this.render();
         return true;
       }
 
 			var range = selection.getRangeAt(0);
 
 			if ($.trim(range.toString()) === "") {
-        this.render();
+       // this.render();
         return true;
       }
       
@@ -253,8 +253,9 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     var newAnnotation = new RapGenius.Models.Annotation(formData.annotation);
           
     newAnnotation.save({}, {
-      success: function(data){
-        var id = data.id;
+      success: function(annotationModel, annotationResponse){
+        annotationModel.set(annotationResponse, {parse: true});
+        var id = annotationResponse.id;
         $anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
         range.surroundContents($anchor[0]);
         $form.remove();
@@ -301,6 +302,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
   makeAnnotation: function(event){
       var that = this;
 			event.stopPropagation();
+      $("#main").click();
 			//	event.preventDefault();
 			var selection = rangy.getSelection();
 			var range = selection.getRangeAt(0);
@@ -316,6 +318,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
       that.submitAnnotation.range = range;
       that.submitAnnotation.that = that;
       that.submitAnnotation.$form = $form;
+
 
 			// annotation_form = $("<span>",
 			//                          {id: "explain-button", text: "Annotate"} )[0];
