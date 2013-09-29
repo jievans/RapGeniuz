@@ -4,6 +4,14 @@ require 'redcarpet_renderers'
 
 
 module SongsHelper
+  
+  def strip_javascript(old_lyrics)
+    doc = Nokogiri::HTML::DocumentFragment.parse(old_lyrics)
+    doc.css('script').remove()
+    doc.xpath("//@*[starts-with(name(),'on')]").remove
+    doc.to_s
+  end
+  
   def markdown(lyrics, options = {})
     renderer = Redcarpet::Render::HTML.new(options)
     markdowner = Redcarpet::Markdown.new(renderer)

@@ -253,8 +253,9 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     var newAnnotation = new RapGenius.Models.Annotation(formData.annotation);
           
     newAnnotation.save({}, {
+      wait: true,
       success: function(annotationModel, annotationResponse){
-        annotationModel.set(annotationResponse, {parse: true});
+      //  annotationModel.set(annotationResponse, {parse: true});
         var id = annotationResponse.id;
         $anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
         range.surroundContents($anchor[0]);

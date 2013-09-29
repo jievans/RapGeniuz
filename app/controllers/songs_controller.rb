@@ -54,8 +54,14 @@ class SongsController < ApplicationController
   def update
     # render :json => {"wrong" => "You did something wrong"}, :status => 409
     song = Song.find(params[:id])
-    unless errors = lyrics_invalid?(song.lyrics, params[:song][:lyrics])
-      song.update_attributes!(params[:song])
+    stripped_lyrics = strip_javascript(params[:song][:lyrics])
+    unless stripped_lyrics == params[:song][:lyrics]
+      render :json => {:javascript => "You cannot input JavaScript!"}, 
+             :status => 409
+      return
+    end
+    unless errors = lyrics_invalid?(song.lyrics, stripped_lyrics)
+      song.update_attributes!(:lyrics => stripped_lyrics)
       render :json => song
     else
       render :json => errors, :status => 409
