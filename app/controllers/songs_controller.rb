@@ -15,7 +15,7 @@ class SongsController < ApplicationController
   def create
 
     original_lyrics = params[:song][:lyrics]
-    html_lyrics = non_block_markdown(original_lyrics)
+    html_lyrics = safe_html(original_lyrics)
 
     params[:song][:lyrics] = html_lyrics
     params[:song][:user_id] = current_user.id

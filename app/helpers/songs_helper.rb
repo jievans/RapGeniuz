@@ -12,6 +12,15 @@ module SongsHelper
     doc.to_s
   end
   
+  def lyrics_to_html(old_lyrics)
+    old_lyrics.gsub(/(\r\n|\n)/) {|match| "<br>"}
+  end
+  
+  def safe_html(old_lyrics)
+    html_lyrics = lyrics_to_html(old_lyrics)
+    strip_javascript(html_lyrics)
+  end
+  
   def markdown(lyrics, options = {})
     renderer = Redcarpet::Render::HTML.new(options)
     markdowner = Redcarpet::Markdown.new(renderer)
