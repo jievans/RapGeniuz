@@ -8,7 +8,7 @@ module SongsHelper
   end
   
   def lyrics_to_html(old_lyrics)
-    old_lyrics.gsub(/(\r\n|\n)/) {|match| "<br>"}
+    old_lyrics.strip.gsub(/(\r\n|\n)/) {|match| "<br>"}
   end
   
   def safe_html(old_lyrics)

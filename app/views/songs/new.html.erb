@@ -52,8 +52,14 @@
     <label for="song_lyrics">Lyrics</label>
     <textarea name="song[lyrics]" id="song_lyrics"><%= @song.lyrics %></textarea>
 
-    <input type="submit" class="submit-button" value="Submit">
-
+    <input type="submit" class="submit-button" value="Submit" id="submit-song">
+    <div class="pending-alert">Fetching Last.fm data...</div>
   </form>
+  
+  <script>
+  $("#submit-song").on("click", function(event){
+    $(".pending-alert").css("visibility", "visible");
+  });
+  </script>
 </div>
 

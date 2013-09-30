@@ -8,9 +8,7 @@
 </div>
 
 <div id="song-wrapper">
-  <div class="lyrics-wrapper">
-	<%= song.get("lyrics") %>
-  </div>
+  <div class="lyrics-wrapper"><%= song.get("lyrics") %></div>
   <% if(RapGenius.currentUser.get("id")) { %>  
   	<span class="button edit-lyrics">Edit Lyrics</span>
   <% } %>

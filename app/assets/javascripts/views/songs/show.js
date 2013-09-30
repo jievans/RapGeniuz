@@ -241,42 +241,42 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			clonedRange.insertNode(annotate_button);
 	},
   
-  submitAnnotation: function submitAnnotation(event){
-    var range = submitAnnotation.range;
-    var that = submitAnnotation.that;
-    var $form = submitAnnotation.$form;
-    event.preventDefault();
-    var formData = $(this).serializeJSON();
-    formData.annotation.referent = range.toHtml();
-    formData.annotation.song_id = that.model.get("id");
+  getAnnotationHandler: function(range, view, $form){
+    
+    return function (event){
+        event.preventDefault();
+        var formData = $(this).serializeJSON();
+        formData.annotation.referent = range.toHtml();
+        formData.annotation.song_id = view.model.get("id");
+        var newAnnotation = new RapGenius
+                                .Models
+                                .Annotation(formData.annotation);
           
-    var newAnnotation = new RapGenius.Models.Annotation(formData.annotation);
-          
-    newAnnotation.save({}, {
-      wait: true,
-      success: function(annotationModel, annotationResponse){
-      //  annotationModel.set(annotationResponse, {parse: true});
-        var id = annotationResponse.id;
-        $anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
-        range.surroundContents($anchor[0]);
-        $form.remove();
-        var lyrics = $('.lyrics-wrapper').html();
-              
-        that.model.save({lyrics: lyrics}, {
-          success: function(model, response){
-            that.model.annotations.add(newAnnotation);
-          },
-          error: function(model, response){
-            // where we left off
-            var selector = 'a[data-annotation-id="' + id + '"]';
-            $(selector).contents().unwrap();
-            var errorObject = response.responseJSON;
-            that.postError(errorObject);
+        newAnnotation.save({}, {
+          wait: true,
+          success: function(annotationModel, annotationResponse){
+          //  annotationModel.set(annotationResponse, {parse: true});
+            var id = annotationResponse.id;
+            $anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
+            range.surroundContents($anchor[0]);
+            $form.remove();
+            var lyrics = $('.lyrics-wrapper').html();
+            view.model.save({lyrics: lyrics}, {
+              success: function(model, response){
+                view.model.annotations.add(newAnnotation);
+              },
+              error: function(model, response){
+                // where we left off
+                var selector = 'a[data-annotation-id="' + id + '"]';
+                $(selector).contents().unwrap();
+                var errorObject = response.responseJSON;
+                view.postError(errorObject);
+              },
+            });
           },
         });
-      },
-    });
 
+      }
   },
   
   postError: function(errorObject){
@@ -316,16 +316,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			clonedRange.collapse(false);
 			var $form = $(JST["annotations/new"]());
 
-      that.submitAnnotation.range = range;
-      that.submitAnnotation.that = that;
-      that.submitAnnotation.$form = $form;
-
-
-			// annotation_form = $("<span>",
-			//                          {id: "explain-button", text: "Annotate"} )[0];
-
-			// if updating song data fails, just delete the annotation
-
 			setTimeout(function(){
 
 				$button.remove();
@@ -345,11 +335,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 				console.log($dummy.parent());
         $dummy.remove();
 
-        // this whole thing can be reformatted of course...
-        // TODO: makes more sense to save the data through the model and then render.  also, the form on submit can be pulled out...all it needs is the referent...which by the way, should have the range.toString called earlier and stored, since the range might have collapsed by then.
-
-
-				$form.on("submit", that.submitAnnotation);
+				$form.on("submit", that.getAnnotationHandler(range, that, $form));
 
 			}, 200);
 

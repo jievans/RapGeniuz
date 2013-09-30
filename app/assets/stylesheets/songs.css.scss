@@ -16,6 +16,15 @@ $dark-border: rgb(102, 102, 102);
 
 @import "colors";
 
+.pending-alert {
+  display: inline-block;
+  visibility: hidden;
+  color: yellow;
+  &:before {
+   content: image-url("throbber.gif"); 
+  }
+}
+
 .new-song-page{
 
   width: 997px;
