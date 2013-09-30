@@ -32,5 +32,9 @@ class User < ActiveRecord::Base
       user.username = auth["info"]["name"]
     end
   end
+  
+  def self.top_10
+    User.find_by_sql("SELECT users.*, COUNT(*) AS annotation_count FROM users JOIN annotations ON users.id = annotations.user_id GROUP BY users.id LIMIT 10")
+  end
 
 end
