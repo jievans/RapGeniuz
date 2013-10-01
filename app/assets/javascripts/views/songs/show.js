@@ -1,13 +1,4 @@
-// Dummy Span appeared to be automatically removed from DOM when span was empty.
-// TODO: When you have a space in your selection, it doesn't put in the span for the annotation form.
-// TODO: annotation.body.replace(/\n/)function(match){return "<br>";})
-// TODO: clear finished annotation views on click for show annotation button
-
 RapGenius.Views.SongShowView = Backbone.View.extend({
-
-//  lyricsView: new RapGenius.Views.Lyrics({model: this.model}),
-
-// TODO: change .annotation event to mouseup instead of click
 
 	subViews: [],
 
@@ -29,7 +20,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     "click .edit-lyrics": "showEditSong",
     "click #edit-song-button": "submitEditSong",
 		"click .cancel": "render",
-  //  "submit #annotation-form": "submitAnnotation",
   },
 
   render: function(){
@@ -139,11 +129,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 			$exit.on('click', function(exit_event){
 				console.log("clicking on x");
-				// debugger changes the console.log output;
 				$message.remove();
-			//	console.log(form_event.target);
-
-			//	$(error_event.target).remove();
 
 			});
 	},
@@ -155,11 +141,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 				console.log("Adding an error");
 				var $errorMessage = $(JST["errors/message"]({messages: message}));
 				this.$el.append($errorMessage);
-
-		//		$('body').find('.error-message').trigger('error_added');
-
-          this.positionMessage($errorMessage);
-      //	$errorMessage.trigger('message_added');
+        this.positionMessage($errorMessage);
 				return true;
 			}
 
@@ -167,14 +149,9 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 		},
 
   hasAnchor: function(range){
-			// console.log(range);
-			// 			console.log($(range.getNodes([1])));
-			// return $(range.getNodes([1])).is('a');
 			var $anchorParents = $(range.startContainer).parents();
 			var $offsetParents = $(range.endContainer).parents();
 			var containsAnchors = $(range.getNodes([1])).is('a');
-			// 			var $childNodes = $(range.cloneContents().childNodes);
-			// 			console.log($childNodes);
 			return containsAnchors ||
 			$anchorParents.is('a') || $offsetParents.is('a');
 		},
@@ -182,18 +159,8 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 
   showAnnotateButton: function(event){
-
-			// this line should be unnecessary
-
       if($(event.target).is('textarea')) return true;
 			if($(event.target).attr('id') === 'explain-button') return true;
-    //  if($(event.target).attr('id') === 'edit-song-button') return true;
-
-			// _.each(this.subViews, function(subView){
-//         subView.remove();
-//       });
-
-      // why is this line necessary???
       if($(event.target).hasClass('annotation')) return true;
 
       if($(".error-message").length > 0){
@@ -201,9 +168,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         return true;
       }
       
-      // refactor
- //     $("#annotation-form").remove();
-
 			console.log('got to second part');
 			var previous_button = $('#explain-button');
 			if (previous_button.length > 0 ) previous_button.remove();
@@ -212,14 +176,12 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 
       if (selection.rangeCount === 0){
-       // this.render();
         return true;
       }
 
 			var range = selection.getRangeAt(0);
 
 			if ($.trim(range.toString()) === "") {
-       // this.render();
         return true;
       }
       
@@ -255,7 +217,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
         newAnnotation.save({}, {
           wait: true,
           success: function(annotationModel, annotationResponse){
-          //  annotationModel.set(annotationResponse, {parse: true});
             var id = annotationResponse.id;
             $anchor = $('<a>', { "class": "annotation", href: "/" + id, "data-annotation-id": id });
             range.surroundContents($anchor[0]);
@@ -266,7 +227,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
                 view.model.annotations.add(newAnnotation);
               },
               error: function(model, response){
-                // where we left off
                 var selector = 'a[data-annotation-id="' + id + '"]';
                 $(selector).contents().unwrap();
                 var errorObject = response.responseJSON;
@@ -304,11 +264,9 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
       var that = this;
 			event.stopPropagation();
       $("#main").click();
-			//	event.preventDefault();
 			var selection = rangy.getSelection();
 			var range = selection.getRangeAt(0);
 			var $button = $(event.target);
-			// is it possible to insert information through pseudo-selector
 			$button.empty();
 			$button.addClass('loading');
 

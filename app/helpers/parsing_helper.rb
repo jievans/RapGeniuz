@@ -1,23 +1,5 @@
 module ParsingHelper
 
-  def html_update(current_lyrics, edited_lyrics)
-    current_doc = Nokogiri::HTML::DocumentFragment.parse(current_lyrics)
-    edited_doc = Nokogiri::HTML::DocumentFragment.parse(edited_lyrics)
-
-    edited_nodeset = edited_doc.css("a")
-    current_nodeset = current_doc.css("a")
-
-    current_nodeset.each do |node|
-      id = node["data-annotation-id"]
-      corresponding = edited_nodeset.at_css("a[href='/#{id}']")
-      node.attributes.each do |key, attribute|
-        corresponding[key] = attribute.value
-      end
-    end
-
-    edited_doc.to_s()
-  end
-
   def lyrics_invalid?(old_lyrics, new_lyrics)
 
     failure = {}
@@ -27,12 +9,8 @@ module ParsingHelper
     old_anchors = old_doc.css("a")
     new_anchors = new_doc.css("a")
 
-    # ## purely for testing purposes
-#     user_id = 1
-
 
     old_anchors.each do |old_node|
-      ## see if old anchors deleted
       anchor_id = old_node["data-annotation-id"]
       new_node = new_anchors.at_css("a[data-annotation-id='#{anchor_id}']")
 
