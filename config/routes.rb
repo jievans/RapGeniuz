@@ -10,7 +10,6 @@ RapGenius::Application.routes.draw do
   
   get "/search", :to => "search#search"
   
-  resources :images
   resources :artists
   resources :albums
   resources :annotations
