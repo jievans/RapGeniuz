@@ -5,7 +5,6 @@ class ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find_by_id(params[:id])
-    @image = Image.new
     if @artist.bio
       @bio = strip_links(@artist.bio)
       advert_pattern = /\s*Read more about .* on Last.fm./m
