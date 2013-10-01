@@ -1,5 +1,5 @@
 module ParsingHelper
-
+  
   def lyrics_invalid?(old_lyrics, new_lyrics)
 
     failure = {}
@@ -9,7 +9,18 @@ module ParsingHelper
     old_anchors = old_doc.css("a")
     new_anchors = new_doc.css("a")
 
-
+    old_failure = old_anchor_errors(old_anchors, new_anchors)
+    failure.merge!(old_failure)
+    
+    new_failure = new_anchor_errors(new_anchors)
+    failure.merge!(new_failure)
+  
+    return (failure.empty? ? false : failure)
+    
+  end
+  
+  def old_anchor_errors(old_anchors, new_anchors)
+    failure = {}
     old_anchors.each do |old_node|
       anchor_id = old_node["data-annotation-id"]
       new_node = new_anchors.at_css("a[data-annotation-id='#{anchor_id}']")
@@ -27,9 +38,13 @@ module ParsingHelper
           failure[:deletion] = "You aren't allowed to delete others' annotations."
         end
       end
-
-    end # old_anchors each
-
+    end
+    
+    failure
+  end
+  
+  def new_anchor_errors(new_anchors)
+    failure = {}
     proper_attributes = ["class", "href", "data-annotation-id"]
 
     new_anchors.each do |anchor|
@@ -48,13 +63,12 @@ module ParsingHelper
         end
 
         unless attributes_valid?(anchor)
-          failure[:fiddled] = "You messed with the attributes"
+          failure[:fiddled] = "You messed with the attribute values."
         end
-      end
-    end
-
-    return (failure.empty? ? false : failure)
-
+      end ## end unless checking attribute keys
+    end ## end each
+    
+    failure
   end
 
   def attributes_valid?(node)

@@ -11,9 +11,6 @@ $edit-color: $edit-purple;
 $dark-border: rgb(102, 102, 102);
 
 
-// LESSON: Div up against an achor will create a little space even when the Div is absolutely positioned.  You have to put the div inside the anchor for the space not to be created.
-//  Also, span acts truly inline, whereas Div clears possibly and then is relative to where it would have been otherwise????
-
 @import "colors";
 
 .pending-alert {
@@ -235,7 +232,6 @@ $dark-border: rgb(102, 102, 102);
 
 }
 
-// Question: how margins work in absolutely positioned elements?
 
 
 
