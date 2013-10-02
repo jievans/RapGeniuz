@@ -144,31 +144,19 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
     
   nonAnnotation: function(event, selection, range){
     
+    if( !RapGenius.currentUser.get("id") ){
+      $("#annotation-login").modal("show");
+      return true;
+    }
+  
     if ( $(event.target).is('textarea') || 
          $(event.target).attr('id') === 'explain-button' ||
          $(event.target).hasClass('annotation') ||
          selection.rangeCount === 0 ||
-         $.trim(range.toString()) === "" ) {
-           return true;
-         }
-         
-     if( !RapGenius.currentUser.get("id") ){
-           $("#annotation-login").modal("show");
-           return true;
-         }
-    
-    if (this.containsAnchor(range)) return true;
-    
-    // if ($(event.target).is('textarea')) return true;
-//     if ($(event.target).attr('id') === 'explain-button') return true;
-//     if ($(event.target).hasClass('annotation')) return true;   
-//     if (selection.rangeCount === 0) return true;
-//     if ($.trim(range.toString()) === "") return true;
-//     if( !RapGenius.currentUser.get("id") ){
-//       $("#annotation-login").modal("show");
-//       return true;
-//     }
-//     if (this.containsAnchor(range)) return true;
+         $.trim(range.toString()) === "" ||
+         this.containsAnchor(range) ) {
+            return true;
+    }
 
   },
 
@@ -259,7 +247,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
           of: $dummy,
         });
         
-				console.log($dummy.parent());
         $dummy.remove();
 
 				$form.on("submit", that.getAnnotationHandler(range, that, $form));

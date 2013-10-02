@@ -4,16 +4,13 @@ class AnnotationsController < ApplicationController
 
   def show
     annotation = Annotation.find(params[:id])
-    # render :json => annotation
     render :partial => "rabl_partials/annotation",
     :locals => {:type => "object", :annotation => annotation}
-  #  render :json => Annotation.find(params[:id])
   end
 
   def create
     params[:annotation][:user_id] = current_user.id
     annotation = Annotation.create!(params[:annotation])
-    # render :json => annotation
     render :partial => "rabl_partials/annotation",
     :locals => {:type => "object", :annotation => annotation}
   end
@@ -33,8 +30,6 @@ class AnnotationsController < ApplicationController
     pattern = /(<a([^<])*?data-annotation-id="#{Regexp.quote(id)}">)((.|\n)*?)(<\/a>)/;
     new_lyrics = old_lyrics.gsub(pattern){|match| $3 }
 
-
-    puts new_lyrics
 
     result = lyrics_invalid?(old_lyrics, new_lyrics)
     unless result
