@@ -150,6 +150,7 @@ a {
 	background: red;
 	padding: 20px;
 	padding-top: 0px;
+  min-width: 587px;
 
 	h2 {
 		text-align: center;
@@ -162,12 +163,18 @@ a {
 		color: white;
 		font-size: 15px;
 		position: absolute;
+    right: 10px;
+    top: 10px;
 
 		&:active{
 			background-color: $header-blue;
 		}
 		
 	}
+  
+  ul {
+    margin-top: 20px;
+  }
 
 }
 
@@ -232,45 +239,10 @@ a {
 	margin-right: 10px;
 }
 
-//#sign-in-form, #sign-up-form {
-//	text-align: center;
-//	background-color: gray;
-//	display: inline-block;
-//	width: 400px;
-//	padding: 50px;
-//
-//
-//	// necessary for javascript positioning
-//	position: absolute;
-//	top: 0;
-//	right: 0;
-//
-//	label {
-//		font-style: italic;
-//		font-weight: bold;
-//	}
-//
-//	color: pink;
-//
-//	.signup-button {
-//		// and this is why we don't use submit input buttons
-//		display: inline-block;
-//		background-color: transparent;
-//		font-family: inherit;
-//		font-size: inherit;
-//		color: inherit;
-//		border: solid pink 3px;
-//		padding: 5px;
-//		margin-top: 20px;
-//	}
-//
-//}
-
 
 #sign-in-form {
 
 	.signin-button {
-		// and this is why we don't use submit input buttons
 		display: inline-block;
 		background-color: transparent;
 		font-family: inherit;
@@ -293,8 +265,6 @@ a {
 	&:active{
 		background-color: $header-blue;
 	}
-	//width: 10px;
-	//		height: 10px;
 }
 
 body {

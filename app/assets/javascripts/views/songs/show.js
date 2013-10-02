@@ -1,17 +1,11 @@
 RapGenius.Views.SongShowView = Backbone.View.extend({
 
-	subViews: [],
-
 	initialize: function(){
 		this.listenTo(this.model, "change", this.render);
     this.listenTo(RapGenius.currentUser, "change", this.render);
 	},
 
 	id: "song-show",
-
-	assign: function(view){
-		this.subViews.push(view);
-	},
 
   events: {
     "click .annotation": "displayAnnotation",
@@ -83,8 +77,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			{model: annotation, composite: that}
 		);
     
-    that.assign(annotationView);
-    
     $("body").append(annotationView.render().$el); 
     
     $("#main").one("click", function(){
@@ -98,19 +90,15 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
   showEditSong: function(event){
 		var anchor_regex = /(<a.*?data-annotation-id=")(\d+)(">)((.|\n)*?)(<\/a>)/g;
-		var plain_lyrics = this.model.get("lyrics").replace(/<br>/g, function(match){
-															return '\n';
-													 }).replace(anchor_regex, function(match,
-														 p1, p2, p3, p4){
-														return "[" + p4 + "]" + "("
-														+ _.str.trim(p2) + ")";
+		var plain_lyrics = this.model.get("lyrics")
+                      .replace(/<br>/g, function(match){ return '\n';})
+                      .replace(anchor_regex, 
+                          function(match, p1, p2, p3, p4){
+														return "[" + p4 + "]" + "(" + _.str.trim(p2) + ")";
 													 });
-
-
 
      var content = JST["songs/edit"]({plain_lyrics: plain_lyrics});
      $('#song-wrapper').html(content);
-
   },
 
   positionMessage: function(message){
@@ -121,17 +109,15 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 				of: $(window),
 			});
 			var $exit = $message.find(".exit");
-			$exit.position({
-				my: "right top",
-				at: "right-10 top+10",
-				of: $message,
-			});
 
-			$exit.on('click', function(exit_event){
+			$exit.one('click', function(exit_event){
 				console.log("clicking on x");
 				$message.remove();
-
 			});
+      
+      $("#main").one("click", function(){
+        $message.remove();
+      });
 	},
 
   containsAnchor: function(range){
@@ -140,7 +126,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 				message["Invalid Selection"] = "One cannot annotate that which has already been annotated...dude.";
 				console.log("Adding an error");
 				var $errorMessage = $(JST["errors/message"]({messages: message}));
-				this.$el.append($errorMessage);
+				$('body').append($errorMessage);
         this.positionMessage($errorMessage);
 				return true;
 			}
@@ -155,46 +141,44 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 			return containsAnchors ||
 			$anchorParents.is('a') || $offsetParents.is('a');
 		},
+    
+  nonAnnotation: function(event, selection, range){
+    
+    if ( $(event.target).is('textarea') || 
+         $(event.target).attr('id') === 'explain-button' ||
+         $(event.target).hasClass('annotation') ||
+         selection.rangeCount === 0 ||
+         $.trim(range.toString()) === "" ) {
+           return true;
+         }
+         
+     if( !RapGenius.currentUser.get("id") ){
+           $("#annotation-login").modal("show");
+           return true;
+         }
+    
+    if (this.containsAnchor(range)) return true;
+    
+    // if ($(event.target).is('textarea')) return true;
+//     if ($(event.target).attr('id') === 'explain-button') return true;
+//     if ($(event.target).hasClass('annotation')) return true;   
+//     if (selection.rangeCount === 0) return true;
+//     if ($.trim(range.toString()) === "") return true;
+//     if( !RapGenius.currentUser.get("id") ){
+//       $("#annotation-login").modal("show");
+//       return true;
+//     }
+//     if (this.containsAnchor(range)) return true;
 
-
+  },
 
   showAnnotateButton: function(event){
-      if($(event.target).is('textarea')) return true;
-			if($(event.target).attr('id') === 'explain-button') return true;
-      if($(event.target).hasClass('annotation')) return true;
-
-      if($(".error-message").length > 0){
-        this.render();
-        return true;
-      }
+  		var selection = rangy.getSelection();
+  		var range = selection.getRangeAt(0);
       
-			console.log('got to second part');
-			var previous_button = $('#explain-button');
-			if (previous_button.length > 0 ) previous_button.remove();
-
-			var selection = rangy.getSelection();
-
-
-      if (selection.rangeCount === 0){
-        return true;
-      }
-
-			var range = selection.getRangeAt(0);
-
-			if ($.trim(range.toString()) === "") {
-        return true;
-      }
+      if ($('#explain-button').length > 0 ) $('#explain-button').remove();
+      if (this.nonAnnotation(event, selection, range)) return true; 
       
-      if( !RapGenius.currentUser.get("id") ){
-        $("#annotation-login").modal("show");
-        return true;
-      }
-      
-			console.log(selection.rangeCount);
-			if (this.containsAnchor(range)) return true;
-
-
-
 			clonedRange = range.cloneRange();
 			clonedRange.collapse(false);
 
@@ -242,22 +226,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
   postError: function(errorObject){
     var $error = $(JST["errors/message"]({messages: errorObject}))
     $('body').append($error);
-    $error.position({
-      my: "center center",
-      at: "center center",
-      of: $(window),
-    });
-
-    var $exit = $error.find(".exit");
-    $exit.position({
-      my: "right top",
-      at: "right-10 top+10",
-      of: $error,
-    });
-
-    $exit.on("click", function(){
-      $error.remove();
-    });
+    this.positionMessage($error);
   },
 
   makeAnnotation: function(event){
@@ -278,7 +247,7 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 
 				$button.remove();
         var $dummy = $('<span>dummy text<span>');
-				// clonedRange.insertNode($form[0]);
+
         clonedRange.insertNode($dummy[0]);
         $("body").append($form);
         $("#main").one("click", function(){

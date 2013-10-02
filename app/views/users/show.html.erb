@@ -1,38 +1,38 @@
 
 <script type="text/javascript">
 
-<% content = render(:partial => "rabl_partials/annotation",
-:locals => {:type => :collection,
-						:annotation => @user.annotations.order("created_at DESC")} )
-						.html_safe %>
+$(function(){
+  <% content = render(:partial => "rabl_partials/annotation",
+  :locals => {:type => :collection,
+  						:annotation => @user.annotations.order("created_at DESC")} )
+  						.html_safe %>
 
-RapGenius.Repositories.AnnotationStreams.user =
-JSON.parse("<%="#{j content}".html_safe %>");
+  RapGenius.Repositories.AnnotationStreams.user =
+  JSON.parse("<%="#{j content}".html_safe %>");
 
-RapGenius.Repositories.SongStreams.user =
-JSON.parse("<%="#{j @user.songs.to_json }".html_safe %>")
+  RapGenius.Repositories.SongStreams.user =
+  JSON.parse("<%="#{j @user.songs.to_json }".html_safe %>")
 
-RapGenius.Repositories.User =
-JSON.parse("<%="#{j @user.to_json}".html_safe %>");
-
-
-var annotationCollection = new RapGenius.Collections.Annotations(
-												RapGenius.Repositories.AnnotationStreams.user,
-												{parse: true});
-
-var activityView = new RapGenius.Views.UserActivityView({
-																			collection: annotationCollection
-																		});
-
-var userModel = new RapGenius.Models.User(RapGenius.Repositories.User);
-
-var infoView = new RapGenius.Views.UserInfoView({
-																			model: userModel
-																		});
+  RapGenius.Repositories.User =
+  JSON.parse("<%="#{j @user.to_json}".html_safe %>");
 
 
-$("#body").append(activityView.render().$el);
-$("#body").append(infoView.render().$el);
+  var annotationCollection = new RapGenius.Collections.Annotations(
+  												RapGenius.Repositories.AnnotationStreams.user,
+  												{parse: true});
 
+  var activityView = new RapGenius.Views.UserActivityView({
+  																			collection: annotationCollection
+  																		});
+
+  var userModel = new RapGenius.Models.User(RapGenius.Repositories.User);
+
+  var infoView = new RapGenius.Views.UserInfoView({
+  																			model: userModel
+  																		});
+
+  $("#body").append(activityView.render().$el);
+  $("#body").append(infoView.render().$el);
+});
 
 </script>
