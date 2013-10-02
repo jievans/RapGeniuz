@@ -143,11 +143,6 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
 		},
     
   nonAnnotation: function(event, selection, range){
-    
-    if( !RapGenius.currentUser.get("id") ){
-      $("#annotation-login").modal("show");
-      return true;
-    }
   
     if ( $(event.target).is('textarea') || 
          $(event.target).attr('id') === 'explain-button' ||
@@ -156,6 +151,11 @@ RapGenius.Views.SongShowView = Backbone.View.extend({
          $.trim(range.toString()) === "" ||
          this.containsAnchor(range) ) {
             return true;
+    }
+    
+    if( !RapGenius.currentUser.get("id") ){
+      $("#annotation-login").modal("show");
+      return true;
     }
 
   },
